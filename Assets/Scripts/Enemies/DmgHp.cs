@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class DmgHp : MonoBehaviour
 {
-    public int Damage = 2;
+    public int DamageTaken = 2;
+    public int DamageDealt = 2;
     public int Health;
     public int MaxHealth = 20;
-    public GameObject Enemy;
+    public GameObject Enemies;
     private void Start()
     {
         Health = MaxHealth;
     }
-    public void TakeDamage (int Damage)
+    public void TakeDamage ()
     {
-        Health -= Damage;
+        Health -= DamageTaken;
         if (Health <= 0)
         {
-            Destroy(Enemy);
+            Destroy(Enemies);
         }
     }
 }
