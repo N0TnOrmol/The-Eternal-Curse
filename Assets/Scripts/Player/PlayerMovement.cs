@@ -1,44 +1,75 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UIElements;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
-{
-    public CharacterController controller;
- 
-    public float speed = 12f;
-    public float gravity = -9.81f * 2;
-    public Transform groundCheck;
-    public float groundDistance = 0.4f;
-    public LayerMask groundMask;
- 
-    Vector3 velocity;
+{   
+    public float rotationSpeed = 450;
+    public float walkSpeed = 5;
+    public float runSpeed = 8;  
 
-    bool isGrounded;
- 
-    // Update is called once per frame
+    private Quaternion targetRotation;
+
+    public Gun gun;
+    private CharacterController Controller;
+    private Camera cam;
+
+    void Start()
+    {
+        Controller = GetComponent<CharacterController>();
+        cam = Camera.main;
+    }
+
     void Update()
     {
+        ControlMouse();
+        //ControlWASD();
+
+        if(Input.GetButtonDown("Shoot"))
         {
-            //checking if we hit the ground to reset our falling velocity, otherwise we will fall faster the next time
-            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-    
-            if (isGrounded && velocity.y < 0)
-            {
-                velocity.y = -2f;
-            }
-    
-            float x = Input.GetAxis("Horizontal");
-            float z = Input.GetAxis("Vertical");
-    
-            //right is the red Axis, foward is the blue axis
-            Vector3 move = transform.right * x + transform.forward * z;
-    
-            controller.Move(move * speed * Time.deltaTime);
-    
-            velocity.y += gravity * Time.deltaTime;
-    
-            controller.Move(velocity * Time.deltaTime);
+            gun.Shoot();
         }
+        else if (Input.GetButton("Shoot"))
+        {
+            gun.ShootContinuous();
+        }
+    }   
+    void ControlMouse()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        mousePos = cam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, cam.transform.position.y - transform.position.y));
+        targetRotation = Quaternion.LookRotation(mousePos - new Vector3(transform.position.x,0,transform.position.z));
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+        Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        Vector3 Motion = input;
+        Motion *= (Mathf.Abs(input.x) == 1 && MathF.Abs(input.z) == 1)?.7f:1;
+        Motion *= (Input.GetButton("Run"))?runSpeed:walkSpeed;
+        Motion += Vector3.up * -8;
+
+        Controller.Move(Motion * Time.deltaTime);
+    }
+    void ControlWASD()
+    {
+        Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+
+        if(input != Vector3.zero)
+        {
+            // Calculate target rotation based on input
+            targetRotation = Quaternion.LookRotation(input);
+
+            // Smoothly rotate towards the target rotation
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
+        Vector3 Motion = input;
+        Motion *= (Mathf.Abs(input.x) == 1 && MathF.Abs(input.z) == 1)?.7f:1;
+        Motion *= (Input.GetButton("Run"))?runSpeed:walkSpeed;
+        Motion += Vector3.up * -8;
+
+        Controller.Move(Motion * Time.deltaTime);
     }
 }
