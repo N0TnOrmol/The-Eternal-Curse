@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Enemy_Movement : MonoBehaviour
 {
-    public float gravity = -9.81f * 2;
     Vector3 velocity;
+    public float gravity = -9.81f * 2;
+    public float speed;
     public GameObject Player;
     public GameObject Stevfe;
-    public float speed;
+
 
     void Update()
     {
