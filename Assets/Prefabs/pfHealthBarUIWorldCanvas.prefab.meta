@@ -10,5 +10,5 @@ AssetOrigin:
   productId: 211787
   packageName: Health System (Includes Learning Video)
   packageVersion: 1.0
-  assetPath: Assets/CodeMonkey/HealthSystem/Prefabs/pfHealthBarUIWorldCanvas.prefab
+  assetPath: Assets/Prefabs/pfHealthBarUIWorldCanvas.prefab
   uploadId: 487200
