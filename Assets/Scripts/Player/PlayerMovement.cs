@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Quaternion targetRotation;
 
-    public Gun gun;
+    public Weapon gun;
     private CharacterController Controller;
     private Camera cam;
 

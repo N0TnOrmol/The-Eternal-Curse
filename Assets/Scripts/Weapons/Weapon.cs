@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public class Weapon : MonoBehaviour
 {
     public enum GunType {Semi, Burst, Auto};
     public GunType gunType;

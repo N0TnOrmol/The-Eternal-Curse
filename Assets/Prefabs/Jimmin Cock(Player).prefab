@@ -42,8 +42,8 @@ GameObject:
   - component: {fileID: 7180496805757850448}
   - component: {fileID: 6981598729397911950}
   - component: {fileID: 3755670958232882070}
-  - component: {fileID: 5402468819668579346}
   - component: {fileID: 8277394819912270303}
+  - component: {fileID: 2514602925699359593}
   m_Layer: 6
   m_Name: Gun
   m_TagString: Untagged
@@ -120,20 +120,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5402468819668579346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1540224612400153532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c32b1cd3e0e04886815dc4db5040545, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gunType: 0
-  spawn: {fileID: 7060132836456044399}
 --- !u!65 &8277394819912270303
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -155,6 +141,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2514602925699359593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1540224612400153532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c32b1cd3e0e04886815dc4db5040545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunType: 0
+  spawn: {fileID: 7060132836456044399}
+  Target: Enemy
 --- !u!1001 &6452971929777894311
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -300,14 +301,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0cec2bf7464944da8a2df0b6cf366ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 0}
-  speed: 12
-  gravity: -19.62
-  groundCheck: {fileID: 0}
-  groundDistance: 0.4
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 0
+  rotationSpeed: 450
+  walkSpeed: 5
+  runSpeed: 8
+  gun: {fileID: 0}
 --- !u!195 &455479322456578130
 NavMeshAgent:
   m_ObjectHideFlags: 0
