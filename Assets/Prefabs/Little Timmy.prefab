@@ -1407,7 +1407,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.1489309, y: 0.019515038, z: 0.52313256}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.097006, y: 2.097006, z: 2.097006}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7041430960012973148}
@@ -1526,7 +1526,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cad68017f5ca4c0e9838e2faefe4860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 2
+  DamageTaken: 2
+  DamageDealt: 2
   Health: 0
   MaxHealth: 20
-  Enemy: {fileID: 8333469267062701155}
+  Enemies: {fileID: 8333469267062701155}
