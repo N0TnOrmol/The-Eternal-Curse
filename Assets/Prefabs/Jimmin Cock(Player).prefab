@@ -121,6 +121,9 @@ PrefabInstance:
       addedObject: {fileID: 1609006230837188473}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f48a312b6c31f4e27b31ee61bad658fc, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 479536118636841032}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f48a312b6c31f4e27b31ee61bad658fc, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 455479322456578130}
   m_SourcePrefab: {fileID: 100100000, guid: f48a312b6c31f4e27b31ee61bad658fc, type: 3}
 --- !u!1 &6146540573751201526 stripped
@@ -192,6 +195,22 @@ MonoBehaviour:
   walkSpeed: 5
   runSpeed: 8
   gun: {fileID: 1315195877862054190}
+--- !u!114 &479536118636841032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6146540573751201526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc2ea68563b37441cb0e36001b053858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamageTaken: 2
+  Health: 0
+  MaxHealth: 20
+  Player: {fileID: 6146540573751201526}
 --- !u!195 &455479322456578130
 NavMeshAgent:
   m_ObjectHideFlags: 0
