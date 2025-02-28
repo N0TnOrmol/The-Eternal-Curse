@@ -304,7 +304,7 @@ MonoBehaviour:
   rotationSpeed: 450
   walkSpeed: 5
   runSpeed: 8
-  gun: {fileID: 0}
+  gun: {fileID: 2514602925699359593}
 --- !u!195 &455479322456578130
 NavMeshAgent:
   m_ObjectHideFlags: 0
