@@ -118,9 +118,6 @@ PrefabInstance:
       addedObject: {fileID: 2436208420443495021}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f48a312b6c31f4e27b31ee61bad658fc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1609006230837188473}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f48a312b6c31f4e27b31ee61bad658fc, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 479536118636841032}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f48a312b6c31f4e27b31ee61bad658fc, type: 3}
       insertIndex: -1
@@ -179,22 +176,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1609006230837188473
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6146540573751201526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0cec2bf7464944da8a2df0b6cf366ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: 450
-  walkSpeed: 5
-  runSpeed: 8
-  gun: {fileID: 1315195877862054190}
 --- !u!114 &479536118636841032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,17 +287,6 @@ PrefabInstance:
       addedObject: {fileID: 7969660435365055079}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aae640a445eb8479ebf78a1093a3cc29, type: 3}
---- !u!114 &1315195877862054190 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5306646970544236420, guid: aae640a445eb8479ebf78a1093a3cc29, type: 3}
-  m_PrefabInstance: {fileID: 6621554666771037866}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c32b1cd3e0e04886815dc4db5040545, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &8579518458273776396 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3239476230829342118, guid: aae640a445eb8479ebf78a1093a3cc29, type: 3}
