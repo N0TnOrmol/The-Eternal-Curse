@@ -7,7 +7,7 @@ public class DmgHp : MonoBehaviour
     public int DamageTaken = 2;
     public int DamageDealt = 2;
     public int Health;
-    public int MaxHealth = 10;
+    public int MaxHealth = 2;
     public GameObject Enemies;
     private void Start()
     {

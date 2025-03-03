@@ -40,14 +40,9 @@ public class Bullet : MonoBehaviour
             {
                 dmgHp.TakeDamage();
             }
+        }
 
-            // Destroy the bullet upon hitting an enemy
-            Destroy(gameObject);
-        }
-        else
-        {
-            // Destroy the bullet on hitting anything else (like walls)
-            Destroy(gameObject);
-        }
+        // Destroy the bullet on any collision (enemy or anything else)
+        Destroy(gameObject);
     }
 }

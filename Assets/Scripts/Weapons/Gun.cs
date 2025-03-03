@@ -20,29 +20,33 @@ public class Gun : MonoBehaviour
 
     public void Shoot()
     {
+        // Don't allow shooting if the audio is already playing
         if (GetComponent<AudioSource>().isPlaying)
-            return; // Don't shoot while audio is playing
+            return;
 
-        if (CanShoot())
+        if (CanShoot())  // Only shoot if the cooldown period allows
         {
-            // Debugging: Log when a bullet is spawned
-            Debug.Log("Bullet spawned at: " + spawnPoint.position);
-            
-            // Instantiate the bullet
-            GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
-
-            // Move the bullet forward
-            bullet.transform.forward = spawnPoint.forward;
-
-            // Play shooting sound
+            // Play the shooting sound immediately when the gun fires
             GetComponent<AudioSource>().Play();
 
+            // Instantiate the bullet at the spawn point
+            GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
+
+            // Optional: Set bullet's direction to move forward
+            bullet.transform.forward = spawnPoint.forward;
+
+            // Log when the bullet is spawned (for debugging)
+            Debug.Log("Bullet spawned at: " + spawnPoint.position);
+
+            // Set the next time you can shoot based on RPM (rate of fire)
             nextPossibleShootTime = Time.time + secondsBetweenShots;
         }
     }
+
     void Update()
     {
-        if (Input.GetButton("Shoot"))  // Fire1 (usually left mouse button or Ctrl key)
+        // Detect shooting input (e.g., left mouse button or a key)
+        if (Input.GetButton("Fire1"))  // Fire1 is usually left mouse button or Ctrl key
         {
             ShootContinuous();
         }
@@ -59,6 +63,6 @@ public class Gun : MonoBehaviour
 
     private bool CanShoot()
     {
-        return Time.time >= nextPossibleShootTime;
+        return Time.time >= nextPossibleShootTime; // Check if enough time has passed since the last shot
     }
 }

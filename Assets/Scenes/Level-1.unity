@@ -930,6 +930,10 @@ PrefabInstance:
       value: 0.6478826
       objectReference: {fileID: 0}
     - target: {fileID: 7872805765546896148, guid: c7e134f73d64849cc980aa01205f562a, type: 3}
+      propertyPath: Priority
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872805765546896148, guid: c7e134f73d64849cc980aa01205f562a, type: 3}
       propertyPath: MaxDistance
       value: 576.05194
       objectReference: {fileID: 0}
