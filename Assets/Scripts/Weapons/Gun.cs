@@ -1,59 +1,59 @@
 using UnityEngine;
-using System.Collections;
 
 [RequireComponent(typeof(AudioSource))]
 public class Gun : MonoBehaviour
 {
     public enum GunType { Semi, Burst, Auto };
     public GunType gunType;
-    // Components
-    public Transform Spawn;
+    public float rpm;
+    public Transform spawnPoint; // Where the bullet will be spawned
+    public GameObject bulletPrefab; // Reference to the 3D bullet prefab
+
     // System:
+    private float secondsBetweenShots;
     private float nextPossibleShootTime;
-    public string Target = "Enemy";
 
     void Start()
     {
-
+        secondsBetweenShots = 60 / rpm; // Calculate the time between shots
     }
 
     public void Shoot()
     {
-        // Check if audio is playing, if so, don't shoot
         if (GetComponent<AudioSource>().isPlaying)
-            return; // Early return to prevent shooting if audio is playing
+            return; // Don't shoot while audio is playing
 
         if (CanShoot())
         {
-            Ray ray = new Ray(Spawn.position, Spawn.forward);
-            RaycastHit hit;
-            float shotDistance = 20;
+            // Debugging: Log when a bullet is spawned
+            Debug.Log("Bullet spawned at: " + spawnPoint.position);
+            
+            // Instantiate the bullet
+            GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
 
-            if (Physics.Raycast(ray, out hit, shotDistance))
-            {
-                shotDistance = hit.distance;
+            // Move the bullet forward
+            bullet.transform.forward = spawnPoint.forward;
 
-                // Process the hit object
-                if (hit.collider.CompareTag(Target))
-                {
-                    DmgHp dmgHp = hit.collider.GetComponent<DmgHp>();
-                    if (dmgHp != null)
-                    {
-                        dmgHp.TakeDamage();
-                    }
-                }
-                GetComponent<AudioSource>().Play();
-                Debug.DrawRay(ray.origin, ray.direction * shotDistance,Color.red,1);
+            // Play shooting sound
+            GetComponent<AudioSource>().Play();
 
-            }
+            nextPossibleShootTime = Time.time + secondsBetweenShots;
+        }
+    }
+    void Update()
+    {
+        if (Input.GetButton("Shoot"))  // Fire1 (usually left mouse button or Ctrl key)
+        {
+            ShootContinuous();
         }
     }
 
-    public void ShootContinuous()  // Ensure this method is public
+    // This method should handle continuous firing if the gun is in auto mode
+    public void ShootContinuous()
     {
         if (gunType == GunType.Auto)
         {
-            Shoot(); // Call Shoot method in Auto mode
+            Shoot(); // Call Shoot method for continuous shooting
         }
     }
 
@@ -61,6 +61,4 @@ public class Gun : MonoBehaviour
     {
         return Time.time >= nextPossibleShootTime;
     }
-
-
 }

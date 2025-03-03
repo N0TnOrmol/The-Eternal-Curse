@@ -127,8 +127,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunType: 0
-  Spawn: {fileID: 158182875782191065}
-  Target: Enemy
+  rpm: 600
+  spawnPoint: {fileID: 158182875782191065}
+  bulletPrefab: {fileID: 2708087528421162531, guid: 331dfe641d58b4cceae64a42a3eec44d, type: 3}
 --- !u!82 &3565611496512649471
 AudioSource:
   m_ObjectHideFlags: 0
@@ -142,7 +143,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: c3277b1e20c67409fa3eaac6567e0d04, type: 3}
   m_Resource: {fileID: 8300000, guid: c3277b1e20c67409fa3eaac6567e0d04, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
