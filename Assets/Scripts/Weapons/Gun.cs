@@ -47,7 +47,7 @@ public class Gun : MonoBehaviour
                     DmgHp dmgHp = hit.collider.GetComponent<DmgHp>();
                     if (dmgHp != null)
                     {
-                        dmgHp.TakeDamage();
+                        dmgHp.TakeDamageEnemy();
                     }
                 }
 
