@@ -6,31 +6,23 @@ public class Gun : MonoBehaviour
 {
     public enum GunType { Semi, Burst, Auto };
     public GunType gunType;
-    public float rpm;
     // Components
     public Transform Spawn;
-    private LineRenderer tracer;
     // System:
-    private float secondsBetweenShots;
     private float nextPossibleShootTime;
     public string Target = "Enemy";
 
     void Start()
     {
-        secondsBetweenShots = 60 / rpm;
-        if (GetComponent<LineRenderer>())
-        {
-            tracer = GetComponent<LineRenderer>();
-            tracer.enabled = false; // Start with LineRenderer disabled
-            tracer.startWidth = 0.05f; // Ensure it's visible
-            tracer.endWidth = 0.05f;
-            tracer.material = new Material(Shader.Find("Unlit/Color"));
-            tracer.material.color = Color.red; // Set color for testing
-        }
+
     }
 
     public void Shoot()
     {
+        // Check if audio is playing, if so, don't shoot
+        if (GetComponent<AudioSource>().isPlaying)
+            return; // Early return to prevent shooting if audio is playing
+
         if (CanShoot())
         {
             Ray ray = new Ray(Spawn.position, Spawn.forward);
@@ -50,16 +42,9 @@ public class Gun : MonoBehaviour
                         dmgHp.TakeDamage();
                     }
                 }
-
-                nextPossibleShootTime = Time.time + secondsBetweenShots;
                 GetComponent<AudioSource>().Play();
+                Debug.DrawRay(ray.origin, ray.direction * shotDistance,Color.red,1);
 
-                // Start tracer effect
-                if (tracer)
-                {
-                    Debug.Log("shoot");
-                    StartCoroutine(RenderTracer(hit.point)); // Use hit.point directly for accuracy
-                }
             }
         }
     }
@@ -77,12 +62,5 @@ public class Gun : MonoBehaviour
         return Time.time >= nextPossibleShootTime;
     }
 
-    IEnumerator RenderTracer(Vector3 hitPoint)
-    {
-        tracer.enabled = true;
-        tracer.SetPosition(0, Spawn.position);
-        tracer.SetPosition(1, hitPoint); // Directly set the hit point for tracer end
-        yield return new WaitForSeconds(0.1f); // Shorter time to render, you can adjust this
-        tracer.enabled = false;
-    }
+
 }
