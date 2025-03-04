@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 [RequireComponent(typeof(AudioSource))]
 public class Gun : MonoBehaviour
@@ -7,82 +6,63 @@ public class Gun : MonoBehaviour
     public enum GunType { Semi, Burst, Auto };
     public GunType gunType;
     public float rpm;
-    // Components
-    public Transform Spawn;
-    private LineRenderer tracer;
+    public Transform spawnPoint; // Where the bullet will be spawned
+    public GameObject bulletPrefab; // Reference to the 3D bullet prefab
+
     // System:
     private float secondsBetweenShots;
     private float nextPossibleShootTime;
-    public string Target = "Enemy";
 
     void Start()
     {
-        secondsBetweenShots = 60 / rpm;
-        if (GetComponent<LineRenderer>())
-        {
-            tracer = GetComponent<LineRenderer>();
-            tracer.enabled = false; // Start with LineRenderer disabled
-            tracer.startWidth = 0.05f; // Ensure it's visible
-            tracer.endWidth = 0.05f;
-            tracer.material = new Material(Shader.Find("Unlit/Color"));
-            tracer.material.color = Color.red; // Set color for testing
-        }
+        secondsBetweenShots = 60 / rpm; // Calculate the time between shots
     }
 
     public void Shoot()
     {
-        if (CanShoot())
+        // Don't allow shooting if the audio is already playing
+        if (GetComponent<AudioSource>().isPlaying)
+            return;
+
+        if (CanShoot())  // Only shoot if the cooldown period allows
         {
-            Ray ray = new Ray(Spawn.position, Spawn.forward);
-            RaycastHit hit;
-            float shotDistance = 20;
+            // Play the shooting sound immediately when the gun fires
+            GetComponent<AudioSource>().Play();
 
-            if (Physics.Raycast(ray, out hit, shotDistance))
-            {
-                shotDistance = hit.distance;
+            // Instantiate the bullet at the spawn point
+            GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
 
-                // Process the hit object
-                if (hit.collider.CompareTag(Target))
-                {
-                    DmgHp dmgHp = hit.collider.GetComponent<DmgHp>();
-                    if (dmgHp != null)
-                    {
-                        dmgHp.TakeDamageEnemy();
-                    }
-                }
+            // Optional: Set bullet's direction to move forward
+            bullet.transform.forward = spawnPoint.forward;
 
-                nextPossibleShootTime = Time.time + secondsBetweenShots;
-                GetComponent<AudioSource>().Play();
+            // Log when the bullet is spawned (for debugging)
+            Debug.Log("Bullet spawned at: " + spawnPoint.position);
 
-                // Start tracer effect
-                if (tracer)
-                {
-                    Debug.Log("shoot");
-                    StartCoroutine(RenderTracer(hit.point)); // Use hit.point directly for accuracy
-                }
-            }
+            // Set the next time you can shoot based on RPM (rate of fire)
+            nextPossibleShootTime = Time.time + secondsBetweenShots;
         }
     }
 
-    public void ShootContinuous()  // Ensure this method is public
+    void Update()
+    {
+        // Detect shooting input (e.g., left mouse button or a key)
+        if (Input.GetButton("Fire1"))  // Fire1 is usually left mouse button or Ctrl key
+        {
+            ShootContinuous();
+        }
+    }
+
+    // This method should handle continuous firing if the gun is in auto mode
+    public void ShootContinuous()
     {
         if (gunType == GunType.Auto)
         {
-            Shoot(); // Call Shoot method in Auto mode
+            Shoot(); // Call Shoot method for continuous shooting
         }
     }
 
     private bool CanShoot()
     {
-        return Time.time >= nextPossibleShootTime;
-    }
-
-    IEnumerator RenderTracer(Vector3 hitPoint)
-    {
-        tracer.enabled = true;
-        tracer.SetPosition(0, Spawn.position);
-        tracer.SetPosition(1, hitPoint); // Directly set the hit point for tracer end
-        yield return new WaitForSeconds(0.1f); // Shorter time to render, you can adjust this
-        tracer.enabled = false;
+        return Time.time >= nextPossibleShootTime; // Check if enough time has passed since the last shot
     }
 }

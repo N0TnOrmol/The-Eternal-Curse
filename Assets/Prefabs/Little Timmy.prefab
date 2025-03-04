@@ -1529,5 +1529,5 @@ MonoBehaviour:
   DamageTaken: 2
   DamageDealt: 2
   Health: 0
-  MaxHealth: 20
+  MaxHealth: 10
   Enemies: {fileID: 8333469267062701155}
