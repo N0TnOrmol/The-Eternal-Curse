@@ -29,11 +29,11 @@ public class PlayerMovement : MonoBehaviour
         ControlMouse();
         //ControlWASD();
 
-        if(Input.GetButtonDown("Shoot"))
+        if(Input.GetButtonDown("Attack"))
         {
             gun.Shoot();
         }
-        else if (Input.GetButton("Shoot"))
+        else if (Input.GetButton("Attack"))
         {
             gun.ShootContinuous();
         }
@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         Vector3 Motion = input;
         Motion *= (Mathf.Abs(input.x) == 1 && MathF.Abs(input.z) == 1)?.7f:1;
-        Motion *= (Input.GetButton("Run"))?runSpeed:walkSpeed;
+        Motion *= Input.GetButton("Run")?runSpeed:walkSpeed;
         Motion += Vector3.up * -8;
 
         Controller.Move(Motion * Time.deltaTime);
@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
         }
         Vector3 Motion = input;
         Motion *= (Mathf.Abs(input.x) == 1 && MathF.Abs(input.z) == 1)?.7f:1;
-        Motion *= (Input.GetButton("Run"))?runSpeed:walkSpeed;
+        Motion *= Input.GetButton("Run")?runSpeed:walkSpeed;
         Motion += Vector3.up * -8;
 
         Controller.Move(Motion * Time.deltaTime);

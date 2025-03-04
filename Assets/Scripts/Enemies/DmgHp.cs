@@ -13,7 +13,6 @@ public class DmgHp : MonoBehaviour
     private void Start()
     {
         Health = MaxHealth;
-
     }
     IEnumerator ContinuousDMG()
     {
