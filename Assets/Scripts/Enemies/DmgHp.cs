@@ -13,7 +13,7 @@ public class DmgHp : MonoBehaviour
     {
         Health = MaxHealth;
     }
-    public void TakeDamage ()
+    public void TakeDamage (float damage)
     {
         Health -= DamageTaken;
         if (Health <= 0)
