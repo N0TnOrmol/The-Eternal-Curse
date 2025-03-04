@@ -6,7 +6,6 @@ public class PlayerHealth : MonoBehaviour
     public int Health;
     public int MaxHealth = 20;
     public GameObject Player;
-    public GameObject DmgBox;
     private void Start()
     {
         Health = MaxHealth;
