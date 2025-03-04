@@ -21,4 +21,9 @@ public class DmgHp : MonoBehaviour
             Destroy(Enemies);
         }
     }
+
+    internal void TakeDamage()
+    {
+        throw new NotImplementedException();
+    }
 }

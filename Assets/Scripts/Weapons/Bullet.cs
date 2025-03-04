@@ -35,10 +35,10 @@ public class Bullet : MonoBehaviour
         if (collision.collider.CompareTag(targetTag))
         {
             // Try to get the enemy's health script and deal damage
-            DmgHp dmgHp = collision.collider.GetComponent<DmgHp>();
-            if (dmgHp != null)
+            DmgHp DmgHp = collision.collider.GetComponent<DmgHp>();
+            if (DmgHp != null)
             {
-                dmgHp.TakeDamage();
+                DmgHp.TakeDamage();
             }
         }
 
