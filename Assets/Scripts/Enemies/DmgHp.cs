@@ -1,6 +1,7 @@
 using System;
 using UnityEditor.Rendering;
 using UnityEngine;
+using System.Collections;
 public class DmgHp : MonoBehaviour
 {
     public int DamageTaken = 2;
@@ -26,7 +27,9 @@ public class DmgHp : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            playerHealth.TakeDamagePlayer();
+            other.GetComponent<PlayerHealth>().TakeDamagePlayer(); 
+
         }
     }
+
 }

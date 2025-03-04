@@ -14,7 +14,7 @@ public class MeleeWeapon : MonoBehaviour
     void Update()
     {
         // Detect if the player presses the attack button (e.g., left mouse button or a custom input)
-        if (Input.GetButtonDown("Fire1") && !isSwinging)
+        if (Input.GetButtonDown("Attack") && !isSwinging)
         {
             StartCoroutine(SwingWeapon());
         }

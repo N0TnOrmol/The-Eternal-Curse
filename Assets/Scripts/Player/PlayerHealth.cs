@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -6,7 +7,7 @@ public class PlayerHealth : MonoBehaviour
     public int Health;
     public int MaxHealth = 20;
     public GameObject Player;
-    public GameObject DmgBox;
+
     private void Start()
     {
         Health = MaxHealth;
@@ -20,4 +21,5 @@ public class PlayerHealth : MonoBehaviour
             Debug.Log("You Died");
         }
     }
+
 }
