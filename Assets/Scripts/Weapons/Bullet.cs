@@ -38,7 +38,7 @@ public class Bullet : MonoBehaviour
             DmgHp DmgHp = collision.collider.GetComponent<DmgHp>();
             if (DmgHp != null)
             {
-                DmgHp.TakeDamage();
+                DmgHp.TakeDamageEnemy();
             }
         }
 
