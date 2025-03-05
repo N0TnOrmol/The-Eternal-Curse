@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEditor.Rendering;
 using UnityEngine;
@@ -13,7 +12,6 @@ public class DmgHp : MonoBehaviour
     private void Start()
     {
         Health = MaxHealth;
-
     }
     IEnumerator ContinuousDMG()
     {
@@ -23,10 +21,17 @@ public class DmgHp : MonoBehaviour
     }
     public void TakeDamageEnemy()
     {
-        Health -= DamageTaken;
-        if (Health <= 0)
+        if (Random.Range(1, 10) > 9)
         {
-            Destroy(Enemies);
+            Health - *2 -= DamageTaken;
+        }
+        else
+        {
+            Health -= DamageTaken;
+            if (Health <= 0)
+            {
+               Destroy(Enemies);
+            }
         }
     }
     public void OnTriggerStay(Collider other)
@@ -37,5 +42,4 @@ public class DmgHp : MonoBehaviour
             StartCoroutine(ContinuousDMG());
         }
     }
-
 }

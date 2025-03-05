@@ -46,7 +46,7 @@ public class Gun : MonoBehaviour
     void Update()
     {
         // Detect shooting input (e.g., left mouse button or a key)
-        if (Input.GetButton("Fire1"))  // Fire1 is usually left mouse button or Ctrl key
+        if (Input.GetButton("Attack"))  // Fire1 is usually left mouse button or Ctrl key
         {
             ShootContinuous();
         }

@@ -29,11 +29,11 @@ public class PlayerMovement : MonoBehaviour
         ControlMouse();
         //ControlWASD();
 
-        if(Input.GetButtonDown("Shoot"))
+        if(Input.GetButtonDown("Attack"))
         {
             gun.Shoot();
         }
-        else if (Input.GetButton("Shoot"))
+        else if (Input.GetButton("Attack"))
         {
             gun.ShootContinuous();
         }
