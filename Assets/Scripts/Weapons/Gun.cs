@@ -7,8 +7,10 @@ public class Gun : MonoBehaviour
     public float rpm;
     public Transform spawnPoint; // Where the bullet will be spawned
     public GameObject bulletPrefab; // Reference to the 3D bullet prefab
+
     private float secondsBetweenShots;
     private float nextPossibleShootTime;
+    private bool isShootingAllowed = false; // New flag to manage if shooting is allowed
 
     void Start()
     {
@@ -17,9 +19,10 @@ public class Gun : MonoBehaviour
 
     public void Shoot()
     {
-        // Don't allow shooting if the audio is already playing
-        if (GetComponent<AudioSource>().isPlaying)
+        // Don't allow shooting if the audio is already playing or if shooting is not allowed
+        if (!isShootingAllowed || GetComponent<AudioSource>().isPlaying)
             return;
+
         if (CanShoot())  // Only shoot if the cooldown period allows
         {
             // Play the shooting sound immediately when the gun fires
@@ -28,11 +31,12 @@ public class Gun : MonoBehaviour
             // Instantiate the bullet at the spawn point
             GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
 
-            // Optional: Set bullet's direction to move forward
+            // Set bullet's direction to move forward
             bullet.transform.forward = spawnPoint.forward;
 
             // Log when the bullet is spawned (for debugging)
             Debug.Log("Bullet spawned at: " + spawnPoint.position);
+
             // Set the next time you can shoot based on RPM (rate of fire)
             nextPossibleShootTime = Time.time + secondsBetweenShots;
         }
@@ -40,8 +44,8 @@ public class Gun : MonoBehaviour
 
     void Update()
     {
-        // Detect shooting input only if the gun script is enabled
-        if (Input.GetButton("Attack") && enabled)
+        // Only allow shooting if the gun is active and shooting is allowed
+        if (isShootingAllowed && Input.GetButton("Attack") && enabled)
         {
             ShootContinuous();
         }
@@ -59,5 +63,11 @@ public class Gun : MonoBehaviour
     private bool CanShoot()
     {
         return Time.time >= nextPossibleShootTime; // Check if enough time has passed since the last shot
+    }
+
+    // Set whether shooting is allowed or not
+    public void SetShootingAllowed(bool allowed)
+    {
+        isShootingAllowed = allowed;
     }
 }
