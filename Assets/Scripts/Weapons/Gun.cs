@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
 public class Gun : MonoBehaviour
 {
     public enum GunType { Semi, Burst, Auto };
@@ -8,8 +7,6 @@ public class Gun : MonoBehaviour
     public float rpm;
     public Transform spawnPoint; // Where the bullet will be spawned
     public GameObject bulletPrefab; // Reference to the 3D bullet prefab
-
-    // System:
     private float secondsBetweenShots;
     private float nextPossibleShootTime;
 
@@ -23,7 +20,6 @@ public class Gun : MonoBehaviour
         // Don't allow shooting if the audio is already playing
         if (GetComponent<AudioSource>().isPlaying)
             return;
-
         if (CanShoot())  // Only shoot if the cooldown period allows
         {
             // Play the shooting sound immediately when the gun fires
@@ -37,7 +33,6 @@ public class Gun : MonoBehaviour
 
             // Log when the bullet is spawned (for debugging)
             Debug.Log("Bullet spawned at: " + spawnPoint.position);
-
             // Set the next time you can shoot based on RPM (rate of fire)
             nextPossibleShootTime = Time.time + secondsBetweenShots;
         }
@@ -45,8 +40,8 @@ public class Gun : MonoBehaviour
 
     void Update()
     {
-        // Detect shooting input (e.g., left mouse button or a key)
-        if (Input.GetButton("Attack"))  // Fire1 is usually left mouse button or Ctrl key
+        // Detect shooting input only if the gun script is enabled
+        if (Input.GetButton("Attack") && enabled)
         {
             ShootContinuous();
         }

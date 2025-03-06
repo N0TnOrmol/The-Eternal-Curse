@@ -451,7 +451,7 @@ GameObject:
   - component: {fileID: 7828852286980126981}
   m_Layer: 0
   m_Name: Flintlock Pistol 1.1
-  m_TagString: Untagged
+  m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
