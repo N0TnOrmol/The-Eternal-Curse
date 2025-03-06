@@ -23,14 +23,14 @@ public class DmgHp : MonoBehaviour
     {
         if (Random.Range(1, 10) > 9)
         {
-            Health - *2 -= DamageTaken;
+            Health -= DamageTaken * 2; // Multiply DamageTaken by 2 for a critical hit
         }
         else
         {
             Health -= DamageTaken;
             if (Health <= 0)
             {
-               Destroy(Enemies);
+                Destroy(Enemies);
             }
         }
     }
