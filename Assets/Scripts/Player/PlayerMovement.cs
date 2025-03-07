@@ -9,7 +9,7 @@ using UnityEngine.UIElements;
 public class PlayerMovement : MonoBehaviour
 {   
     public float rotationSpeed = 450;
-    public float walkSpeed = 5;
+    public float walkSpeed = 8;
     public float runSpeed = 8;  
 
     private Quaternion targetRotation;

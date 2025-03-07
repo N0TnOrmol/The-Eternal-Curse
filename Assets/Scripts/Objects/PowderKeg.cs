@@ -7,7 +7,7 @@ public class PowderKeg : MonoBehaviour
     public bool exploded = false;           // Explosion flag
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("Bullet") && !exploded)
+        if (collision.collider.CompareTag("Bullet" + "Player") && !exploded)
         {
             Explode();
         }
