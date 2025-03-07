@@ -7,16 +7,13 @@ public class Gun : MonoBehaviour
     public float rpm;
     public Transform spawnPoint; // Where the bullet will be spawned
     public GameObject bulletPrefab; // Reference to the 3D bullet prefab
-
     private float secondsBetweenShots;
     private float nextPossibleShootTime;
     private bool isShootingAllowed = false; // New flag to manage if shooting is allowed
-
     void Start()
     {
         secondsBetweenShots = 60 / rpm; // Calculate the time between shots
     }
-
     public void Shoot()
     {
         // Don't allow shooting if the audio is already playing or if shooting is not allowed
@@ -41,7 +38,6 @@ public class Gun : MonoBehaviour
             nextPossibleShootTime = Time.time + secondsBetweenShots;
         }
     }
-
     void Update()
     {
         // Only allow shooting if the gun is active and shooting is allowed
@@ -50,7 +46,6 @@ public class Gun : MonoBehaviour
             ShootContinuous();
         }
     }
-
     // This method should handle continuous firing if the gun is in auto mode
     public void ShootContinuous()
     {
@@ -59,12 +54,10 @@ public class Gun : MonoBehaviour
             Shoot(); // Call Shoot method for continuous shooting
         }
     }
-
     private bool CanShoot()
     {
         return Time.time >= nextPossibleShootTime; // Check if enough time has passed since the last shot
     }
-
     // Set whether shooting is allowed or not
     public void SetShootingAllowed(bool allowed)
     {

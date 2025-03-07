@@ -5,7 +5,7 @@ public class PickUp : MonoBehaviour
     public GameObject PickUpText;
     public GameObject ObjectToPickUp;
     public GameObject ObjectInHand;
-
+    public Gun gunScript;
     void Start()
     {
         ObjectToPickUp.SetActive(false);
@@ -22,6 +22,8 @@ public class PickUp : MonoBehaviour
                 ObjectToPickUp.SetActive(true);
                 PickUpText.SetActive(false);
                 ObjectInHand.SetActive(false);
+                gunScript.SetShootingAllowed(false);
+                gunScript.enabled = false;
             }
             
         }
