@@ -24,6 +24,10 @@ public class DmgHp : MonoBehaviour
         if (Random.Range(1, 10) > 9)
         {
             Health -= DamageTaken * 2; // Multiply DamageTaken by 2 for a critical hit
+            if (Health <= 0)
+            {
+                Destroy(Enemies);
+            }
         }
         else
         {
