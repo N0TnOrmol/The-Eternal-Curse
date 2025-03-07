@@ -5,9 +5,7 @@ public class Bullet : MonoBehaviour
     public float speed = 20f; // Speed of the bullet
     public float lifetime = 5f; // How long the bullet exists before being destroyed
     public string targetTag = "Enemy"; // Tag of the enemy to deal damage
-
     private Rigidbody rb; // To move the bullet
-
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -26,23 +24,25 @@ public class Bullet : MonoBehaviour
         // Destroy the bullet after its lifetime expires
         Destroy(gameObject, lifetime);
     }
-
     void OnCollisionEnter(Collision collision)
     {
-        // Debugging: Check if collision happens
-        Debug.Log("Bullet hit something: " + collision.collider.name);
-
+        Debug.Log("Bullet hit: " + collision.collider.name);
         if (collision.collider.CompareTag(targetTag))
         {
-            // Try to get the enemy's health script and deal damage
-            DmgHp DmgHp = collision.collider.GetComponent<DmgHp>();
-            if (DmgHp != null)
+            DmgHp enemy = collision.collider.GetComponent<DmgHp>();
+            if (enemy != null)
             {
-                DmgHp.TakeDamageEnemy();
+                enemy.TakeDamageEnemy();
             }
         }
-
-        // Destroy the bullet on any collision (enemy or anything else)
+        if (collision.collider.CompareTag("Explosive"))
+        {
+            PowderKeg keg = collision.collider.GetComponent<PowderKeg>();
+            if (keg != null && !keg.exploded)
+            {
+                keg.Explode(); // Boom 💥
+            }
+        }
         Destroy(gameObject);
     }
 }

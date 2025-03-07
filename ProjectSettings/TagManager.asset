@@ -9,6 +9,8 @@ TagManager:
   - WaveSpawner
   - MeleeWeapon
   - Gun
+  - Explosive
+  - bullet
   layers:
   - Default
   - TransparentFX
