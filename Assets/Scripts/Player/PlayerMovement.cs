@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
 
         if(Input.GetButtonDown("Attack"))
         {
-            gun.Shoot();
+            gun.ShootContinuous();
         }
         else if (Input.GetButton("Attack"))
         {

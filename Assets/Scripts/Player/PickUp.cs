@@ -25,7 +25,13 @@ public class PickUp : MonoBehaviour
                 gunScript.SetShootingAllowed(false);
                 gunScript.enabled = false;
             }
-            
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.tag == "Player")
+        {
+            PickUpText.SetActive(false);
         }
     }
 }

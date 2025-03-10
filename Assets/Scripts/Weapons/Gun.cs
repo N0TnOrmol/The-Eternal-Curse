@@ -2,63 +2,60 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    public enum GunType { Semi, Burst, Auto };
-    public GunType gunType;
     public float rpm;
-    public Transform spawnPoint; // Where the bullet will be spawned
-    public GameObject bulletPrefab; // Reference to the 3D bullet prefab
+    public Transform spawnPoint;
+    public GameObject bulletPrefab;
     private float secondsBetweenShots;
     private float nextPossibleShootTime;
-    private bool isShootingAllowed = false; // New flag to manage if shooting is allowed
+    private bool isShootingAllowed = false;
+
+    private AudioSource audioSource;
+
     void Start()
     {
-        secondsBetweenShots = 60 / rpm; // Calculate the time between shots
+        secondsBetweenShots = 60 / rpm;
+        audioSource = GetComponent<AudioSource>(); // Get the AudioSource
     }
+
     public void Shoot()
     {
-        // Don't allow shooting if the audio is already playing or if shooting is not allowed
-        if (!isShootingAllowed || GetComponent<AudioSource>().isPlaying)
+        // Only allow shooting if the gun is allowed to shoot, the time is right, and the audio is not playing
+        if (!isShootingAllowed || !CanShoot() || audioSource.isPlaying) 
             return;
 
-        if (CanShoot())  // Only shoot if the cooldown period allows
-        {
-            // Play the shooting sound immediately when the gun fires
-            GetComponent<AudioSource>().Play();
+        // Play gun sound
+        if (audioSource != null)
+            audioSource.Play();
 
-            // Instantiate the bullet at the spawn point
-            GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
+        // Instantiate bullet
+        GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
+        bullet.transform.forward = spawnPoint.forward;
 
-            // Set bullet's direction to move forward
-            bullet.transform.forward = spawnPoint.forward;
-
-            // Log when the bullet is spawned (for debugging)
-            Debug.Log("Bullet spawned at: " + spawnPoint.position);
-
-            // Set the next time you can shoot based on RPM (rate of fire)
-            nextPossibleShootTime = Time.time + secondsBetweenShots;
-        }
+        // Set next shot time
+        nextPossibleShootTime = Time.time + secondsBetweenShots;
     }
+
     void Update()
     {
-        // Only allow shooting if the gun is active and shooting is allowed
         if (isShootingAllowed && Input.GetButton("Attack") && enabled)
         {
             ShootContinuous();
         }
     }
-    // This method should handle continuous firing if the gun is in auto mode
-    public void ShootContinuous()
-    {
-        if (gunType == GunType.Auto)
-        {
-            Shoot(); // Call Shoot method for continuous shooting
-        }
-    }
+
     private bool CanShoot()
     {
-        return Time.time >= nextPossibleShootTime; // Check if enough time has passed since the last shot
+        return Time.time >= nextPossibleShootTime;
     }
-    // Set whether shooting is allowed or not
+
+    public void ShootContinuous()
+    {
+        if (CanShoot())
+        {
+            Shoot();
+        }
+    }
+
     public void SetShootingAllowed(bool allowed)
     {
         isShootingAllowed = allowed;

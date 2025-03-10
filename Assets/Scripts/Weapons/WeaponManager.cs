@@ -2,58 +2,72 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
-    public GameObject gun;  // Reference to the gun
-    public GameObject meleeWeapon;  // Reference to the melee weapon (saber)
-    private Gun gunScript;  // Reference to the Gun script
-    private bool isGunActive = true;  // Bool to track whether the gun is active or not
+    // References to the three weapon GameObjects
+    public GameObject gun;
+    public GameObject meleeWeapon;
+    public GameObject musket;
+
+    // Scripts for the gun and musket (since both are ranged weapons)
+    private Gun gunScript;
+    private Musket musketScript;
+
+    // Current weapon index (0 = Gun, 1 = Melee, 2 = Musket)
+    private int currentWeaponIndex = 0;
 
     void Start()
     {
-        // Get the Gun component from the gun GameObject
-        gunScript = gun.GetComponent<Gun>();  // Get the Gun script
+        // Get the gun and musket scripts to enable/disable shooting
+        gunScript = gun.GetComponent<Gun>();
+        musketScript = musket.GetComponent<Musket>();
 
-        // Initially, enable the gun and disable the melee weapon
-        gun.SetActive(true);
-        meleeWeapon.SetActive(false);
-        gunScript.enabled = true;  // Enable the gun shooting script
-        gunScript.SetShootingAllowed(true);  // Allow shooting initially
+        // Set the default weapon as the gun
+        UpdateWeaponState();
     }
 
     void Update()
     {
-        // Detect the weapon switch input (e.g., pressing the "Q" key)
+        // If the player presses the weapon switch key (Q), cycle through the weapons
         if (Input.GetKeyDown(KeyCode.Q))
         {
             SwitchWeapon();
         }
 
-        // Allow shooting only if the gun is equipped and shooting is allowed
-        if (isGunActive && Input.GetButton("Attack"))
+        // Handle shooting when using a ranged weapon
+        if (currentWeaponIndex == 0 && Input.GetButton("Attack"))
         {
-            gunScript.ShootContinuous(); // Call the shooting logic from the Gun script
+            gunScript.ShootContinuous();  // Gun shooting
+        }
+        else if (currentWeaponIndex == 2 && Input.GetButton("Attack"))
+        {
+            musketScript.ShootContinuous();  // Musket shooting
         }
     }
 
-    // Method to switch weapons
+    // Switches to the next weapon in the cycle (Gun → Melee → Musket → Gun)
     void SwitchWeapon()
     {
-        if (isGunActive)  // If the gun is currently active, switch to the melee weapon
-        {
-            gun.SetActive(false);  // Disable the gun
-            meleeWeapon.SetActive(true);  // Enable the melee weapon
-            gunScript.enabled = false;  // Disable the Gun script to stop shooting
-            gunScript.SetShootingAllowed(false);  // Disable shooting
-            isGunActive = false;  // Set the bool to false (melee weapon active)
-            Debug.Log("Switched to melee weapon, gun is disabled.");
-        }
-        else  // If the melee weapon is active, switch to the gun
-        {
-            gun.SetActive(true);  // Enable the gun
-            meleeWeapon.SetActive(false);  // Disable the melee weapon
-            gunScript.enabled = true;  // Enable the Gun script to allow shooting
-            gunScript.SetShootingAllowed(true);  // Allow shooting
-            isGunActive = true;  // Set the bool to true (gun is active)
-            Debug.Log("Switched to gun, gun is enabled.");
-        }
+        currentWeaponIndex = (currentWeaponIndex + 1) % 3;  // Cycle between 0, 1, and 2
+        UpdateWeaponState();
+    }
+
+    // Updates which weapon is active and sets shooting permissions accordingly
+    void UpdateWeaponState()
+    {
+        // Enable the currently selected weapon and disable the others
+        gun.SetActive(currentWeaponIndex == 0);
+        meleeWeapon.SetActive(currentWeaponIndex == 1);
+        musket.SetActive(currentWeaponIndex == 2);
+
+        // Enable shooting only for the active ranged weapon
+        gunScript.enabled = (currentWeaponIndex == 0);
+        musketScript.enabled = (currentWeaponIndex == 2);
+
+        // Allow shooting only for the active ranged weapon
+        gunScript.SetShootingAllowed(currentWeaponIndex == 0);
+        musketScript.SetShootingAllowed(currentWeaponIndex == 2);
+
+        // Log the currently selected weapon
+        string weaponName = currentWeaponIndex == 0 ? "Gun" : currentWeaponIndex == 1 ? "Melee" : "Musket";
+        Debug.Log("Switched to: " + weaponName);
     }
 }
