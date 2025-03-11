@@ -1,50 +1,48 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 20f;  // Speed of the bullet
-    public float lifetime = 5f;  // How long the bullet exists before being destroyed
-    public string targetTag = "Enemy";  // Tag of the enemy to deal damage
-    private Rigidbody rb;  // To move the bullet
+    public float lifetime = 5f;
+    public string targetTag = "Enemy";
+    private Rigidbody rb;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        if (rb == null)
+
+        if (!rb)
         {
-            Debug.LogError("Rigidbody is missing on the bullet!");
+            Debug.LogError("Bullet Rigidbody missing!");
             return;
         }
 
-        // Move the bullet forward using its Rigidbody
-        rb.linearVelocity = transform.forward * speed;  
+        rb.isKinematic = false;
+        rb.useGravity = false;
 
-        // Debugging: Check if bullet is moving
-        Debug.Log("Bullet moving with linear velocity: " + rb.linearVelocity);
-
-        // Destroy the bullet after its lifetime expires
         Destroy(gameObject, lifetime);
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Bullet hit: " + collision.collider.name);
+        if (collision.collider.GetComponent<NavMeshAgent>() != null)
+        {
+            Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
+            return;
+        }
+
         if (collision.collider.CompareTag(targetTag))
         {
             DmgHp enemy = collision.collider.GetComponent<DmgHp>();
-            if (enemy != null)
-            {
-                enemy.TakeDamageEnemy();
-            }
+            if (enemy) enemy.TakeDamageEnemy();
         }
+
         if (collision.collider.CompareTag("Explosive"))
         {
             PowderKeg keg = collision.collider.GetComponent<PowderKeg>();
-            if (keg != null && !keg.exploded)
-            {
-                keg.Explode(); // Boom 💥
-            }
+            if (keg && !keg.exploded) keg.Explode();
         }
+
         Destroy(gameObject);
     }
 }

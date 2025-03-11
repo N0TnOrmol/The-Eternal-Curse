@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &146583607015267349
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4789792020339771480, guid: e97b831cf779d4bc2abe96c97e2666cb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -39.146
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789792020339771480, guid: e97b831cf779d4bc2abe96c97e2666cb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 14.468
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789792020339771480, guid: e97b831cf779d4bc2abe96c97e2666cb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -22.782
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789792020339771480, guid: e97b831cf779d4bc2abe96c97e2666cb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.29883623
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789792020339771480, guid: e97b831cf779d4bc2abe96c97e2666cb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.29883623
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789792020339771480, guid: e97b831cf779d4bc2abe96c97e2666cb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.64085644
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789792020339771480, guid: e97b831cf779d4bc2abe96c97e2666cb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.64085644
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789792020339771480, guid: e97b831cf779d4bc2abe96c97e2666cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789792020339771480, guid: e97b831cf779d4bc2abe96c97e2666cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789792020339771480, guid: e97b831cf779d4bc2abe96c97e2666cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 5274580322718716642, guid: e97b831cf779d4bc2abe96c97e2666cb, type: 3}
+      propertyPath: m_Name
+      value: Saber (PickUp) Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e97b831cf779d4bc2abe96c97e2666cb, type: 3}

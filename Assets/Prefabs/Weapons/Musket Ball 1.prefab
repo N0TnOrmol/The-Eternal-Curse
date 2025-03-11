@@ -120,7 +120,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0131f18af819c4b158c2d18386151a12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
   lifetime: 5
   targetTag: Enemy
 --- !u!54 &5003274144159997056

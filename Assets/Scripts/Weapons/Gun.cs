@@ -2,58 +2,43 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    public float rpm;
+    public float rpm = 600f;   // Rate of fire (shots per minute)
     public Transform spawnPoint;
     public GameObject bulletPrefab;
+
     private float secondsBetweenShots;
     private float nextPossibleShootTime;
     private bool isShootingAllowed = false;
-
     private AudioSource audioSource;
 
     void Start()
     {
-        secondsBetweenShots = 60 / rpm;
-        audioSource = GetComponent<AudioSource>(); // Get the AudioSource
+        secondsBetweenShots = 60f / rpm;
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void Shoot()
     {
-        // Only allow shooting if the gun is allowed to shoot, the time is right, and the audio is not playing
-        if (!isShootingAllowed || !CanShoot() || audioSource.isPlaying) 
-            return;
+        if (!isShootingAllowed || Time.time < nextPossibleShootTime) return;
 
-        // Play gun sound
-        if (audioSource != null)
-            audioSource.Play();
+        if (audioSource) audioSource.Play();
 
-        // Instantiate bullet
         GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
-        bullet.transform.forward = spawnPoint.forward;
+        Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
 
-        // Set next shot time
-        nextPossibleShootTime = Time.time + secondsBetweenShots;
-    }
-
-    void Update()
-    {
-        if (isShootingAllowed && Input.GetButton("Attack") && enabled)
+        if (bulletRb)
         {
-            ShootContinuous();
+            bulletRb.isKinematic = false;
+            bulletRb.useGravity = false;
+            bulletRb.AddForce(spawnPoint.forward * 1000f, ForceMode.Impulse);
         }
-    }
 
-    private bool CanShoot()
-    {
-        return Time.time >= nextPossibleShootTime;
+        nextPossibleShootTime = Time.time + secondsBetweenShots;
     }
 
     public void ShootContinuous()
     {
-        if (CanShoot())
-        {
-            Shoot();
-        }
+        if (Time.time >= nextPossibleShootTime) Shoot();
     }
 
     public void SetShootingAllowed(bool allowed)
