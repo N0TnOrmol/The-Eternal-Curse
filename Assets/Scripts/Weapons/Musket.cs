@@ -1,48 +1,27 @@
+using UnityEditor.Search;
 using UnityEngine;
 
 public class Musket : MonoBehaviour
 {
-    public float rpm = 30f;
-    public Transform spawnPoint;
-    public GameObject bulletPrefab;
-
-    private float secondsBetweenShots;
-    private float nextPossibleShootTime;
-    private bool isShootingAllowed = false;
-    private AudioSource audioSource;
-
-    void Start()
-    {
-        secondsBetweenShots = 60f / rpm;
-        audioSource = GetComponent<AudioSource>();
-    }
-
+    public enum GunType {Semi,Burst,Auto}
+    public GunType gunType;
+    public Transform spawn;
     public void Shoot()
     {
-        if (!isShootingAllowed || Time.time < nextPossibleShootTime) return;
-
-        if (audioSource) audioSource.Play();
-
-        GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
-        Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
-
-        if (bulletRb)
+        Ray ray = new Ray(spawn.position,spawn.forward);
+        RaycastHit hit;
+        float shotDistance = 20;
+        if(Physics.Raycast(ray, out hit, shotDistance))
         {
-            bulletRb.isKinematic = false;
-            bulletRb.useGravity = false;
-            bulletRb.AddForce(spawnPoint.forward * 1200f, ForceMode.Impulse);
+            shotDistance = hit.distance;
         }
-
-        nextPossibleShootTime = Time.time + secondsBetweenShots;
+        Debug.DrawRay(ray.origin,ray.direction * shotDistance, Color.red,1);
     }
-
     public void ShootContinuous()
     {
-        if (Time.time >= nextPossibleShootTime) Shoot();
-    }
-
-    public void SetShootingAllowed(bool allowed)
-    {
-        isShootingAllowed = allowed;
+        if(gunType == GunType.Auto)
+        {
+            Shoot();
+        }
     }
 }

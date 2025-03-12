@@ -50,8 +50,6 @@ public class WeaponManager : MonoBehaviour
         musket.SetActive(currentWeaponIndex == 2);
         blunderbuss.SetActive(currentWeaponIndex == 3);
 
-        if (gunScript) gunScript.SetShootingAllowed(currentWeaponIndex == 0);
-        if (musketScript) musketScript.SetShootingAllowed(currentWeaponIndex == 2);
-        if (blunderbussScript) blunderbussScript.SetShootingAllowed(currentWeaponIndex == 3);
+
     }
 }

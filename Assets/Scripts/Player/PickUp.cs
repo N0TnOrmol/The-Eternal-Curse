@@ -22,7 +22,7 @@ public class PickUp : MonoBehaviour
                 ObjectToPickUp.SetActive(true);
                 PickUpText.SetActive(false);
                 ObjectInHand.SetActive(false);
-                gunScript.SetShootingAllowed(false);
+  
                 gunScript.enabled = false;
             }
         }

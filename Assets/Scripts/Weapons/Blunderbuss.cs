@@ -1,59 +1,27 @@
+using UnityEditor.Search;
 using UnityEngine;
 
 public class Blunderbuss : MonoBehaviour
 {
-    public float rpm = 20f;
-    public Transform spawnPoint;
-    public GameObject bulletPrefab;
-    public int pelletCount = 6;
-    public float spreadAngle = 10f;
-
-    private float secondsBetweenShots;
-    private float nextPossibleShootTime;
-    private bool isShootingAllowed = false;
-    private AudioSource audioSource;
-
-    void Start()
-    {
-        secondsBetweenShots = 60f / rpm;
-        audioSource = GetComponent<AudioSource>();
-    }
-
+    public enum GunType {Semi,Burst,Auto}
+    public GunType gunType;
+    public Transform spawn;
     public void Shoot()
     {
-        if (!isShootingAllowed || Time.time < nextPossibleShootTime) return;
-
-        if (audioSource) audioSource.Play();
-
-        for (int i = 0; i < pelletCount; i++)
+        Ray ray = new Ray(spawn.position,spawn.forward);
+        RaycastHit hit;
+        float shotDistance = 20;
+        if(Physics.Raycast(ray, out hit, shotDistance))
         {
-            GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
-            Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
-
-            if (bulletRb)
-            {
-                bulletRb.isKinematic = false;
-                bulletRb.useGravity = false;
-
-                // Random spread direction
-                Vector3 spread = spawnPoint.forward +
-                                 new Vector3(Random.Range(-spreadAngle, spreadAngle) * 0.01f,
-                                             Random.Range(-spreadAngle, spreadAngle) * 0.01f, 
-                                             0);
-                bulletRb.AddForce(spread.normalized * 800f, ForceMode.Impulse);
-            }
+            shotDistance = hit.distance;
         }
-
-        nextPossibleShootTime = Time.time + secondsBetweenShots;
+        Debug.DrawRay(ray.origin,ray.direction * shotDistance, Color.red,1);
     }
-
     public void ShootContinuous()
     {
-        if (Time.time >= nextPossibleShootTime) Shoot();
-    }
-
-    public void SetShootingAllowed(bool allowed)
-    {
-        isShootingAllowed = allowed;
+        if(gunType == GunType.Auto)
+        {
+            Shoot();
+        }
     }
 }
