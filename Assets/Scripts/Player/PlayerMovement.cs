@@ -11,8 +11,10 @@ public class PlayerMovement : MonoBehaviour
     public float rotationSpeed = 450;
     public float walkSpeed = 8;
     public float runSpeed = 8;  
+    private float acceleration = 5;
 
     private Quaternion targetRotation;
+    private Vector3 currentVelocityMod;
 
     public Gun gun;
     private CharacterController Controller;
@@ -46,7 +48,8 @@ public class PlayerMovement : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
         Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-        Vector3 Motion = input;
+        currentVelocityMod = Vector3.MoveTowards(currentVelocityMod,input,acceleration * Time.deltaTime);
+        Vector3 Motion = currentVelocityMod;
         Motion *= (Mathf.Abs(input.x) == 1 && MathF.Abs(input.z) == 1)?.7f:1;
         Motion *= (Input.GetButton("Run"))?runSpeed:walkSpeed;
         Motion += Vector3.up * -8;
@@ -65,7 +68,8 @@ public class PlayerMovement : MonoBehaviour
             // Smoothly rotate towards the target rotation
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
-        Vector3 Motion = input;
+        currentVelocityMod = Vector3.MoveTowards(currentVelocityMod,input,acceleration * Time.deltaTime);
+        Vector3 Motion = currentVelocityMod;
         Motion *= (Mathf.Abs(input.x) == 1 && MathF.Abs(input.z) == 1)?.7f:1;
         Motion *= (Input.GetButton("Run"))?runSpeed:walkSpeed;
         Motion += Vector3.up * -8;

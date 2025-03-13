@@ -175,6 +175,7 @@ MonoBehaviour:
   rpm: 600
   spawn: {fileID: 794524854611325030}
   shellEjectionPoint: {fileID: 8161577473328649577}
+  shell: {fileID: -5021072108867471345, guid: c4fd647e28c5040cf992852a301be77d, type: 3}
   tracer: {fileID: 3438823875155585387}
 --- !u!82 &7326931178092510398
 AudioSource:
@@ -189,7 +190,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: db634ed474b2f4fb38067c6167900ce4, type: 3}
   m_Resource: {fileID: 8300000, guid: db634ed474b2f4fb38067c6167900ce4, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -281,7 +282,7 @@ LineRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 532914666583963210}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -328,8 +329,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.026317596
-        value: 0.052980125
+        time: 0.023391724
+        value: 0.07284707
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -341,7 +342,7 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0, g: 0, b: 0, a: 1}
+      key0: {r: 1, g: 1, b: 1, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 1, g: 1, b: 1, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
