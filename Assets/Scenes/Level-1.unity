@@ -1807,7 +1807,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1465772666329510483, guid: 35160df079376453893f86865f90bc2f, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465772666329510483, guid: 35160df079376453893f86865f90bc2f, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465772666329510483, guid: 35160df079376453893f86865f90bc2f, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465772666329510483, guid: 35160df079376453893f86865f90bc2f, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465772666329510483, guid: 35160df079376453893f86865f90bc2f, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
+      value: 0.023391724
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465772666329510483, guid: 35160df079376453893f86865f90bc2f, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 0.07284707
       objectReference: {fileID: 0}
     - target: {fileID: 2047834258816889121, guid: 35160df079376453893f86865f90bc2f, type: 3}
       propertyPath: m_Name
