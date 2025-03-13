@@ -7,9 +7,14 @@ public class Bullet : MonoBehaviour
     public string targetTag = "Enemy"; // Tag of the enemy to deal damage
 
     private Rigidbody rb; // To move the bullet
+<<<<<<< Updated upstream
 
+=======
+    public PauseGame Pause;
+>>>>>>> Stashed changes
     void Start()
     {
+
         rb = GetComponent<Rigidbody>();
         if (rb == null)
         {
