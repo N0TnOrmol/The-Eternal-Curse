@@ -175,9 +175,9 @@ MonoBehaviour:
   gunType: 0
   rpm: 0
   spawn: {fileID: 357802260028535403}
-  shellEjectionPoint: {fileID: 0}
-  shell: {fileID: 0}
-  tracer: {fileID: 0}
+  shellEjectionPoint: {fileID: 253252135873428087}
+  shell: {fileID: -5021072108867471345, guid: c4fd647e28c5040cf992852a301be77d, type: 3}
+  tracer: {fileID: 7412972592423783005}
 --- !u!82 &8539197067290563594
 AudioSource:
   m_ObjectHideFlags: 0

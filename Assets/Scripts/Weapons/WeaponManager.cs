@@ -12,9 +12,14 @@ public class WeaponManager : MonoBehaviour
     private Blunderbuss blunderbussScript;
 
     private int currentWeaponIndex = 0;
+    private GameObject[] weapons;
 
     void Start()
     {
+        // Store weapons in an array for easier switching
+        weapons = new GameObject[] { gun, meleeWeapon, musket, blunderbuss };
+
+        // Get scripts if available
         if (gun) gunScript = gun.GetComponent<Gun>();
         if (musket) musketScript = musket.GetComponent<Musket>();
         if (blunderbuss) blunderbussScript = blunderbuss.GetComponent<Blunderbuss>();
@@ -39,17 +44,31 @@ public class WeaponManager : MonoBehaviour
 
     void SwitchWeapon()
     {
-        currentWeaponIndex = (currentWeaponIndex + 1) % 4;
-        UpdateWeaponState();
+        // Deactivate all weapons
+        foreach (GameObject weapon in weapons)
+        {
+            if (weapon) weapon.SetActive(false);
+        }
+
+        // Switch to the next weapon
+        currentWeaponIndex = (currentWeaponIndex + 1) % weapons.Length;
+
+        // Activate the new weapon
+        if (weapons[currentWeaponIndex])
+        {
+            weapons[currentWeaponIndex].SetActive(true);
+        }
     }
 
     void UpdateWeaponState()
     {
-        gun.SetActive(currentWeaponIndex == 0);
-        meleeWeapon.SetActive(currentWeaponIndex == 1);
-        musket.SetActive(currentWeaponIndex == 2);
-        blunderbuss.SetActive(currentWeaponIndex == 3);
-
-
+        // Deactivate all weapons except the currently selected one
+        for (int i = 0; i < weapons.Length; i++)
+        {
+            if (weapons[i])
+            {
+                weapons[i].SetActive(i == currentWeaponIndex);
+            }
+        }
     }
 }

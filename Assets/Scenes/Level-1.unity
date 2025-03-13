@@ -1465,16 +1465,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1862649386 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3455893756196011194, guid: 35160df079376453893f86865f90bc2f, type: 3}
-  m_PrefabInstance: {fileID: 7410008578094840012}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &2039421286 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2906265955795654127, guid: 35160df079376453893f86865f90bc2f, type: 3}
-  m_PrefabInstance: {fileID: 7410008578094840012}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2060630102155981547
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1742,14 +1732,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.00796
       objectReference: {fileID: 0}
-    - target: {fileID: 868787243891679406, guid: 35160df079376453893f86865f90bc2f, type: 3}
-      propertyPath: shell
-      value: 
-      objectReference: {fileID: -5021072108867471345, guid: c4fd647e28c5040cf992852a301be77d, type: 3}
-    - target: {fileID: 868787243891679406, guid: 35160df079376453893f86865f90bc2f, type: 3}
-      propertyPath: shellEjectionPoint
-      value: 
-      objectReference: {fileID: 2039421286}
     - target: {fileID: 912318553547397420, guid: 35160df079376453893f86865f90bc2f, type: 3}
       propertyPath: m_LocalPosition.y
       value: -2.829
@@ -1778,6 +1760,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
       objectReference: {fileID: 0}
+    - target: {fileID: 1465772666329510483, guid: 35160df079376453893f86865f90bc2f, type: 3}
+      propertyPath: m_Parameters.colorGradient.ctime0
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465772666329510483, guid: 35160df079376453893f86865f90bc2f, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 0.54509807
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465772666329510483, guid: 35160df079376453893f86865f90bc2f, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 0.89411765
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465772666329510483, guid: 35160df079376453893f86865f90bc2f, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465772666329510483, guid: 35160df079376453893f86865f90bc2f, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.g
+      value: 0.32941177
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465772666329510483, guid: 35160df079376453893f86865f90bc2f, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.r
+      value: 0.93333334
+      objectReference: {fileID: 0}
     - target: {fileID: 2047834258816889121, guid: 35160df079376453893f86865f90bc2f, type: 3}
       propertyPath: m_Name
       value: Spawn Musket
@@ -1792,7 +1798,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2143316576411174228, guid: 35160df079376453893f86865f90bc2f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2143316576411174228, guid: 35160df079376453893f86865f90bc2f, type: 3}
       propertyPath: m_TagString
@@ -1838,14 +1844,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -2.65
       objectReference: {fileID: 0}
-    - target: {fileID: 2787172942708618009, guid: 35160df079376453893f86865f90bc2f, type: 3}
-      propertyPath: shell
-      value: 
-      objectReference: {fileID: -5021072108867471345, guid: c4fd647e28c5040cf992852a301be77d, type: 3}
-    - target: {fileID: 2787172942708618009, guid: 35160df079376453893f86865f90bc2f, type: 3}
-      propertyPath: shellEjectionPoint
-      value: 
-      objectReference: {fileID: 1862649386}
     - target: {fileID: 3396190509621829107, guid: 35160df079376453893f86865f90bc2f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1929,6 +1927,30 @@ PrefabInstance:
     - target: {fileID: 5151841101444286023, guid: 35160df079376453893f86865f90bc2f, type: 3}
       propertyPath: m_TagString
       value: Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563829315788514757, guid: 35160df079376453893f86865f90bc2f, type: 3}
+      propertyPath: m_Parameters.colorGradient.ctime0
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563829315788514757, guid: 35160df079376453893f86865f90bc2f, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 0.54509807
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563829315788514757, guid: 35160df079376453893f86865f90bc2f, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 0.89411765
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563829315788514757, guid: 35160df079376453893f86865f90bc2f, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563829315788514757, guid: 35160df079376453893f86865f90bc2f, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.g
+      value: 0.32941177
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563829315788514757, guid: 35160df079376453893f86865f90bc2f, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.r
+      value: 0.93333334
       objectReference: {fileID: 0}
     - target: {fileID: 5823342177869365751, guid: 35160df079376453893f86865f90bc2f, type: 3}
       propertyPath: m_Layer
