@@ -1106,7 +1106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 720406876}
-  meleeWeapon: {fileID: 7410008578094840018}
+  saber: {fileID: 7410008578094840018}
   musket: {fileID: 1312581873}
   blunderbuss: {fileID: 350143000}
 --- !u!4 &1471774296
@@ -1888,6 +1888,10 @@ PrefabInstance:
       propertyPath: healthBarController
       value: 
       objectReference: {fileID: 614611820}
+    - target: {fileID: 4017435019108595656, guid: 35160df079376453893f86865f90bc2f, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4120407519627473234, guid: 35160df079376453893f86865f90bc2f, type: 3}
       propertyPath: m_Name
       value: Spawn Gun
@@ -1906,7 +1910,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4362610839616679282, guid: 35160df079376453893f86865f90bc2f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4362610839616679282, guid: 35160df079376453893f86865f90bc2f, type: 3}
       propertyPath: m_TagString

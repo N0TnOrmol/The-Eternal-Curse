@@ -70,6 +70,12 @@ public class Gun : MonoBehaviour
         }
     }
 
+        public void ResetShootingState()
+    {
+        nextPossibleShootTime = Time.time; // Allows instant shooting after switching weapons
+        isPlayingAudio = false; // Ensure audio doesn't interfere
+    }
+
     IEnumerator RenderTracer(Vector3 hitPoint)
     {
         tracer.enabled = true;

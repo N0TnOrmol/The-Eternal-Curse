@@ -75,7 +75,11 @@ public class Blunderbuss : MonoBehaviour
         }
     }
 
-
+    public void ResetShootingState()
+    {
+        nextPossibleShootTime = Time.time; // Allows instant shooting after switching weapons
+        isPlayingAudio = false; // Ensure audio doesn't interfere
+    }
 
     public void ShootContinuous()
     {

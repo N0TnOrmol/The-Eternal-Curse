@@ -31,18 +31,34 @@ public class WeaponManager : MonoBehaviour
 
     void SwitchWeapon()
     {
-        // Deactivate all weapons
+        // Deactivate all weapons first
         foreach (GameObject weapon in weapons)
         {
-            if (weapon) weapon.SetActive(false);
+            if (weapon)
+            {
+                weapon.SetActive(false);
+            }
         }
 
         // Switch to the next weapon
         currentWeaponIndex = (currentWeaponIndex + 1) % weapons.Length;
 
-        // Activate the new weapon
-        UpdateWeaponState();
+        // Activate the selected weapon
+        if (weapons[currentWeaponIndex])
+        {
+            weapons[currentWeaponIndex].SetActive(true);
+
+            // Reset the nextPossibleShootTime to allow instant shooting after switching
+            Gun gun = weapons[currentWeaponIndex].GetComponent<Gun>();
+            Musket musket = weapons[currentWeaponIndex].GetComponent<Musket>();
+            Blunderbuss blunderbuss = weapons[currentWeaponIndex].GetComponent<Blunderbuss>();
+
+            if (gun) gun.ResetShootingState();
+            if (musket) musket.ResetShootingState();
+            if (blunderbuss) blunderbuss.ResetShootingState();
+        }
     }
+
 
     void UpdateWeaponState()
     {
