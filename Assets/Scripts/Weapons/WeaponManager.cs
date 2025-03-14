@@ -3,28 +3,17 @@ using UnityEngine;
 public class WeaponManager : MonoBehaviour
 {
     public GameObject gun;
-    public GameObject meleeWeapon;
+    public GameObject saber;
     public GameObject musket;
     public GameObject blunderbuss;
-
-    private Gun gunScript;
-    private Musket musketScript;
-    private Blunderbuss blunderbussScript;
 
     private int currentWeaponIndex = 0;
     private GameObject[] weapons;
 
     void Start()
     {
-        // Store weapons in an array for easier switching
-        weapons = new GameObject[] { gun, meleeWeapon, musket, blunderbuss };
-
-        // Get scripts if available
-        if (gun) gunScript = gun.GetComponent<Gun>();
-        if (musket) musketScript = musket.GetComponent<Musket>();
-        if (blunderbuss) blunderbussScript = blunderbuss.GetComponent<Blunderbuss>();
-
-        UpdateWeaponState();
+        weapons = new GameObject[] { gun, saber, musket, blunderbuss };
+        UpdateWeaponState(); // Ensure only one weapon is active at start
     }
 
     void Update()
@@ -34,11 +23,9 @@ public class WeaponManager : MonoBehaviour
             SwitchWeapon();
         }
 
-        if (Input.GetButton("Attack"))
+        if (Input.GetButtonDown("Attack")) // "Fire1" is Unity's default for left-click
         {
-            if (currentWeaponIndex == 0 && gunScript) gunScript.ShootContinuous();
-            if (currentWeaponIndex == 2 && musketScript) musketScript.ShootContinuous();
-            if (currentWeaponIndex == 3 && blunderbussScript) blunderbussScript.ShootContinuous();
+            ShootCurrentWeapon();
         }
     }
 
@@ -54,21 +41,53 @@ public class WeaponManager : MonoBehaviour
         currentWeaponIndex = (currentWeaponIndex + 1) % weapons.Length;
 
         // Activate the new weapon
-        if (weapons[currentWeaponIndex])
-        {
-            weapons[currentWeaponIndex].SetActive(true);
-        }
+        UpdateWeaponState();
     }
 
     void UpdateWeaponState()
     {
-        // Deactivate all weapons except the currently selected one
         for (int i = 0; i < weapons.Length; i++)
         {
             if (weapons[i])
             {
                 weapons[i].SetActive(i == currentWeaponIndex);
             }
+        }
+    }
+
+    void ShootCurrentWeapon()
+    {
+        GameObject activeWeapon = weapons[currentWeaponIndex];
+
+        if (activeWeapon)
+        {
+            Gun gunScript = activeWeapon.GetComponent<Gun>();
+            Musket musketScript = activeWeapon.GetComponent<Musket>();
+            Blunderbuss blunderbussScript = activeWeapon.GetComponent<Blunderbuss>();
+
+            if (gunScript)
+            {
+                Debug.Log("Shooting with Gun!");
+                gunScript.Shoot();
+            }
+            else if (musketScript)
+            {
+                Debug.Log("Shooting with Musket!");
+                musketScript.Shoot();
+            }
+            else if (blunderbussScript)
+            {
+                Debug.Log("Shooting with Blunderbuss!");
+                blunderbussScript.Shoot();
+            }
+            else
+            {
+                Debug.LogWarning("No valid weapon script found on active weapon!");
+            }
+        }
+        else
+        {
+            Debug.LogError("No active weapon found in WeaponManager!");
         }
     }
 }

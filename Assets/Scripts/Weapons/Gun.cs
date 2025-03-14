@@ -38,10 +38,18 @@ public class Gun : MonoBehaviour
         {
             Ray ray = new Ray(spawn.position, spawn.up);
             RaycastHit hit;
+            float tracerDistance = shotDistance; // Cache original shot distance
 
             if (Physics.Raycast(ray, out hit, shotDistance))
             {
-                shotDistance = hit.distance;
+                tracerDistance = hit.distance; // Update tracer distance
+
+                // Check if we hit an enemy
+                DmgHp enemy = hit.collider.GetComponent<DmgHp>();
+                if (enemy != null)
+                {
+                    enemy.TakeDamageEnemy();
+                }
             }
 
             nextPossibleShootTime = Time.time + secondsBetweenShots;
@@ -51,12 +59,25 @@ public class Gun : MonoBehaviour
 
             if (tracer)
             {
-                StartCoroutine(RenderTracer(ray.direction * shotDistance));
+                StartCoroutine(RenderTracer(ray.origin + ray.direction * tracerDistance)); // Use cached distance
             }
 
-            Rigidbody newShell = Instantiate(shell, shellEjectionPoint.position, Quaternion.identity) as Rigidbody;
-            newShell.AddForce(shellEjectionPoint.up * Random.Range(105f, 200f) + spawn.up * Random.Range(-10f, 10f));
+            // Spawn ONE shell
+            Rigidbody newShell = Instantiate(shell, shellEjectionPoint.position, Quaternion.identity);
+            Vector3 shellForce = shellEjectionPoint.up * Random.Range(105f, 200f) +
+                                spawn.up * Random.Range(-10f, 10f);
+            newShell.AddForce(shellForce);
         }
+    }
+
+    IEnumerator RenderTracer(Vector3 hitPoint)
+    {
+        tracer.enabled = true;
+        tracer.SetPosition(0, spawn.position);
+        tracer.SetPosition(1, hitPoint); // Always extend to the full cached distance
+
+        yield return new WaitForSeconds(0.5f);
+        tracer.enabled = false;
     }
 
     public void ShootContinuous()
@@ -78,13 +99,4 @@ public class Gun : MonoBehaviour
         isPlayingAudio = false;
     }
 
-    IEnumerator RenderTracer(Vector3 hitPoint)
-    {
-        tracer.enabled = true;
-        tracer.SetPosition(0, spawn.position);
-        tracer.SetPosition(1, spawn.position + hitPoint);
-
-        yield return new WaitForSeconds(0.5f);
-        tracer.enabled = false;
-    }
 }

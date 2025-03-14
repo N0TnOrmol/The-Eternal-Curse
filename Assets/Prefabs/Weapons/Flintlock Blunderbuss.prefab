@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunType: 0
-  rpm: 0
+  rpm: 600
   spawn: {fileID: 7241080380648363179}
   shellEjectionPoint: {fileID: 935682548270814330}
   shell: {fileID: -5021072108867471345, guid: c4fd647e28c5040cf992852a301be77d, type: 3}

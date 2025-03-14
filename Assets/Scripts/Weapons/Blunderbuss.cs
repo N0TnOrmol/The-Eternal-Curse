@@ -38,10 +38,18 @@ public class Blunderbuss : MonoBehaviour
         {
             Ray ray = new Ray(spawn.position, spawn.up);
             RaycastHit hit;
+            float tracerDistance = shotDistance; // Cache original shot distance
 
             if (Physics.Raycast(ray, out hit, shotDistance))
             {
-                shotDistance = hit.distance;
+                tracerDistance = hit.distance; // Update tracer distance
+
+                // Check if we hit an enemy
+                DmgHp enemy = hit.collider.GetComponent<DmgHp>();
+                if (enemy != null)
+                {
+                    enemy.TakeDamageEnemy();
+                }
             }
 
             nextPossibleShootTime = Time.time + secondsBetweenShots;
@@ -51,13 +59,23 @@ public class Blunderbuss : MonoBehaviour
 
             if (tracer)
             {
-                StartCoroutine(RenderTracer(ray.direction * shotDistance));
+                StartCoroutine(RenderTracer(ray.direction * tracerDistance)); // Use cached distance
             }
 
-            Rigidbody newShell = Instantiate(shell, shellEjectionPoint.position, Quaternion.identity) as Rigidbody;
-            newShell.AddForce(shellEjectionPoint.up * Random.Range(105f, 200f) + spawn.up * Random.Range(-10f, 10f));
+            // Spawn multiple shells
+            int shellCount = Random.Range(3, 6);
+            for (int i = 0; i < shellCount; i++)
+            {
+                Rigidbody newShell = Instantiate(shell, shellEjectionPoint.position, Quaternion.identity);
+                Vector3 randomForce = shellEjectionPoint.up * Random.Range(105f, 200f) +
+                                    spawn.up * Random.Range(-20f, 20f) +
+                                    spawn.right * Random.Range(-30f, 30f);
+                newShell.AddForce(randomForce);
+            }
         }
     }
+
+
 
     public void ShootContinuous()
     {
