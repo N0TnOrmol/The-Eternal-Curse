@@ -7,7 +7,8 @@ public class PauseGame : MonoBehaviour
     public GameObject PauseUI;
     public bool isPaused = false;
     public GameObject bullet;
-    private Gun gunScript;
+    public GameObject gun;
+    public Gun gunScript;
     private Bullet bulletScript;
 
     void Update()
@@ -17,6 +18,7 @@ public class PauseGame : MonoBehaviour
             PauseUI.SetActive(true);
             Time.timeScale = 0;
             isPaused = true;
+            gun.SetActive(false);
             gunScript.enabled = false;
             bulletScript.enabled = false;
             bullet.SetActive(false);
@@ -26,10 +28,23 @@ public class PauseGame : MonoBehaviour
             PauseUI.SetActive(false);
             Time.timeScale = 1;
             isPaused = false;
+            gun.SetActive(true);
             gunScript.enabled = true;
             bulletScript.enabled = true;
             bullet.SetActive(true);
         }
+    }
+
+    public void ButtonReturn()
+    {
+        isPaused = false;
+        gunScript.enabled = true;
+        bulletScript.enabled = true;
+        gun.SetActive(true);
+        bullet.SetActive(true);
+        PauseUI.SetActive(false);
+        Time.timeScale = 1;
+        Debug.Log("Off");
     }
 
 }
