@@ -4,12 +4,13 @@ using UnityEngine.UI;
 
 public class DMController : MonoBehaviour
 {
-
     public int DLIndex = 0;
     public KeyCode TestDM;
     public GameObject DL1;
     public GameObject DL2;
     public GameObject DL3;
+    public PlayerMovement playerMovement;
+    public Gun gun;
 
     void Update()
     {
@@ -29,10 +30,6 @@ public class DMController : MonoBehaviour
                         if (DLIndex >= 4)
                         {
                             StartCoroutine(SoberUp());
-                            if (DLIndex <= 0)
-                            {
-                                StopCoroutine(SoberUp());
-                            }
                         }
                     }
                 }
@@ -53,5 +50,4 @@ public class DMController : MonoBehaviour
         DLIndex--;
         DL1.SetActive(false);
     }
-
 }

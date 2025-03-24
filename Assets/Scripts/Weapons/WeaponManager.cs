@@ -59,7 +59,6 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-
     void UpdateWeaponState()
     {
         for (int i = 0; i < weapons.Length; i++)
