@@ -38,11 +38,11 @@ public class Gun : MonoBehaviour
         {
             Ray ray = new Ray(spawn.position, spawn.up);
             RaycastHit hit;
-            float tracerDistance = shotDistance; // Cache original shot distance
+            Vector3 endPosition = spawn.position + spawn.up * shotDistance; // Default to max distance
 
             if (Physics.Raycast(ray, out hit, shotDistance))
             {
-                tracerDistance = hit.distance; // Update tracer distance
+                endPosition = hit.point; // Stop at the exact hit point
 
                 // Check if we hit an enemy
                 DmgHp enemy = hit.collider.GetComponent<DmgHp>();
@@ -57,12 +57,13 @@ public class Gun : MonoBehaviour
             audioSource.Play();
             StartCoroutine(WaitForSoundToEnd());
 
+            // Render tracer stopping at the enemy
             if (tracer)
             {
-                StartCoroutine(RenderTracer(ray.origin + ray.direction * tracerDistance)); // Use cached distance
+                StartCoroutine(RenderTracer(endPosition));
             }
 
-            // Spawn ONE shell
+            // Spawn shell
             Rigidbody newShell = Instantiate(shell, shellEjectionPoint.position, Quaternion.identity);
             Vector3 shellForce = shellEjectionPoint.up * Random.Range(105f, 200f) +
                                 spawn.up * Random.Range(-10f, 10f);
@@ -70,11 +71,20 @@ public class Gun : MonoBehaviour
         }
     }
 
+    IEnumerator RenderTracer(Vector3 hitPoint)
+    {
+        tracer.enabled = true;
+        tracer.SetPosition(0, spawn.position);
+        tracer.SetPosition(1, hitPoint); // Stops at the exact hit point
+
+        yield return new WaitForSeconds(0.1f);
+        tracer.enabled = false;
+    }
+
     public void ResetShootingState()
     {
-        // Reset the shooting state (e.g., cooldown and audio)
-        nextPossibleShootTime = Time.time;  // Reset cooldown
-        isPlayingAudio = false;             // Reset audio state
+        nextPossibleShootTime = Time.time; 
+        isPlayingAudio = false;
     }
 
     public void ShootContinuous()
@@ -94,15 +104,5 @@ public class Gun : MonoBehaviour
     {
         yield return new WaitWhile(() => audioSource.isPlaying);
         isPlayingAudio = false;
-    }
-
-    IEnumerator RenderTracer(Vector3 hitPoint)
-    {
-        tracer.enabled = true;
-        tracer.SetPosition(0, spawn.position);
-        tracer.SetPosition(1, hitPoint); // Always extend to the full cached distance
-
-        yield return new WaitForSeconds(0.5f);
-        tracer.enabled = false;
     }
 }
