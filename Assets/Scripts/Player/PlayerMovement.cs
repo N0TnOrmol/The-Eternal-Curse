@@ -1,79 +1,96 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
-{   
+{
     public float rotationSpeed = 450;
     public float walkSpeed = 8;
-    public float runSpeed = 8;  
+    public float runSpeed = 8;
     private float acceleration = 5;
 
     private Quaternion targetRotation;
     private Vector3 currentVelocityMod;
 
-    public Gun gun;
     private CharacterController Controller;
     private Camera cam;
+    private float originalWalkSpeed;
+    private float originalRunSpeed;
+
+    // Reference to the drunk level
+    public DMController dmController;
 
     void Start()
     {
         Controller = GetComponent<CharacterController>();
         cam = Camera.main;
+
+        // Save the original speeds for restoration
+        originalWalkSpeed = walkSpeed;
+        originalRunSpeed = runSpeed;
     }
 
     void Update()
     {
         ControlMouse();
-        //ControlWASD();
+        ControlWASD();
+        ApplyDizzyEffect();
+    }
 
-        if(Input.GetButtonDown("Attack"))
-        {
-            gun.Shoot();
-        }
-        else if (Input.GetButton("Attack"))
-        {
-            gun.ShootContinuous();
-        }
-    }   
     void ControlMouse()
     {
         Vector3 mousePos = Input.mousePosition;
         mousePos = cam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, cam.transform.position.y - transform.position.y));
-        targetRotation = Quaternion.LookRotation(mousePos - new Vector3(transform.position.x,0,transform.position.z));
+        targetRotation = Quaternion.LookRotation(mousePos - new Vector3(transform.position.x, 0, transform.position.z));
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+    }
 
+    void ControlWASD()
+    {
         Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-        currentVelocityMod = Vector3.MoveTowards(currentVelocityMod,input,acceleration * Time.deltaTime);
+        currentVelocityMod = Vector3.MoveTowards(currentVelocityMod, input, acceleration * Time.deltaTime);
         Vector3 Motion = currentVelocityMod;
-        Motion *= (Mathf.Abs(input.x) == 1 && MathF.Abs(input.z) == 1)?.7f:1;
-        Motion *= (Input.GetButton("Run"))?runSpeed:walkSpeed;
+        Motion *= (Mathf.Abs(input.x) == 1 && Mathf.Abs(input.z) == 1) ? 0.7f : 1;
+
+        // Apply run/walk speed
+        Motion *= (Input.GetButton("Run")) ? runSpeed : walkSpeed;
+
+        // Apply gravity
         Motion += Vector3.up * -8;
 
         Controller.Move(Motion * Time.deltaTime);
     }
-    void ControlWASD()
+
+    void ApplyDizzyEffect()
     {
-        Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-
-        if(input != Vector3.zero)
+        // Apply dizzy effects based on DLIndex
+        if (dmController.DLIndex == 1)
         {
-            // Calculate target rotation based on input
-            targetRotation = Quaternion.LookRotation(input);
-
-            // Smoothly rotate towards the target rotation
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            walkSpeed = originalWalkSpeed * 1.2f; // Slightly increased speed
+            runSpeed = originalRunSpeed * 1.2f;
         }
-        currentVelocityMod = Vector3.MoveTowards(currentVelocityMod,input,acceleration * Time.deltaTime);
-        Vector3 Motion = currentVelocityMod;
-        Motion *= (Mathf.Abs(input.x) == 1 && MathF.Abs(input.z) == 1)?.7f:1;
-        Motion *= (Input.GetButton("Run"))?runSpeed:walkSpeed;
-        Motion += Vector3.up * -8;
-
-        Controller.Move(Motion * Time.deltaTime);
+        else if (dmController.DLIndex == 2)
+        {
+            walkSpeed = originalWalkSpeed * 0.8f; // Slower walk speed
+            runSpeed = originalRunSpeed * 0.8f;
+        }
+        else if (dmController.DLIndex == 3)
+        {
+            walkSpeed = originalWalkSpeed * 0.6f; // Much slower
+            runSpeed = originalRunSpeed * 0.6f;
+            // Randomize movement direction to simulate dizziness
+            transform.Rotate(0, Random.Range(-5f, 5f), 0);
+        }
+        else if (dmController.DLIndex == 4)
+        {
+            walkSpeed = originalWalkSpeed * 0.5f; // Very slow
+            runSpeed = originalRunSpeed * 0.5f;
+            // Apply random rotation more often
+            transform.Rotate(0, Random.Range(-10f, 10f), 0);
+        }
+        else
+        {
+            walkSpeed = originalWalkSpeed;
+            runSpeed = originalRunSpeed;
+        }
     }
 }

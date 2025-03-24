@@ -70,20 +70,11 @@ public class Gun : MonoBehaviour
         }
     }
 
-        public void ResetShootingState()
+    public void ResetShootingState()
     {
-        nextPossibleShootTime = Time.time; // Allows instant shooting after switching weapons
-        isPlayingAudio = false; // Ensure audio doesn't interfere
-    }
-
-    IEnumerator RenderTracer(Vector3 hitPoint)
-    {
-        tracer.enabled = true;
-        tracer.SetPosition(0, spawn.position);
-        tracer.SetPosition(1, hitPoint); // Always extend to the full cached distance
-
-        yield return new WaitForSeconds(0.5f);
-        tracer.enabled = false;
+        // Reset the shooting state (e.g., cooldown and audio)
+        nextPossibleShootTime = Time.time;  // Reset cooldown
+        isPlayingAudio = false;             // Reset audio state
     }
 
     public void ShootContinuous()
@@ -105,4 +96,13 @@ public class Gun : MonoBehaviour
         isPlayingAudio = false;
     }
 
+    IEnumerator RenderTracer(Vector3 hitPoint)
+    {
+        tracer.enabled = true;
+        tracer.SetPosition(0, spawn.position);
+        tracer.SetPosition(1, hitPoint); // Always extend to the full cached distance
+
+        yield return new WaitForSeconds(0.5f);
+        tracer.enabled = false;
+    }
 }

@@ -429,6 +429,8 @@ MonoBehaviour:
   DL1: {fileID: 280205434}
   DL2: {fileID: 893841928}
   DL3: {fileID: 1215023882}
+  playerMovement: {fileID: 0}
+  gun: {fileID: 0}
 --- !u!1 &280205434
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,17 +730,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4362610839616679282, guid: 35160df079376453893f86865f90bc2f, type: 3}
   m_PrefabInstance: {fileID: 7410008578094840012}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &720406880 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3956197957094860554, guid: 35160df079376453893f86865f90bc2f, type: 3}
-  m_PrefabInstance: {fileID: 7410008578094840012}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 720406876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c32b1cd3e0e04886815dc4db5040545, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &821584870
 GameObject:
   m_ObjectHideFlags: 0
@@ -1217,7 +1208,7 @@ MonoBehaviour:
   rotationSpeed: 450
   walkSpeed: 8
   runSpeed: 8
-  gun: {fileID: 720406880}
+  dmController: {fileID: 237903757}
 --- !u!143 &1221982160
 CharacterController:
   m_ObjectHideFlags: 0
