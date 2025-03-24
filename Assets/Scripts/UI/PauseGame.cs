@@ -37,14 +37,14 @@ public class PauseGame : MonoBehaviour
 
     public void ButtonReturn()
     {
-        isPaused = false;
-        gunScript.enabled = true;
-        bulletScript.enabled = true;
-        gun.SetActive(true);
-        bullet.SetActive(true);
         PauseUI.SetActive(false);
         Time.timeScale = 1;
-        Debug.Log("Off");
+        isPaused = false;
+        gun.SetActive(true);
+        gunScript.enabled = true;
+        bulletScript.enabled = true;
+        bullet.SetActive(true);
+        Debug.Log("ON");
     }
 
 }
