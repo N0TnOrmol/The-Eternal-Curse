@@ -8,7 +8,11 @@ public class Bullet : MonoBehaviour
 
     private Rigidbody rb; // To move the bullet
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
+=======
+    public PauseGame Pause;
+>>>>>>> Stashed changes
 =======
     public PauseGame Pause;
 >>>>>>> Stashed changes
