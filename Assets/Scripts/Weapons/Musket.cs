@@ -29,6 +29,7 @@ public class Musket : MonoBehaviour
         if (GetComponent<LineRenderer>())
         {
             tracer = GetComponent<LineRenderer>();
+            tracer.enabled = false; // Disable tracer at start
         }
     }
 
@@ -38,13 +39,13 @@ public class Musket : MonoBehaviour
         {
             Ray ray = new Ray(spawn.position, spawn.up);
             RaycastHit hit;
-            float tracerDistance = shotDistance; // Cache original shot distance
+            Vector3 tracerEnd = spawn.position + spawn.up * shotDistance; // Default end point
 
             if (Physics.Raycast(ray, out hit, shotDistance))
             {
-                tracerDistance = hit.distance; // Update tracer distance
+                tracerEnd = hit.point; // Stop tracer at the hit point
 
-                // Check if we hit an enemy
+                // Damage the enemy if hit
                 DmgHp enemy = hit.collider.GetComponent<DmgHp>();
                 if (enemy != null)
                 {
@@ -59,18 +60,18 @@ public class Musket : MonoBehaviour
 
             if (tracer)
             {
-                StartCoroutine(RenderTracer(ray.origin + ray.direction * tracerDistance)); // Use cached distance
+                StartCoroutine(RenderTracer(tracerEnd)); // Draw tracer up to the hit point
             }
 
             // Spawn ONE shell
             Rigidbody newShell = Instantiate(shell, shellEjectionPoint.position, Quaternion.identity);
             Vector3 shellForce = shellEjectionPoint.up * Random.Range(105f, 200f) +
-                                spawn.up * Random.Range(-10f, 10f);
+                                 spawn.up * Random.Range(-10f, 10f);
             newShell.AddForce(shellForce);
         }
     }
 
-        public void ResetShootingState()
+    public void ResetShootingState()
     {
         nextPossibleShootTime = Time.time; // Allows instant shooting after switching weapons
         isPlayingAudio = false; // Ensure audio doesn't interfere
@@ -98,10 +99,10 @@ public class Musket : MonoBehaviour
     IEnumerator RenderTracer(Vector3 hitPoint)
     {
         tracer.enabled = true;
-        tracer.SetPosition(0, spawn.position);
-        tracer.SetPosition(1, hitPoint); // Always extend to the full cached distance
+        tracer.SetPosition(0, spawn.position); // Start at gun muzzle
+        tracer.SetPosition(1, hitPoint);       // End at the hit point
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.05f); // Quick flash effect
         tracer.enabled = false;
     }
 }

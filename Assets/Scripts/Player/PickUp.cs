@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PickUp : MonoBehaviour
+public class PickUpSaber : MonoBehaviour
 {
     public GameObject PickUpText;
     public GameObject ObjectToPickUp;

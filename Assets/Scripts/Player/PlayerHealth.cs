@@ -11,8 +11,9 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         Health = MaxHealth;
-        healthBarController.SetMaxHealth(MaxHealth); 
+        healthBarController.SetMaxHealth(MaxHealth);
     }
+
     public void TakeDamagePlayer()
     {
         Health -= DamageTaken;
@@ -22,5 +23,11 @@ public class PlayerHealth : MonoBehaviour
             Destroy(Player);
             Debug.Log("You Died");
         }
+    }
+
+    public void HealPlayer(int amount)
+    {
+        Health = Mathf.Min(Health + amount, MaxHealth); // Ensure it doesn’t exceed max HP
+        healthBarController.SetHealth(Health);
     }
 }
