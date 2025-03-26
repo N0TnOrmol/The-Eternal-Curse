@@ -24,14 +24,6 @@ public class BottlePickUp : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Player") && !isPickedUp && Input.GetKeyDown(KeyCode.E))
-        {
-            PickUpBottle();
-        }
-    }
-
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -40,10 +32,18 @@ public class BottlePickUp : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (PickUpText.activeSelf && Input.GetKeyDown(KeyCode.E) && !isPickedUp)
+        {
+            PickUpBottle();
+        }
+    }
+
     void PickUpBottle()
     {
         isPickedUp = true;
-        dmController.IncreaseDrunkLevel(); // Activate UI Level
+        dmController.IncreaseDrunkLevel(); // Activate UI Level + Dizzy Effect
         playerHealth.HealPlayer(5); // Heal the player
 
         // Hide bottle & UI prompt

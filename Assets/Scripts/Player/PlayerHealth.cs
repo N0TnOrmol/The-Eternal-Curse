@@ -25,9 +25,10 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    public void HealPlayer(int amount)
+        public void HealPlayer(int healAmount)
     {
-        Health = Mathf.Min(Health + amount, MaxHealth); // Ensure it doesn’t exceed max HP
+        Health = Mathf.Clamp(Health + healAmount, 0, MaxHealth);
         healthBarController.SetHealth(Health);
     }
+
 }

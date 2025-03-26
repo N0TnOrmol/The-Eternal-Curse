@@ -9,22 +9,48 @@ public class DMController : MonoBehaviour
     public GameObject DL2;
     public GameObject DL3;
 
+    // Reference to PlayerMovement for dizzy effect
+    public PlayerMovement playerMovement;
+
     void Start()
     {
-        UpdateDrunkUI(); // Ensure UI is updated at start
+        UpdateDrunkUI();
+        ApplyDizzyEffect(); // Ensure effect applies at start
     }
 
     public void IncreaseDrunkLevel()
     {
-        DLIndex = Mathf.Clamp(DLIndex + 1, 0, 3); // Limit between 0 and 3
+        DLIndex = Mathf.Clamp(DLIndex + 1, 0, 3);
         UpdateDrunkUI();
+        ApplyDizzyEffect();
     }
 
     void UpdateDrunkUI()
     {
-        // Activate/deactivate drunk UI elements
         DL1.SetActive(DLIndex >= 1);
         DL2.SetActive(DLIndex >= 2);
         DL3.SetActive(DLIndex >= 3);
+    }
+
+    void ApplyDizzyEffect()
+    {
+        if (playerMovement == null) return; // Ensure playerMovement is assigned
+
+        switch (DLIndex)
+        {
+            case 1:
+                playerMovement.walkSpeed *= 1.2f; // Slight speed boost
+                playerMovement.runSpeed *= 1.2f;
+                break;
+            case 2:
+                playerMovement.walkSpeed *= 0.8f; // Slower movement
+                playerMovement.runSpeed *= 0.8f;
+                break;
+            case 3:
+                playerMovement.walkSpeed *= 0.6f;
+                playerMovement.runSpeed *= 0.6f;
+                playerMovement.transform.Rotate(0, Random.Range(-5f, 5f), 0); // Slight random rotation
+                break;
+        }
     }
 }
