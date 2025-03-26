@@ -2,86 +2,91 @@ using UnityEngine;
 
 public class BottlePickUp : MonoBehaviour
 {
-    public DMController dmController; // Reference to the Drunko Meter controller
-    public PlayerHealth playerHealth; // Reference to the player health script
-    public int healingAmount = 5; // Amount of health restored when drinking a bottle
+    // Reference to the DMController UI script
+    public DMController dmController; // Make sure to assign this from the UI (Inspector)
+    
+    // Reference to PlayerHealth to heal the player
+    public PlayerHealth playerHealth; // Assign this from the Player's GameObject
+    
+    // Amount of health restored when the bottle is picked up
+    public int healingAmount = 5;
 
-    private bool isPickedUp = false; // Track if the bottle is picked up or not
-    private int pickupCount = 0; // Track the number of times the bottle is picked up
+    // Bottle Pickup UI Elements
+    public GameObject PickUpText;
+    public GameObject BottleObject; // Reference to the actual bottle object
 
-    public GameObject PickUpText; // Text to show when the player is close enough to pick up
-    public GameObject BottleObject; // The actual bottle object to be picked up
-    public GameObject Player; // The player that is gonna pickup the bottles
+    private bool isPickedUp = false; // If the bottle has been picked up
+    private int pickupCount = 0; // Track how many times the bottle was picked up
 
     void Start()
     {
-        BottleObject.SetActive(true); // Ensure the bottle is enabled at the start
-        PickUpText.SetActive(false); // Hide the pick-up text at the start
+        // Set the bottle visible and pick-up text hidden initially
+        BottleObject.SetActive(true); 
+        PickUpText.SetActive(false); 
     }
 
     void Update()
     {
-        // Only show the pickup text if the player is close enough to the bottle
+        // Check if the bottle has been picked up, return if so
         if (isPickedUp) return;
 
-        // Check for pickup when player presses "E"
-        if (Vector3.Distance(transform.position, Player.transform.position) < 3f && !isPickedUp)
+        // Check distance from player to bottle, assuming player and bottle are in the same scene
+        if (Vector3.Distance(transform.position, playerHealth.transform.position) < 3f && !isPickedUp)
         {
-            PickUpText.SetActive(true);
+            PickUpText.SetActive(true); // Show pickup prompt
 
+            // Check if player presses "E" to pick up the bottle
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Debug.Log("it works");
-                PickUpBottle();
+                Debug.Log("Picking up the bottle!"); // Debugging log
+                PickUpBottle(); // Handle picking up the bottle
             }
         }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player")) // When the player enters the trigger zone of the bottle
         {
-            PickUpText.SetActive(true); // Show pickup text when the player is in range
+            PickUpText.SetActive(true); // Show the pickup text
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player")) // When the player exits the trigger zone of the bottle
         {
-            PickUpText.SetActive(false); // Hide pickup text when the player exits the trigger
+            PickUpText.SetActive(false); // Hide the pickup text
         }
     }
 
     void PickUpBottle()
     {
-        // Increment the pickup count each time the bottle is picked up
+        // Increment the pickup count and update the Drunk Level accordingly
         pickupCount++;
 
-        // Apply the appropriate Drunko Meter effect based on pickup count (Max 3 levels)
         switch (pickupCount)
         {
             case 1:
-                dmController.DLIndex = 1; // Drunk level 1
+                dmController.DLIndex = 1; // Set Drunk Level 1
                 break;
             case 2:
-                dmController.DLIndex = 2; // Drunk level 2
+                dmController.DLIndex = 2; // Set Drunk Level 2
                 break;
             case 3:
-                dmController.DLIndex = 3; // Drunk level 3
+                dmController.DLIndex = 3; // Set Drunk Level 3
                 break;
             default:
-                // We don't go past level 3
-                dmController.DLIndex = 3;
+                dmController.DLIndex = 3; // Keep at level 3 if more than 3 bottles are picked up
                 break;
         }
 
         // Heal the player when they drink the bottle
         playerHealth.HealPlayer(healingAmount);
 
-        // Destroy the bottle after it has been picked up
+        // After pickup, deactivate the bottle and hide the text
         isPickedUp = true;
         BottleObject.SetActive(false);
-        PickUpText.SetActive(false);
+        PickUpText.SetActive(false); // Hide the pickup text
     }
 }
