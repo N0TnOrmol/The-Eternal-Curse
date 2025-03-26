@@ -21,7 +21,7 @@ TagManager:
   - UI
   - Player
   - Enemies
-  - Obstacle
+  - Pickups
   - Surface
   - 'Environmental '
   - Shell
