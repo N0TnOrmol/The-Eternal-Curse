@@ -51,6 +51,14 @@ public class Musket : MonoBehaviour
                 {
                     enemy.TakeDamageEnemy();
                 }
+                if (hit.collider.CompareTag("Explosive"))
+                {
+                    PowderKeg keg = hit.collider.GetComponent<PowderKeg>();
+                    if (keg != null)
+                    {
+                        keg.Explode();
+                    }
+                }
             }
 
             nextPossibleShootTime = Time.time + secondsBetweenShots;

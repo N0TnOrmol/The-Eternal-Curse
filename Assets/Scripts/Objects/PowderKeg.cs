@@ -1,21 +1,34 @@
 using UnityEngine;
+using System.Collections;
 
 public class PowderKeg : MonoBehaviour
 {
-    public float explosionRadius = 5f;       // Explosion range
-    public float explosionForce = 1000f;     // Knockback force
-    public bool exploded = false;           // Explosion flag
+    public float explosionRadius = 5f;      // Explosion range
+    public float explosionForce = 1000f;    // Knockback force
+    public bool exploded = false;          // Explosion flag
+    public ParticleSystem explosionEffect; // Reference to explosion particles
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("Bullet" + "Player") && !exploded)
+        if (collision.collider.CompareTag("Bullet") && !exploded)
         {
             Explode();
         }
     }
+
     public void Explode()
     {
         if (exploded) return;
+
         exploded = true;
+
+        // Activate Particles 💨🔥
+        if (explosionEffect != null)
+        {
+            explosionEffect.gameObject.SetActive(true);
+            explosionEffect.Play();
+        }
+
         Collider[] hitObjects = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider obj in hitObjects)
         {
@@ -26,6 +39,7 @@ public class PowderKeg : MonoBehaviour
                 {
                     player.TakeDamagePlayer(); // Deal damage
                 }
+
                 Rigidbody rb = obj.GetComponent<Rigidbody>();
                 if (rb != null)
                 {
@@ -34,12 +48,16 @@ public class PowderKeg : MonoBehaviour
                 }
             }
         }
+
         Debug.Log("Boom 💥!");
-        Destroy(gameObject); // Destroy the keg
+
+        // Start Coroutine to Destroy After 1 Second
+        StartCoroutine(DestroyAfterDelay(1f));
     }
-    private void OnDrawGizmosSelected()
+
+    private IEnumerator DestroyAfterDelay(float delay)
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, explosionRadius);
+        yield return new WaitForSeconds(delay);
+        Destroy(gameObject);
     }
 }
