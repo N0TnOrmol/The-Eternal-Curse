@@ -91,8 +91,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 7.408906, y: 3.9168472, z: 4.720764}
-  m_Center: {x: 0.10880518, y: 1.4584236, z: -13.043341}
+  m_Size: {x: 7.408906, y: 3.9168472, z: 6.007206}
+  m_Center: {x: 0.10880518, y: 1.4584236, z: -13.686562}
 --- !u!114 &2757483185120097198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,6 +107,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmController: {fileID: 0}
   playerHealth: {fileID: 0}
-  healingAmount: 5
   PickUpText: {fileID: 0}
   BottleObject: {fileID: 1746716415275014845}
