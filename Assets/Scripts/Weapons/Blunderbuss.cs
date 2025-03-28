@@ -8,13 +8,12 @@ public class Blunderbuss : MonoBehaviour
     public GunType gunType;
     public float rpm;
 
-    // Components
     public Transform spawn;
     public Transform shellEjectionPoint;
     public Rigidbody shell;
     public LineRenderer tracer;
+    private Animator animator;
 
-    // System
     private float shotDistance = 20;
     private float secondsBetweenShots;
     private float nextPossibleShootTime;
@@ -25,96 +24,77 @@ public class Blunderbuss : MonoBehaviour
     {
         secondsBetweenShots = 60 / rpm;
         audioSource = GetComponent<AudioSource>();
-
-        if (GetComponent<LineRenderer>())
-        {
-            tracer = GetComponent<LineRenderer>();
-        }
+        tracer = GetComponent<LineRenderer>();
+        animator = GetComponentInParent<Animator>();
     }
 
     public void Shoot()
     {
         if (CanShoot())
         {
-            Ray ray = new Ray(spawn.position, spawn.up);
-            RaycastHit hit;
-            float tracerDistance = shotDistance; // Cache original shot distance
+            animator?.SetBool("IsShooting_Blunderbuss", true);
+            StartCoroutine(StopShootingAnimation("IsShooting_Blunderbuss"));
 
-            if (Physics.Raycast(ray, out hit, shotDistance))
-            {
-                tracerDistance = hit.distance; // Update tracer distance
+            HandleShootingLogic();
+        }
+    }
 
-                // Check if we hit an enemy
-                DmgHp enemy = hit.collider.GetComponent<DmgHp>();
-                if (enemy != null)
-                {
-                    enemy.TakeDamageEnemy();
-                }
-                if (hit.collider.CompareTag("Explosive"))
-                {
-                    PowderKeg keg = hit.collider.GetComponent<PowderKeg>();
-                    if (keg != null)
-                    {
-                        keg.Explode();
-                    }
-                }
-            }
+    private void HandleShootingLogic()
+    {
+        Ray ray = new Ray(spawn.position, spawn.up);
+        RaycastHit hit;
+        float tracerDistance = shotDistance;
 
-            nextPossibleShootTime = Time.time + secondsBetweenShots;
-            isPlayingAudio = true;
-            audioSource.Play();
-            StartCoroutine(WaitForSoundToEnd());
+        if (Physics.Raycast(ray, out hit, shotDistance))
+        {
+            tracerDistance = hit.distance;
+            DmgHp enemy = hit.collider.GetComponent<DmgHp>();
+            enemy?.TakeDamageEnemy();
+            if (hit.collider.CompareTag("Explosive"))
+                hit.collider.GetComponent<PowderKeg>()?.Explode();
+        }
 
-            if (tracer)
-            {
-                StartCoroutine(RenderTracer(ray.direction * tracerDistance)); // Use cached distance
-            }
+        nextPossibleShootTime = Time.time + secondsBetweenShots;
+        isPlayingAudio = true;
+        audioSource.Play();
+        StartCoroutine(WaitForSoundToEnd());
 
-            // Spawn multiple shells
-            int shellCount = Random.Range(3, 6);
-            for (int i = 0; i < shellCount; i++)
-            {
-                Rigidbody newShell = Instantiate(shell, shellEjectionPoint.position, Quaternion.identity);
-                Vector3 randomForce = shellEjectionPoint.up * Random.Range(105f, 200f) +
-                                    spawn.up * Random.Range(-20f, 20f) +
-                                    spawn.right * Random.Range(-30f, 30f);
-                newShell.AddForce(randomForce);
-            }
+        if (tracer) StartCoroutine(RenderTracer(ray.direction * tracerDistance));
+
+        int shellCount = Random.Range(3, 6);
+        for (int i = 0; i < shellCount; i++)
+        {
+            Rigidbody newShell = Instantiate(shell, shellEjectionPoint.position, Quaternion.identity);
+            newShell.AddForce(shellEjectionPoint.up * Random.Range(105f, 200f));
         }
     }
 
     public void ResetShootingState()
     {
-        nextPossibleShootTime = Time.time; // Allows instant shooting after switching weapons
-        isPlayingAudio = false; // Ensure audio doesn't interfere
-    }
-
-    public void ShootContinuous()
-    {
-        if (gunType == GunType.Auto)
-        {
-            Shoot();
-        }
-    }
-
-    private bool CanShoot()
-    {
-        return Time.time >= nextPossibleShootTime && !isPlayingAudio;
-    }
-
-    IEnumerator WaitForSoundToEnd()
-    {
-        yield return new WaitWhile(() => audioSource.isPlaying);
+        nextPossibleShootTime = Time.time;  
         isPlayingAudio = false;
+        animator?.SetBool("IsShooting_Blunderbuss", false);  
+    }
+
+    IEnumerator StopShootingAnimation(string animationBool)
+    {
+        yield return new WaitForSeconds(0.3f);
+        animator?.SetBool(animationBool, false);
     }
 
     IEnumerator RenderTracer(Vector3 hitPoint)
     {
         tracer.enabled = true;
-        tracer.SetPosition(0, spawn.position);
-        tracer.SetPosition(1, spawn.position + hitPoint);
-
+        tracer.SetPositions(new Vector3[] { spawn.position, spawn.position + hitPoint });
         yield return new WaitForSeconds(0.5f);
         tracer.enabled = false;
+    }
+
+    private bool CanShoot() => Time.time >= nextPossibleShootTime && !isPlayingAudio;
+
+    IEnumerator WaitForSoundToEnd()
+    {
+        yield return new WaitWhile(() => audioSource.isPlaying);
+        isPlayingAudio = false;
     }
 }

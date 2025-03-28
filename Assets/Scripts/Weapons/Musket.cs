@@ -4,17 +4,13 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class Musket : MonoBehaviour
 {
-    public enum GunType { Semi, Burst, Auto }
-    public GunType gunType;
     public float rpm;
-
-    // Components
     public Transform spawn;
     public Transform shellEjectionPoint;
     public Rigidbody shell;
     public LineRenderer tracer;
+    private Animator animator;
 
-    // System
     private float shotDistance = 20;
     private float secondsBetweenShots;
     private float nextPossibleShootTime;
@@ -29,73 +25,86 @@ public class Musket : MonoBehaviour
         if (GetComponent<LineRenderer>())
         {
             tracer = GetComponent<LineRenderer>();
-            tracer.enabled = false; // Disable tracer at start
         }
+
+        animator = GetComponentInParent<Animator>();
     }
 
     public void Shoot()
     {
         if (CanShoot())
         {
-            Ray ray = new Ray(spawn.position, spawn.up);
-            RaycastHit hit;
-            Vector3 tracerEnd = spawn.position + spawn.up * shotDistance; // Default end point
-
-            if (Physics.Raycast(ray, out hit, shotDistance))
+            if (animator != null)
             {
-                tracerEnd = hit.point; // Stop tracer at the hit point
-
-                // Damage the enemy if hit
-                DmgHp enemy = hit.collider.GetComponent<DmgHp>();
-                if (enemy != null)
-                {
-                    enemy.TakeDamageEnemy();
-                }
-                if (hit.collider.CompareTag("Explosive"))
-                {
-                    PowderKeg keg = hit.collider.GetComponent<PowderKeg>();
-                    if (keg != null)
-                    {
-                        keg.Explode();
-                    }
-                }
+                animator.SetBool("IsShooting_Musket", true);
+                StartCoroutine(StopShootingAnimation("IsShooting_Musket"));
             }
 
-            nextPossibleShootTime = Time.time + secondsBetweenShots;
-            isPlayingAudio = true;
-            audioSource.Play();
-            StartCoroutine(WaitForSoundToEnd());
-
-            if (tracer)
-            {
-                StartCoroutine(RenderTracer(tracerEnd)); // Draw tracer up to the hit point
-            }
-
-            // Spawn ONE shell
-            Rigidbody newShell = Instantiate(shell, shellEjectionPoint.position, Quaternion.identity);
-            Vector3 shellForce = shellEjectionPoint.up * Random.Range(105f, 200f) +
-                                 spawn.up * Random.Range(-10f, 10f);
-            newShell.AddForce(shellForce);
+            HandleShootingLogic();
         }
+    }
+
+    private void HandleShootingLogic()
+    {
+        Ray ray = new Ray(spawn.position, spawn.up);
+        RaycastHit hit;
+        Vector3 endPosition = spawn.position + spawn.up * shotDistance;
+
+        if (Physics.Raycast(ray, out hit, shotDistance))
+        {
+            endPosition = hit.point;
+            DmgHp enemy = hit.collider.GetComponent<DmgHp>();
+            if (enemy != null)
+            {
+                enemy.TakeDamageEnemy();
+            }
+
+            if (hit.collider.CompareTag("Explosive"))
+            {
+                PowderKeg keg = hit.collider.GetComponent<PowderKeg>();
+                if (keg != null)
+                {
+                    keg.Explode();
+                }
+            }
+        }
+
+        nextPossibleShootTime = Time.time + secondsBetweenShots;
+        isPlayingAudio = true;
+        audioSource.Play();
+        StartCoroutine(WaitForSoundToEnd());
+
+        if (tracer != null)
+        {
+            StartCoroutine(RenderTracer(endPosition));
+        }
+
+        Rigidbody newShell = Instantiate(shell, shellEjectionPoint.position, Quaternion.identity);
+        newShell.AddForce(shellEjectionPoint.up * Random.Range(105f, 200f));
     }
 
     public void ResetShootingState()
     {
-        nextPossibleShootTime = Time.time; // Allows instant shooting after switching weapons
-        isPlayingAudio = false; // Ensure audio doesn't interfere
-    }
-
-    public void ShootContinuous()
-    {
-        if (gunType == GunType.Auto)
+        nextPossibleShootTime = Time.time;
+        isPlayingAudio = false;
+        if (animator != null)
         {
-            Shoot();
+            animator.SetBool("IsShooting_Musket", false);
         }
     }
 
     private bool CanShoot()
     {
         return Time.time >= nextPossibleShootTime && !isPlayingAudio;
+    }
+
+    IEnumerator StopShootingAnimation(string parameterName)
+    {
+        yield return new WaitForSeconds(0.1f); // Adjust time as needed
+        if (animator != null)
+        {
+            animator.SetBool(parameterName, false);
+        }
     }
 
     IEnumerator WaitForSoundToEnd()
@@ -107,10 +116,9 @@ public class Musket : MonoBehaviour
     IEnumerator RenderTracer(Vector3 hitPoint)
     {
         tracer.enabled = true;
-        tracer.SetPosition(0, spawn.position); // Start at gun muzzle
-        tracer.SetPosition(1, hitPoint);       // End at the hit point
-
-        yield return new WaitForSeconds(0.05f); // Quick flash effect
+        tracer.SetPosition(0, spawn.position);
+        tracer.SetPosition(1, hitPoint);
+        yield return new WaitForSeconds(0.1f);
         tracer.enabled = false;
     }
 }

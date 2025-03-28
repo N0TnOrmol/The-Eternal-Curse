@@ -10,12 +10,14 @@ public class PlayerMovement : MonoBehaviour
 
     private Quaternion targetRotation;
     private Vector3 currentVelocityMod;
+
     private CharacterController Controller;
     private Camera cam;
     private float originalWalkSpeed;
     private float originalRunSpeed;
 
-    private Animator animator; // Reference to the Animator
+    // Animator reference
+    private Animator animator;
 
     // Reference to the drunk level
     public DMController dmController;
@@ -25,18 +27,10 @@ public class PlayerMovement : MonoBehaviour
         Controller = GetComponent<CharacterController>();
         cam = Camera.main;
 
-        // Find and assign the Animator from "Player animated"
-        GameObject animatedPlayer = GameObject.Find("Player animated");
-        if (animatedPlayer != null)
-        {
-            animator = animatedPlayer.GetComponent<Animator>();
-        }
-        else
-        {
-            Debug.LogError("Player animated object not found! Animations won't work.");
-        }
+        // Get Animator from "Player animated"
+        animator = GetComponentInChildren<Animator>();
 
-        // Save original speeds
+        // Save the original speeds for restoration
         originalWalkSpeed = walkSpeed;
         originalRunSpeed = runSpeed;
     }
@@ -46,16 +40,15 @@ public class PlayerMovement : MonoBehaviour
         ControlMouse();
         ControlWASD();
         ApplyDizzyEffect();
-        UpdateAnimations();
+        UpdateAnimation();
     }
 
     void ControlMouse()
     {
-        // Raycast from the camera towards the ground
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground"))) 
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
         {
             Vector3 targetPoint = hit.point;
             targetRotation = Quaternion.LookRotation(targetPoint - new Vector3(transform.position.x, 0, transform.position.z));
@@ -70,20 +63,14 @@ public class PlayerMovement : MonoBehaviour
         Vector3 Motion = currentVelocityMod;
         Motion *= (Mathf.Abs(input.x) == 1 && Mathf.Abs(input.z) == 1) ? 0.7f : 1;
 
-        // Apply run/walk speed
-        bool isRunning = Input.GetButton("Run");
-        Motion *= isRunning ? runSpeed : walkSpeed;
+        Motion *= walkSpeed;  // No longer checking Shift
 
-        // Apply gravity
         Motion += Vector3.up * -8;
-
         Controller.Move(Motion * Time.deltaTime);
     }
 
     void ApplyDizzyEffect()
     {
-        if (dmController == null) return;
-
         if (dmController.DLIndex == 1)
         {
             walkSpeed = originalWalkSpeed * 1.2f;
@@ -113,36 +100,12 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void UpdateAnimations()
+    void UpdateAnimation()
     {
-        if (animator == null) return;
-
-        // Movement animation
-        bool isMoving = currentVelocityMod.magnitude > 0.1f;
-        animator.SetBool("IsRunning", isMoving && Input.GetButton("Run"));
-
-        // Shooting animation (should be triggered externally by the weapon script)
-        if (Input.GetButtonDown("Attack")) 
+        if (animator != null)
         {
-            animator.SetBool("IsShooting", true);
-            Invoke(nameof(ResetShootingAnimation), 0.1f);
+            bool isMoving = Controller.velocity.magnitude > 0.1f;  // Check if player is actually moving
+            animator.SetBool("IsRunning", isMoving);
         }
-
-        // Melee animation (should also be triggered externally)
-        if (Input.GetButtonDown("Attack")) 
-        {
-            animator.SetBool("IsMelee", true);
-            Invoke(nameof(ResetMeleeAnimation), 0.5f);
-        }
-    }
-
-    void ResetShootingAnimation()
-    {
-        animator.SetBool("IsShooting", false);
-    }
-
-    void ResetMeleeAnimation()
-    {
-        animator.SetBool("IsMelee", false);
     }
 }
