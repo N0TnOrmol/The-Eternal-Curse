@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 Motion = currentVelocityMod;
         Motion *= (Mathf.Abs(input.x) == 1 && Mathf.Abs(input.z) == 1) ? 0.7f : 1;
 
-        Motion *= walkSpeed;  // No longer checking Shift
+        Motion *= walkSpeed;  
 
         Motion += Vector3.up * -8;
         Controller.Move(Motion * Time.deltaTime);
@@ -104,7 +104,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (animator != null)
         {
-            bool isMoving = Controller.velocity.magnitude > 0.1f;  // Check if player is actually moving
+            // Check if the player is pressing movement keys
+            bool isMoving = Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0;
             animator.SetBool("IsRunning", isMoving);
         }
     }

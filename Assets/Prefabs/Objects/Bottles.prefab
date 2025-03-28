@@ -117,7 +117,7 @@ MonoBehaviour:
   playerHealth: {fileID: 0}
   PickUpText: {fileID: 0}
   BottleObject: {fileID: 1746716415275014845}
-  pickupEffect: {fileID: 0}
+  pickupEffect: {fileID: 7765890849713086092}
 --- !u!1001 &2526479475166441592
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -190,5 +190,10 @@ PrefabInstance:
 --- !u!4 &1689996184503151764 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3781837455822363884, guid: aee3ddb5eb59f421b9af09430fba5703, type: 3}
+  m_PrefabInstance: {fileID: 2526479475166441592}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7765890849713086092 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5245047766430166772, guid: aee3ddb5eb59f421b9af09430fba5703, type: 3}
   m_PrefabInstance: {fileID: 2526479475166441592}
   m_PrefabAsset: {fileID: 0}

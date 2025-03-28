@@ -389,7 +389,7 @@ AnimatorStateMachine:
     m_Position: {x: 570, y: -80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 298347062520448251}
-    m_Position: {x: 100, y: -80, z: 0}
+    m_Position: {x: 120, y: -80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 90980981485998470}
     m_Position: {x: 340, y: -80, z: 0}
@@ -589,7 +589,7 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
+  - m_ConditionMode: 2
     m_ConditionEvent: IsShooting_Gun
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
@@ -689,7 +689,7 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
+  - m_ConditionMode: 2
     m_ConditionEvent: IsShooting_Blunderbuss
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
@@ -793,7 +793,7 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
+  - m_ConditionMode: 2
     m_ConditionEvent: IsMelee_Harpoon
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
