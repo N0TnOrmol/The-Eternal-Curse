@@ -17,7 +17,7 @@ RenderSettings:
   m_Fog: 1
   m_FogColor: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.066
+  m_FogDensity: 0
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
@@ -1175,22 +1175,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: sparks
       objectReference: {fileID: 0}
-    - target: {fileID: 1274364373588562998, guid: 3b9b3e7c536ca4430ab9f0dca3fbea09, type: 3}
-      propertyPath: looping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1274364373588562998, guid: 3b9b3e7c536ca4430ab9f0dca3fbea09, type: 3}
-      propertyPath: InitialModule.maxNumParticles
-      value: 136
-      objectReference: {fileID: 0}
-    - target: {fileID: 1274364373588562998, guid: 3b9b3e7c536ca4430ab9f0dca3fbea09, type: 3}
-      propertyPath: EmissionModule.rateOverTime.scalar
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1274364373588562998, guid: 3b9b3e7c536ca4430ab9f0dca3fbea09, type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1683579777818556602, guid: 3b9b3e7c536ca4430ab9f0dca3fbea09, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1203,14 +1187,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2480832659414740374, guid: 3b9b3e7c536ca4430ab9f0dca3fbea09, type: 3}
-      propertyPath: looping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2608093733327531965, guid: 3b9b3e7c536ca4430ab9f0dca3fbea09, type: 3}
-      propertyPath: looping
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3442537441018891396, guid: 3b9b3e7c536ca4430ab9f0dca3fbea09, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -1218,18 +1194,6 @@ PrefabInstance:
     - target: {fileID: 4211766189794925232, guid: 3b9b3e7c536ca4430ab9f0dca3fbea09, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4628024954180515391, guid: 3b9b3e7c536ca4430ab9f0dca3fbea09, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.2562388
-      objectReference: {fileID: 0}
-    - target: {fileID: 4628024954180515391, guid: 3b9b3e7c536ca4430ab9f0dca3fbea09, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.2562388
-      objectReference: {fileID: 0}
-    - target: {fileID: 4628024954180515391, guid: 3b9b3e7c536ca4430ab9f0dca3fbea09, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.2562388
       objectReference: {fileID: 0}
     - target: {fileID: 4628024954180515391, guid: 3b9b3e7c536ca4430ab9f0dca3fbea09, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1249,10 +1213,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4628024954180515391, guid: 3b9b3e7c536ca4430ab9f0dca3fbea09, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4628024954180515391, guid: 3b9b3e7c536ca4430ab9f0dca3fbea09, type: 3}
-      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6969703348446835509, guid: 3b9b3e7c536ca4430ab9f0dca3fbea09, type: 3}
@@ -1321,18 +1281,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7895100302898330294, guid: 3b9b3e7c536ca4430ab9f0dca3fbea09, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8057015771247958019, guid: 3b9b3e7c536ca4430ab9f0dca3fbea09, type: 3}
-      propertyPath: looping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8057015771247958019, guid: 3b9b3e7c536ca4430ab9f0dca3fbea09, type: 3}
-      propertyPath: lengthInSec
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8057015771247958019, guid: 3b9b3e7c536ca4430ab9f0dca3fbea09, type: 3}
-      propertyPath: ForceModule.enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8057015771247958019, guid: 3b9b3e7c536ca4430ab9f0dca3fbea09, type: 3}
@@ -2865,6 +2813,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: b303969aca4954f2ab55c9a5f8103d74, type: 2}
+    - target: {fileID: 437924393207161223, guid: 21ccf55b23cde4a5d8a393b737fd6430, type: 3}
+      propertyPath: m_MotionVectors
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 437924393207161223, guid: 21ccf55b23cde4a5d8a393b737fd6430, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -4769,6 +4721,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: b303969aca4954f2ab55c9a5f8103d74, type: 2}
+    - target: {fileID: 5183538777597213915, guid: 21ccf55b23cde4a5d8a393b737fd6430, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5183538777597213915, guid: 21ccf55b23cde4a5d8a393b737fd6430, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
