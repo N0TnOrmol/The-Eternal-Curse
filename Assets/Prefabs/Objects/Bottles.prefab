@@ -108,4 +108,4 @@ MonoBehaviour:
   dmController: {fileID: 0}
   playerHealth: {fileID: 0}
   PickUpText: {fileID: 0}
-  BottleObject: {fileID: 1746716415275014845}
+  BottleObject: {fileID: 919132149155446097, guid: 3d3d1f7df8342439d9b495d6a5479f2f, type: 3}
