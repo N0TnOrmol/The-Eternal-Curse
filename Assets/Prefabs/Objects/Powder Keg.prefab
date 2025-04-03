@@ -163,6 +163,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5754084199372789682, guid: 94c1ff1b35771490d8df42db21e22200, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 7544129764349441841, guid: dd3bf79aa5b6c48a3a86801e04013830, type: 3}
     - target: {fileID: 919132149155446097, guid: 94c1ff1b35771490d8df42db21e22200, type: 3}
       propertyPath: m_Name
       value: Powder Keg
