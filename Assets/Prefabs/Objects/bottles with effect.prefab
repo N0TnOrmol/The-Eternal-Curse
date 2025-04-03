@@ -70,6 +70,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2246258253534630465, guid: c1ed8d2f53a5947f58c385a3e08c3bc2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2551092091292893943, guid: c1ed8d2f53a5947f58c385a3e08c3bc2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.46
@@ -112,7 +116,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2894860258266716237, guid: c1ed8d2f53a5947f58c385a3e08c3bc2, type: 3}
       propertyPath: m_Name
-      value: Bottles Variant
+      value: bottles with effect
+      objectReference: {fileID: 0}
+    - target: {fileID: 2894860258266716237, guid: c1ed8d2f53a5947f58c385a3e08c3bc2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7149691955307816617, guid: c1ed8d2f53a5947f58c385a3e08c3bc2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9196535192534629337, guid: c1ed8d2f53a5947f58c385a3e08c3bc2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
