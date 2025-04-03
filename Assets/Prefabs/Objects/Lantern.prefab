@@ -72,6 +72,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lantern
       objectReference: {fileID: 0}
+    - target: {fileID: 4532891944811062948, guid: 76bd64da6f173467bb82fde34a3c2664, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 7341628664350294265, guid: d784756a452f8441d90c24473d1eac97, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: -6602700815266486717, guid: 76bd64da6f173467bb82fde34a3c2664, type: 3}
