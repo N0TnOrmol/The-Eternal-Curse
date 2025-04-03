@@ -128,16 +128,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 117096262}
     m_Modifications:
     - target: {fileID: 2678699535887872257, guid: ed01a051c3f4243b9a11e2a7fe52e5c1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 252.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678699535887872257, guid: ed01a051c3f4243b9a11e2a7fe52e5c1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 252.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678699535887872257, guid: ed01a051c3f4243b9a11e2a7fe52e5c1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 252.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678699535887872257, guid: ed01a051c3f4243b9a11e2a7fe52e5c1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -48.041153
+      value: -50.27
       objectReference: {fileID: 0}
     - target: {fileID: 2678699535887872257, guid: ed01a051c3f4243b9a11e2a7fe52e5c1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 22.105959
+      value: 20.23
       objectReference: {fileID: 0}
     - target: {fileID: 2678699535887872257, guid: ed01a051c3f4243b9a11e2a7fe52e5c1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 19.70745
+      value: 18.76
       objectReference: {fileID: 0}
     - target: {fileID: 2678699535887872257, guid: ed01a051c3f4243b9a11e2a7fe52e5c1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -166,6 +178,10 @@ PrefabInstance:
     - target: {fileID: 2678699535887872257, guid: ed01a051c3f4243b9a11e2a7fe52e5c1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678699535887872257, guid: ed01a051c3f4243b9a11e2a7fe52e5c1, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3343772801082977211, guid: ed01a051c3f4243b9a11e2a7fe52e5c1, type: 3}
       propertyPath: m_Name
@@ -385,6 +401,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lantern (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 8257602299891452884, guid: 1afcdc25c9b0f423db2236266edb50c7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7fa3126838f8c4fc393f277cbea85d75, type: 2}
     - target: {fileID: 8451331746858270471, guid: 1afcdc25c9b0f423db2236266edb50c7, type: 3}
       propertyPath: m_Intensity
       value: 22.11
@@ -395,7 +415,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8828414487000912883, guid: 1afcdc25c9b0f423db2236266edb50c7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 127.91272
+      value: 128.06
       objectReference: {fileID: 0}
     - target: {fileID: 8828414487000912883, guid: 1afcdc25c9b0f423db2236266edb50c7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2259,6 +2279,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lantern
       objectReference: {fileID: 0}
+    - target: {fileID: 8257602299891452884, guid: 1afcdc25c9b0f423db2236266edb50c7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7fa3126838f8c4fc393f277cbea85d75, type: 2}
     - target: {fileID: 8828414487000912883, guid: 1afcdc25c9b0f423db2236266edb50c7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.1449013
@@ -2556,13 +2580,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a9bf4cdf22484d48b3df887f1b9ecaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countdown: 5
+  countdown: 0
   SpawnPoint: {fileID: 331775463}
   waves:
   - enemies:
     - {fileID: 2231163069249089400, guid: 51cc1a3853f1b45e7858606572f27d0a, type: 3}
     timeToNextEnemy: 0
-    timeToNextWave: 5
+    timeToNextWave: 0
     enemiesLeft: 0
   currentWaveIndex: 0
 --- !u!1 &336265929
@@ -3477,6 +3501,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lantern
       objectReference: {fileID: 0}
+    - target: {fileID: 8257602299891452884, guid: 1afcdc25c9b0f423db2236266edb50c7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7fa3126838f8c4fc393f277cbea85d75, type: 2}
     - target: {fileID: 8828414487000912883, guid: 1afcdc25c9b0f423db2236266edb50c7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 28.107656
@@ -5574,6 +5602,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lantern
       objectReference: {fileID: 0}
+    - target: {fileID: 8257602299891452884, guid: 1afcdc25c9b0f423db2236266edb50c7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7fa3126838f8c4fc393f277cbea85d75, type: 2}
     - target: {fileID: 8828414487000912883, guid: 1afcdc25c9b0f423db2236266edb50c7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11.28793
@@ -6030,6 +6062,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1192618064}
     m_Modifications:
     - target: {fileID: 5783178453739048809, guid: 1afcdc25c9b0f423db2236266edb50c7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.038
+      objectReference: {fileID: 0}
+    - target: {fileID: 5783178453739048809, guid: 1afcdc25c9b0f423db2236266edb50c7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -90
       objectReference: {fileID: 0}
@@ -6037,6 +6073,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lantern (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8257602299891452884, guid: 1afcdc25c9b0f423db2236266edb50c7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7fa3126838f8c4fc393f277cbea85d75, type: 2}
     - target: {fileID: 8451331746858270471, guid: 1afcdc25c9b0f423db2236266edb50c7, type: 3}
       propertyPath: m_Intensity
       value: 22.24
@@ -13583,6 +13623,10 @@ PrefabInstance:
       propertyPath: m_StaticShadowCaster
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8257602299891452884, guid: 1afcdc25c9b0f423db2236266edb50c7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7fa3126838f8c4fc393f277cbea85d75, type: 2}
     - target: {fileID: 8451331746858270471, guid: 1afcdc25c9b0f423db2236266edb50c7, type: 3}
       propertyPath: m_Range
       value: 2.93
@@ -15114,6 +15158,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lantern (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 8257602299891452884, guid: 1afcdc25c9b0f423db2236266edb50c7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7fa3126838f8c4fc393f277cbea85d75, type: 2}
     - target: {fileID: 8451331746858270471, guid: 1afcdc25c9b0f423db2236266edb50c7, type: 3}
       propertyPath: m_Range
       value: 6.01
