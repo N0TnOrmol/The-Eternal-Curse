@@ -1365,6 +1365,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bottles with effect (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 8821726438412310489, guid: bd81274fd868342d0b8679dfb72d945f, type: 3}
+      propertyPath: playerHealth
+      value: 
+      objectReference: {fileID: 8127557931423723394}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1721,6 +1725,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bottles with effect (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 8821726438412310489, guid: bd81274fd868342d0b8679dfb72d945f, type: 3}
+      propertyPath: playerHealth
+      value: 
+      objectReference: {fileID: 8127557931423723394}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2422,6 +2430,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bottles with effect (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 8821726438412310489, guid: bd81274fd868342d0b8679dfb72d945f, type: 3}
+      propertyPath: playerHealth
+      value: 
+      objectReference: {fileID: 8127557931423723394}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3068,6 +3080,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bottles with effect (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8821726438412310489, guid: bd81274fd868342d0b8679dfb72d945f, type: 3}
+      propertyPath: playerHealth
+      value: 
+      objectReference: {fileID: 8127557931423723394}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3530,6 +3546,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bottles with effect (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 8821726438412310489, guid: bd81274fd868342d0b8679dfb72d945f, type: 3}
+      propertyPath: dmController
+      value: 
+      objectReference: {fileID: 237903757}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3592,6 +3612,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bottles with effect (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 8821726438412310489, guid: bd81274fd868342d0b8679dfb72d945f, type: 3}
+      propertyPath: playerHealth
+      value: 
+      objectReference: {fileID: 8127557931423723394}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3824,6 +3848,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bottles with effect (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 8821726438412310489, guid: bd81274fd868342d0b8679dfb72d945f, type: 3}
+      propertyPath: playerHealth
+      value: 
+      objectReference: {fileID: 8127557931423723394}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3943,6 +3971,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bottles with effect (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 8821726438412310489, guid: bd81274fd868342d0b8679dfb72d945f, type: 3}
+      propertyPath: playerHealth
+      value: 
+      objectReference: {fileID: 8127557931423723394}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4897,6 +4929,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bottles with effect (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 8821726438412310489, guid: bd81274fd868342d0b8679dfb72d945f, type: 3}
+      propertyPath: playerHealth
+      value: 
+      objectReference: {fileID: 8127557931423723394}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5049,6 +5085,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bottles with effect (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 8821726438412310489, guid: bd81274fd868342d0b8679dfb72d945f, type: 3}
+      propertyPath: playerHealth
+      value: 
+      objectReference: {fileID: 8127557931423723394}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5515,6 +5555,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bottles with effect (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8821726438412310489, guid: bd81274fd868342d0b8679dfb72d945f, type: 3}
+      propertyPath: playerHealth
+      value: 
+      objectReference: {fileID: 8127557931423723394}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6895,6 +6939,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bottles with effect (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 8821726438412310489, guid: bd81274fd868342d0b8679dfb72d945f, type: 3}
+      propertyPath: playerHealth
+      value: 
+      objectReference: {fileID: 8127557931423723394}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13416,6 +13464,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: bottles with effect
       objectReference: {fileID: 0}
+    - target: {fileID: 8821726438412310489, guid: bd81274fd868342d0b8679dfb72d945f, type: 3}
+      propertyPath: dmController
+      value: 
+      objectReference: {fileID: 237903757}
+    - target: {fileID: 8821726438412310489, guid: bd81274fd868342d0b8679dfb72d945f, type: 3}
+      propertyPath: playerHealth
+      value: 
+      objectReference: {fileID: 8127557931423723394}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17895,11 +17951,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4643219412802868301, guid: 9af109ac75dbf447ba58b7164882e525, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -30.28
+      value: -49
       objectReference: {fileID: 0}
     - target: {fileID: 4643219412802868301, guid: 9af109ac75dbf447ba58b7164882e525, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -20.76
+      value: -37
       objectReference: {fileID: 0}
     - target: {fileID: 5421163899600785143, guid: 9af109ac75dbf447ba58b7164882e525, type: 3}
       propertyPath: m_Layer
@@ -18378,6 +18434,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4362803456837289037, guid: e3e4da125d69847e1b0af12b7bc7e066, type: 3}
   m_PrefabInstance: {fileID: 8127557931423723381}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8127557931423723394 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4532086956692466261, guid: e3e4da125d69847e1b0af12b7bc7e066, type: 3}
+  m_PrefabInstance: {fileID: 8127557931423723381}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc2ea68563b37441cb0e36001b053858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
