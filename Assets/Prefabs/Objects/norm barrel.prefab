@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 7895491775654991981}
   - component: {fileID: 5132350262322386993}
   - component: {fileID: 8550364515406626289}
-  - component: {fileID: 1292674441628391633}
+  - component: {fileID: 1073451248363436057}
+  - component: {fileID: 5892507260261479754}
   m_Layer: 0
   m_Name: norm barrel
   m_TagString: Untagged
@@ -87,7 +88,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1292674441628391633
+--- !u!65 &1073451248363436057
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,5 +107,21 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.020328002, y: 0.020328006, z: 0.028000006}
+  m_Center: {x: 0, y: -9.313228e-10, z: 0.014000003}
+--- !u!208 &5892507260261479754
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7063438857540886753}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.010164, y: 0.010164005, z: 0.014000005}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -9.313228e-10, z: 0.014}
+  m_TimeToStationary: 0.5
