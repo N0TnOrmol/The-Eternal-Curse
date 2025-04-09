@@ -46,9 +46,9 @@ public class Musket : MonoBehaviour
 
     private void HandleShootingLogic()
     {
-        Ray ray = new Ray(spawn.position, spawn.up);
         RaycastHit hit;
-        Vector3 endPosition = spawn.position + spawn.up * shotDistance;
+        Ray ray = new Ray(spawn.position, spawn.forward);
+        Vector3 endPosition = spawn.position + spawn.forward * shotDistance;
 
         if (Physics.Raycast(ray, out hit, shotDistance))
         {

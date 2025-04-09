@@ -8,15 +8,13 @@ public class Gun : MonoBehaviour
     public GunType gunType;
     public float rpm;
 
-    // Components
     public Transform spawn;
     public Transform shellEjectionPoint;
     public Rigidbody shell;
     public LineRenderer tracer;
-    private Animator animator; 
+    private Animator animator;
 
-    // System
-    private float shotDistance = 20;
+    private float shotDistance = 20f;
     private float secondsBetweenShots;
     private float nextPossibleShootTime;
     private AudioSource audioSource;
@@ -34,25 +32,27 @@ public class Gun : MonoBehaviour
     {
         if (CanShoot())
         {
-            animator?.SetBool("IsShooting_Gun", true); 
+            animator?.SetBool("IsShooting_Gun", true);
             StartCoroutine(StopShootingAnimation("IsShooting_Gun"));
-
             HandleShootingLogic();
         }
     }
 
     private void HandleShootingLogic()
     {
-        Ray ray = new Ray(spawn.position, spawn.up);
+        Vector3 direction = GetMouseAimDirection();
+        Ray ray = new Ray(spawn.position, direction);
         RaycastHit hit;
-        Vector3 endPosition = spawn.position + spawn.up * shotDistance;
+        Vector3 endPosition = spawn.position + direction * shotDistance;
 
         if (Physics.Raycast(ray, out hit, shotDistance))
         {
             endPosition = hit.point;
-            if (hit.collider.GetComponent<DmgHp>() != null)
-                hit.collider.GetComponent<DmgHp>().TakeDamageEnemy();
-            else if (hit.collider.CompareTag("Explosive"))
+
+            if (hit.collider.TryGetComponent(out DmgHp enemy))
+                enemy.TakeDamageEnemy();
+
+            if (hit.collider.CompareTag("Explosive"))
                 hit.collider.GetComponent<PowderKeg>()?.Explode();
         }
 
@@ -67,11 +67,22 @@ public class Gun : MonoBehaviour
         newShell.AddForce(shellEjectionPoint.up * Random.Range(105f, 200f));
     }
 
+    private Vector3 GetMouseAimDirection()
+    {
+        Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(camRay, out RaycastHit camHit, Mathf.Infinity, LayerMask.GetMask("Ground")))
+        {
+            return (camHit.point - spawn.position).normalized;
+        }
+
+        return spawn.forward;
+    }
+
     public void ResetShootingState()
     {
-        nextPossibleShootTime = Time.time;  
+        nextPossibleShootTime = Time.time;
         isPlayingAudio = false;
-        animator?.SetBool("IsShooting_Gun", false);  
+        animator?.SetBool("IsShooting_Gun", false);
     }
 
     IEnumerator StopShootingAnimation(string animationBool)

@@ -3,7 +3,6 @@ using UnityEngine;
 public class WeaponManager : MonoBehaviour
 {
     public GameObject gun;
-    public GameObject saber;
     public GameObject musket;
     public GameObject blunderbuss;
 
@@ -12,7 +11,7 @@ public class WeaponManager : MonoBehaviour
 
     void Start()
     {
-        weapons = new GameObject[] { gun, saber, musket, blunderbuss };
+        weapons = new GameObject[] { gun, musket, blunderbuss };
         UpdateWeaponState(); // Ensure only one weapon is active at start
     }
 

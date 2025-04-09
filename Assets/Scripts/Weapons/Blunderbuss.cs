@@ -41,12 +41,14 @@ public class Blunderbuss : MonoBehaviour
 
     private void HandleShootingLogic()
     {
-        Ray ray = new Ray(spawn.position, spawn.up);
         RaycastHit hit;
+        Ray ray = new Ray(spawn.position, spawn.forward);
+        Vector3 endPosition = spawn.position + spawn.forward * shotDistance;
         float tracerDistance = shotDistance;
 
         if (Physics.Raycast(ray, out hit, shotDistance))
         {
+            endPosition = hit.point;
             tracerDistance = hit.distance;
             DmgHp enemy = hit.collider.GetComponent<DmgHp>();
             enemy?.TakeDamageEnemy();
@@ -62,11 +64,11 @@ public class Blunderbuss : MonoBehaviour
         if (tracer) StartCoroutine(RenderTracer(ray.direction * tracerDistance));
 
         int shellCount = Random.Range(3, 6);
-        for (int i = 0; i < shellCount; i++)
-        {
-            Rigidbody newShell = Instantiate(shell, shellEjectionPoint.position, Quaternion.identity);
-            newShell.AddForce(shellEjectionPoint.up * Random.Range(105f, 200f));
-        }
+    
+        if (tracer) StartCoroutine(RenderTracer(endPosition));
+
+        Rigidbody newShell = Instantiate(shell, shellEjectionPoint.position, Quaternion.identity);
+        newShell.AddForce(shellEjectionPoint.up * Random.Range(105f, 200f));
     }
 
     public void ResetShootingState()
