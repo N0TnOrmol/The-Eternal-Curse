@@ -84,26 +84,23 @@ public class Gun : MonoBehaviour
         isPlayingAudio = false;
         animator?.SetBool("IsShooting_Gun", false);
     }
-
+    private bool CanShoot() => Time.time >= nextPossibleShootTime && !isPlayingAudio;
     IEnumerator StopShootingAnimation(string animationBool)
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSecondsRealtime(0.2f);
         animator?.SetBool(animationBool, false);
     }
-
     IEnumerator RenderTracer(Vector3 hitPoint)
     {
         tracer.enabled = true;
         tracer.SetPositions(new Vector3[] { spawn.position, hitPoint });
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSecondsRealtime(0.1f);
         tracer.enabled = false;
     }
-
-    private bool CanShoot() => Time.time >= nextPossibleShootTime && !isPlayingAudio;
-
     IEnumerator WaitForSoundToEnd()
     {
-        yield return new WaitWhile(() => audioSource.isPlaying);
+        yield return new WaitUntil(() => !audioSource.isPlaying);
         isPlayingAudio = false;
     }
+
 }

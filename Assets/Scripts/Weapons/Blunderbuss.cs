@@ -14,7 +14,7 @@ public class Blunderbuss : MonoBehaviour
     public LineRenderer tracer;
     private Animator animator;
 
-    private float shotDistance = 20;
+    private float shotDistance = 20f;
     private float secondsBetweenShots;
     private float nextPossibleShootTime;
     private AudioSource audioSource;
@@ -34,24 +34,26 @@ public class Blunderbuss : MonoBehaviour
         {
             animator?.SetBool("IsShooting_Blunderbuss", true);
             StartCoroutine(StopShootingAnimation("IsShooting_Blunderbuss"));
-
             HandleShootingLogic();
         }
     }
 
     private void HandleShootingLogic()
     {
+        Vector3 direction = GetMouseAimDirection();
+        Ray ray = new Ray(spawn.position, direction);
         RaycastHit hit;
-        Ray ray = new Ray(spawn.position, spawn.forward);
-        Vector3 endPosition = spawn.position + spawn.forward * shotDistance;
+        Vector3 endPosition = spawn.position + direction * shotDistance;
         float tracerDistance = shotDistance;
 
         if (Physics.Raycast(ray, out hit, shotDistance))
         {
             endPosition = hit.point;
             tracerDistance = hit.distance;
-            DmgHp enemy = hit.collider.GetComponent<DmgHp>();
-            enemy?.TakeDamageEnemy();
+
+            if (hit.collider.TryGetComponent(out DmgHp enemy))
+                enemy.TakeDamageEnemy();
+
             if (hit.collider.CompareTag("Explosive"))
                 hit.collider.GetComponent<PowderKeg>()?.Explode();
         }
@@ -61,21 +63,28 @@ public class Blunderbuss : MonoBehaviour
         audioSource.Play();
         StartCoroutine(WaitForSoundToEnd());
 
-        if (tracer) StartCoroutine(RenderTracer(ray.direction * tracerDistance));
-
-        int shellCount = Random.Range(3, 6);
-    
         if (tracer) StartCoroutine(RenderTracer(endPosition));
 
         Rigidbody newShell = Instantiate(shell, shellEjectionPoint.position, Quaternion.identity);
         newShell.AddForce(shellEjectionPoint.up * Random.Range(105f, 200f));
     }
 
+    private Vector3 GetMouseAimDirection()
+    {
+        Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(camRay, out RaycastHit camHit, Mathf.Infinity, LayerMask.GetMask("Ground")))
+        {
+            return (camHit.point - spawn.position).normalized;
+        }
+
+        return spawn.forward;
+    }
+
     public void ResetShootingState()
     {
-        nextPossibleShootTime = Time.time;  
+        nextPossibleShootTime = Time.time;
         isPlayingAudio = false;
-        animator?.SetBool("IsShooting_Blunderbuss", false);  
+        animator?.SetBool("IsShooting_Blunderbuss", false);
     }
 
     IEnumerator StopShootingAnimation(string animationBool)
@@ -87,7 +96,7 @@ public class Blunderbuss : MonoBehaviour
     IEnumerator RenderTracer(Vector3 hitPoint)
     {
         tracer.enabled = true;
-        tracer.SetPositions(new Vector3[] { spawn.position, spawn.position + hitPoint });
+        tracer.SetPositions(new Vector3[] { spawn.position, hitPoint });
         yield return new WaitForSeconds(0.5f);
         tracer.enabled = false;
     }

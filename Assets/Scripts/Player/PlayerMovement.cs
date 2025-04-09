@@ -24,13 +24,16 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        
         Controller = GetComponent<CharacterController>();
         cam = Camera.main;
 
         // Get Animator from "Player animated"
         animator = GetComponentInChildren<Animator>();
 
-        // Save the original speeds for restoration
+        // Ensure it still plays when game is paused
+        animator.updateMode = AnimatorUpdateMode.UnscaledTime;
+
         originalWalkSpeed = walkSpeed;
         originalRunSpeed = runSpeed;
     }

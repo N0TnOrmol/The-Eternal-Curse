@@ -6,10 +6,10 @@ public class PauseGame : MonoBehaviour
     public KeyCode Pause;
     public GameObject PauseUI;
     public bool isPaused = false;
-    public GameObject bullet;
+
     public GameObject gun;
     public Gun gunScript;
-    private Bullet bulletScript;
+
 
     void Update()
     {
@@ -20,8 +20,7 @@ public class PauseGame : MonoBehaviour
             isPaused = true;
             gun.SetActive(false);
             gunScript.enabled = false;
-            bulletScript.enabled = false;
-            bullet.SetActive(false);
+
         }
         else if (Input.GetKeyDown(Pause) && isPaused)
         {
@@ -30,8 +29,7 @@ public class PauseGame : MonoBehaviour
             isPaused = false;
             gun.SetActive(true);
             gunScript.enabled = true;
-            bulletScript.enabled = true;
-            bullet.SetActive(true);
+
         }
     }
 
@@ -42,8 +40,6 @@ public class PauseGame : MonoBehaviour
         isPaused = false;
         gun.SetActive(true);
         gunScript.enabled = true;
-        bulletScript.enabled = true;
-        bullet.SetActive(true);
         Debug.Log("ON");
     }
 

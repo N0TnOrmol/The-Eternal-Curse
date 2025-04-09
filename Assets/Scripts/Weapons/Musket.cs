@@ -11,7 +11,7 @@ public class Musket : MonoBehaviour
     public LineRenderer tracer;
     private Animator animator;
 
-    private float shotDistance = 20;
+    private float shotDistance = 20f;
     private float secondsBetweenShots;
     private float nextPossibleShootTime;
     private AudioSource audioSource;
@@ -21,12 +21,7 @@ public class Musket : MonoBehaviour
     {
         secondsBetweenShots = 60 / rpm;
         audioSource = GetComponent<AudioSource>();
-
-        if (GetComponent<LineRenderer>())
-        {
-            tracer = GetComponent<LineRenderer>();
-        }
-
+        tracer = GetComponent<LineRenderer>();
         animator = GetComponentInParent<Animator>();
     }
 
@@ -34,39 +29,28 @@ public class Musket : MonoBehaviour
     {
         if (CanShoot())
         {
-            if (animator != null)
-            {
-                animator.SetBool("IsShooting_Musket", true);
-                StartCoroutine(StopShootingAnimation("IsShooting_Musket"));
-            }
-
+            animator?.SetBool("IsShooting_Musket", true);
+            StartCoroutine(StopShootingAnimation("IsShooting_Musket"));
             HandleShootingLogic();
         }
     }
 
     private void HandleShootingLogic()
     {
+        Vector3 direction = GetMouseAimDirection();
+        Ray ray = new Ray(spawn.position, direction);
         RaycastHit hit;
-        Ray ray = new Ray(spawn.position, spawn.forward);
-        Vector3 endPosition = spawn.position + spawn.forward * shotDistance;
+        Vector3 endPosition = spawn.position + direction * shotDistance;
 
         if (Physics.Raycast(ray, out hit, shotDistance))
         {
             endPosition = hit.point;
-            DmgHp enemy = hit.collider.GetComponent<DmgHp>();
-            if (enemy != null)
-            {
+
+            if (hit.collider.TryGetComponent(out DmgHp enemy))
                 enemy.TakeDamageEnemy();
-            }
 
             if (hit.collider.CompareTag("Explosive"))
-            {
-                PowderKeg keg = hit.collider.GetComponent<PowderKeg>();
-                if (keg != null)
-                {
-                    keg.Explode();
-                }
-            }
+                hit.collider.GetComponent<PowderKeg>()?.Explode();
         }
 
         nextPossibleShootTime = Time.time + secondsBetweenShots;
@@ -74,37 +58,36 @@ public class Musket : MonoBehaviour
         audioSource.Play();
         StartCoroutine(WaitForSoundToEnd());
 
-        if (tracer != null)
-        {
-            StartCoroutine(RenderTracer(endPosition));
-        }
+        if (tracer) StartCoroutine(RenderTracer(endPosition));
 
         Rigidbody newShell = Instantiate(shell, shellEjectionPoint.position, Quaternion.identity);
         newShell.AddForce(shellEjectionPoint.up * Random.Range(105f, 200f));
+    }
+
+    private Vector3 GetMouseAimDirection()
+    {
+        Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(camRay, out RaycastHit camHit, Mathf.Infinity, LayerMask.GetMask("Ground")))
+        {
+            return (camHit.point - spawn.position).normalized;
+        }
+
+        return spawn.forward;
     }
 
     public void ResetShootingState()
     {
         nextPossibleShootTime = Time.time;
         isPlayingAudio = false;
-        if (animator != null)
-        {
-            animator.SetBool("IsShooting_Musket", false);
-        }
+        animator?.SetBool("IsShooting_Musket", false);
     }
 
-    private bool CanShoot()
-    {
-        return Time.time >= nextPossibleShootTime && !isPlayingAudio;
-    }
+    private bool CanShoot() => Time.time >= nextPossibleShootTime && !isPlayingAudio;
 
     IEnumerator StopShootingAnimation(string parameterName)
     {
-        yield return new WaitForSeconds(0.1f); // Adjust time as needed
-        if (animator != null)
-        {
-            animator.SetBool(parameterName, false);
-        }
+        yield return new WaitForSeconds(0.1f);
+        animator?.SetBool(parameterName, false);
     }
 
     IEnumerator WaitForSoundToEnd()
