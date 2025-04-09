@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class PlayerHealth : MonoBehaviour
     public int MaxHealth = 20;
     public GameObject Player;
     public HealthBarController healthBarController;
+    public GameObject deathScreen;
 
     private void Start()
     {
@@ -21,7 +23,7 @@ public class PlayerHealth : MonoBehaviour
         if (Health <= 0)
         {
             Destroy(Player);
-            Debug.Log("You Died");
+            deathScreen.SetActive(true);
         }
     }
 
