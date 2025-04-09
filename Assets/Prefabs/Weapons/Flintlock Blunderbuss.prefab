@@ -305,8 +305,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -2.43, y: 16.12, z: -38.54}
-  - {x: -2.43, y: 16.12, z: -36.1}
+  - {x: -3.96, y: 16.12, z: -35.6}
+  - {x: -3.96, y: 16.12, z: -33.8}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -323,13 +323,22 @@ LineRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
+        time: 0.7341454
+        value: 0.71872467
+        inSlope: 1.2351654
+        outSlope: 1.2351654
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0.79937655
+        outSlope: 0.79937655
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.2035928
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2

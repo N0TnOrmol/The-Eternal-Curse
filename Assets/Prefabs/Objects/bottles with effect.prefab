@@ -62,6 +62,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3781837455822363884, guid: aee3ddb5eb59f421b9af09430fba5703, type: 3}
   m_PrefabInstance: {fileID: 286432839637868286}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5418879290627960842 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5245047766430166772, guid: aee3ddb5eb59f421b9af09430fba5703, type: 3}
+  m_PrefabInstance: {fileID: 286432839637868286}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7184287258056257121
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -74,6 +79,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1561501907776899674, guid: c72a3e8d034aa4e21a8aa23bb9ba58f4, type: 3}
+    - target: {fileID: 1864110118441990584, guid: c1ed8d2f53a5947f58c385a3e08c3bc2, type: 3}
+      propertyPath: pickupEffect
+      value: 
+      objectReference: {fileID: 5418879290627960842}
     - target: {fileID: 2246258253534630465, guid: c1ed8d2f53a5947f58c385a3e08c3bc2, type: 3}
       propertyPath: m_Layer
       value: 0
