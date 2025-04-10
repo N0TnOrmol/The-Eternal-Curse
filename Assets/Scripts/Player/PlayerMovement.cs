@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
 
         originalWalkSpeed = walkSpeed;
         originalRunSpeed = runSpeed;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.None;
     }
 
 
