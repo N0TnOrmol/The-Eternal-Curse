@@ -3773,6 +3773,16 @@ MonoBehaviour:
     timeToNextEnemy: 0
     timeToNextWave: 1
     enemiesLeft: 0
+  - enemies:
+    - {fileID: 2231163069249089400, guid: 51cc1a3853f1b45e7858606572f27d0a, type: 3}
+    timeToNextEnemy: 0
+    timeToNextWave: 1
+    enemiesLeft: 0
+  - enemies:
+    - {fileID: 2231163069249089400, guid: 51cc1a3853f1b45e7858606572f27d0a, type: 3}
+    timeToNextEnemy: 0
+    timeToNextWave: 1
+    enemiesLeft: 0
   currentWaveIndex: 0
 --- !u!1 &336265929
 GameObject:
@@ -21687,6 +21697,21 @@ MonoBehaviour:
   - enemies:
     - {fileID: 2231163069249089400, guid: 51cc1a3853f1b45e7858606572f27d0a, type: 3}
     timeToNextEnemy: 0
+    timeToNextWave: 10
+    enemiesLeft: 0
+  - enemies:
+    - {fileID: 2231163069249089400, guid: 51cc1a3853f1b45e7858606572f27d0a, type: 3}
+    timeToNextEnemy: 0
+    timeToNextWave: 10
+    enemiesLeft: 0
+  - enemies:
+    - {fileID: 2231163069249089400, guid: 51cc1a3853f1b45e7858606572f27d0a, type: 3}
+    timeToNextEnemy: 0
+    timeToNextWave: 5
+    enemiesLeft: 0
+  - enemies:
+    - {fileID: 2231163069249089400, guid: 51cc1a3853f1b45e7858606572f27d0a, type: 3}
+    timeToNextEnemy: 0
     timeToNextWave: 5
     enemiesLeft: 0
   currentWaveIndex: 0
@@ -23198,6 +23223,26 @@ MonoBehaviour:
   SpawnPoint: {fileID: 2107601303}
   waves:
   - enemies:
+    - {fileID: 2231163069249089400, guid: 51cc1a3853f1b45e7858606572f27d0a, type: 3}
+    - {fileID: 2231163069249089400, guid: 51cc1a3853f1b45e7858606572f27d0a, type: 3}
+    - {fileID: 2231163069249089400, guid: 51cc1a3853f1b45e7858606572f27d0a, type: 3}
+    timeToNextEnemy: 0
+    timeToNextWave: 5
+    enemiesLeft: 0
+  - enemies:
+    - {fileID: 2231163069249089400, guid: 51cc1a3853f1b45e7858606572f27d0a, type: 3}
+    - {fileID: 2231163069249089400, guid: 51cc1a3853f1b45e7858606572f27d0a, type: 3}
+    - {fileID: 2231163069249089400, guid: 51cc1a3853f1b45e7858606572f27d0a, type: 3}
+    - {fileID: 2231163069249089400, guid: 51cc1a3853f1b45e7858606572f27d0a, type: 3}
+    - {fileID: 2231163069249089400, guid: 51cc1a3853f1b45e7858606572f27d0a, type: 3}
+    timeToNextEnemy: 0
+    timeToNextWave: 5
+    enemiesLeft: 0
+  - enemies:
+    - {fileID: 2231163069249089400, guid: 51cc1a3853f1b45e7858606572f27d0a, type: 3}
+    - {fileID: 2231163069249089400, guid: 51cc1a3853f1b45e7858606572f27d0a, type: 3}
+    - {fileID: 2231163069249089400, guid: 51cc1a3853f1b45e7858606572f27d0a, type: 3}
+    - {fileID: 2231163069249089400, guid: 51cc1a3853f1b45e7858606572f27d0a, type: 3}
     - {fileID: 2231163069249089400, guid: 51cc1a3853f1b45e7858606572f27d0a, type: 3}
     timeToNextEnemy: 0
     timeToNextWave: 5
