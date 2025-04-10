@@ -18213,6 +18213,7 @@ MonoBehaviour:
   PauseUI: {fileID: 1684344517}
   gun: {fileID: 8127557931423723387}
   gunScript: {fileID: 8127557931423723382}
+  playerMovement: {fileID: 1221982159}
 --- !u!4 &1593498925
 Transform:
   m_ObjectHideFlags: 0
