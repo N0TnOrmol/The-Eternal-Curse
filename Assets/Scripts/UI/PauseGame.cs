@@ -33,6 +33,7 @@ public class PauseGame : MonoBehaviour
         isPaused = true;
         gun.SetActive(false);
         gunScript.enabled = false;
+        Cursor.visible = true;
     }
 
     void ResumeGameNow()
