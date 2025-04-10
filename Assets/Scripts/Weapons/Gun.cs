@@ -30,6 +30,8 @@ public class Gun : MonoBehaviour
 
     public void Shoot()
     {
+        if (PauseGame.isPaused) return;
+
         if (CanShoot())
         {
             animator?.SetBool("IsShooting_Gun", true);
@@ -37,6 +39,7 @@ public class Gun : MonoBehaviour
             HandleShootingLogic();
         }
     }
+
 
     private void HandleShootingLogic()
     {

@@ -24,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        
         Controller = GetComponent<CharacterController>();
         cam = Camera.main;
 
@@ -38,12 +37,13 @@ public class PlayerMovement : MonoBehaviour
         originalRunSpeed = runSpeed;
     }
 
+
     void Update()
     {
         ControlMouse();
         ControlWASD();
         ApplyDizzyEffect();
-        UpdateAnimation();
+        UpdateAnimation(); // stays here
     }
 
     void ControlMouse()
@@ -67,7 +67,6 @@ public class PlayerMovement : MonoBehaviour
         Motion *= (Mathf.Abs(input.x) == 1 && Mathf.Abs(input.z) == 1) ? 0.7f : 1;
 
         Motion *= walkSpeed;  
-
         Motion += Vector3.up * -8;
         Controller.Move(Motion * Time.deltaTime);
     }
@@ -107,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (animator != null)
         {
-            // Check if the player is pressing movement keys
+            // This checks raw axis (no smoothing), so animation flips instantly
             bool isMoving = Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0;
             animator.SetBool("IsRunning", isMoving);
         }

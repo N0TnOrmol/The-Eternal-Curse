@@ -30,6 +30,8 @@ public class Blunderbuss : MonoBehaviour
 
     public void Shoot()
     {
+        if (PauseGame.isPaused) return;
+
         if (CanShoot())
         {
             animator?.SetBool("IsShooting_Blunderbuss", true);
@@ -37,6 +39,7 @@ public class Blunderbuss : MonoBehaviour
             HandleShootingLogic();
         }
     }
+
 
     private void HandleShootingLogic()
     {

@@ -22,7 +22,7 @@ public class PlayerHealth : MonoBehaviour
         healthBarController.SetHealth(Health);
         if (Health <= 0)
         {
-            Destroy(Player);
+            Player.SetActive(false);
             deathScreen.SetActive(true);
         }
     }
