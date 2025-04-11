@@ -11,12 +11,10 @@ public class LungeTest : MonoBehaviour
     private Vector3 TargetPosition;
     private bool IsLunging = false;
     private bool OnCoolDown = false;
-
     void Start()
     {
         Agent = GetComponent<NavMeshAgent>();
     }
-
     void Update()
     {
         if(IsLunging || OnCoolDown) return;
@@ -25,7 +23,6 @@ public class LungeTest : MonoBehaviour
             StartCoroutine(LungeAtPlayer());
         }
     }
-
     IEnumerator LungeAtPlayer()
     {
         IsLunging = true;

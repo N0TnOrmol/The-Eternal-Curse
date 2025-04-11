@@ -7,47 +7,32 @@ public class PlayerMovement : MonoBehaviour
     public float walkSpeed = 8;
     public float runSpeed = 8;
     private float acceleration = 5;
-
     private Quaternion targetRotation;
     private Vector3 currentVelocityMod;
-
     private CharacterController Controller;
     private Camera cam;
     private float originalWalkSpeed;
     private float originalRunSpeed;
-
-    // Animator reference
     private Animator animator;
-
-    // Reference to the drunk level
     public DMController dmController;
-
     void Start()
     {
         Controller = GetComponent<CharacterController>();
         cam = Camera.main;
-
-        // Get Animator from "Player animated"
         animator = GetComponentInChildren<Animator>();
-
-        // Ensure it still plays when game is paused
         animator.updateMode = AnimatorUpdateMode.UnscaledTime;
-
         originalWalkSpeed = walkSpeed;
         originalRunSpeed = runSpeed;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.None;
     }
-
-
     void Update()
     {
         ControlMouse();
         ControlWASD();
         ApplyDizzyEffect();
-        UpdateAnimation(); // stays here
+        UpdateAnimation(); 
     }
-
     void ControlMouse()
     {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -60,7 +45,6 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
     }
-
     void ControlWASD()
     {
         Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
@@ -72,7 +56,6 @@ public class PlayerMovement : MonoBehaviour
         Motion += Vector3.up * -8;
         Controller.Move(Motion * Time.deltaTime);
     }
-
     void ApplyDizzyEffect()
     {
         if (dmController.DLIndex == 1)
@@ -103,12 +86,10 @@ public class PlayerMovement : MonoBehaviour
             runSpeed = originalRunSpeed;
         }
     }
-
     void UpdateAnimation()
     {
         if (animator != null)
         {
-            // This checks raw axis (no smoothing), so animation flips instantly
             bool isMoving = Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0;
             animator.SetBool("IsRunning", isMoving);
         }

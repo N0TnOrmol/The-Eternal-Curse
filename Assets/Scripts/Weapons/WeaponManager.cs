@@ -5,32 +5,26 @@ public class WeaponManager : MonoBehaviour
     public GameObject gun;
     public GameObject musket;
     public GameObject blunderbuss;
-
     private int currentWeaponIndex = 0;
     private GameObject[] weapons;
-
     void Start()
     {
         weapons = new GameObject[] { gun, musket, blunderbuss };
-        UpdateWeaponState(); // Ensure only one weapon is active at start
+        UpdateWeaponState(); 
     }
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
             SwitchWeapon();
         }
-
-        if (Input.GetButtonDown("Attack")) // "Fire1" is Unity's default for left-click
+        if (Input.GetButtonDown("Attack")) 
         {
             ShootCurrentWeapon();
         }
     }
-
     void SwitchWeapon()
     {
-        // Deactivate all weapons first
         foreach (GameObject weapon in weapons)
         {
             if (weapon)
@@ -38,26 +32,18 @@ public class WeaponManager : MonoBehaviour
                 weapon.SetActive(false);
             }
         }
-
-        // Switch to the next weapon
         currentWeaponIndex = (currentWeaponIndex + 1) % weapons.Length;
-
-        // Activate the selected weapon
         if (weapons[currentWeaponIndex])
         {
             weapons[currentWeaponIndex].SetActive(true);
-
-            // Reset the nextPossibleShootTime to allow instant shooting after switching
             Gun gun = weapons[currentWeaponIndex].GetComponent<Gun>();
             Musket musket = weapons[currentWeaponIndex].GetComponent<Musket>();
             Blunderbuss blunderbuss = weapons[currentWeaponIndex].GetComponent<Blunderbuss>();
-
             if (gun) gun.ResetShootingState();
             if (musket) musket.ResetShootingState();
             if (blunderbuss) blunderbuss.ResetShootingState();
         }
     }
-
     void UpdateWeaponState()
     {
         for (int i = 0; i < weapons.Length; i++)
@@ -68,17 +54,14 @@ public class WeaponManager : MonoBehaviour
             }
         }
     }
-
     void ShootCurrentWeapon()
     {
         GameObject activeWeapon = weapons[currentWeaponIndex];
-
         if (activeWeapon)
         {
             Gun gunScript = activeWeapon.GetComponent<Gun>();
             Musket musketScript = activeWeapon.GetComponent<Musket>();
             Blunderbuss blunderbussScript = activeWeapon.GetComponent<Blunderbuss>();
-
             if (gunScript)
             {
                 Debug.Log("Shooting with Gun!");

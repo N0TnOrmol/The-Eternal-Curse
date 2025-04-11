@@ -6,14 +6,10 @@ public class CameraController : MonoBehaviour
 {
     private Vector3 cameraTarget;
     private Transform target;
-    // Start is called before the first frame update
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
-
     }
-
-    // Update is called once per frame
     void Update()
     {
         cameraTarget = new Vector3(target.position.x, transform.position.y, target.position.z - 20);

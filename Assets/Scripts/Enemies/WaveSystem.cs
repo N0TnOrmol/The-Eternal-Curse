@@ -8,7 +8,6 @@ public class WaveSystem : MonoBehaviour
     public Wave[] waves;
     public int currentWaveIndex = 0;
     private bool readyToCountDown = true;
-
     private void Start()
     {
         readyToCountDown = true;
@@ -17,7 +16,6 @@ public class WaveSystem : MonoBehaviour
             waves[i].enemiesLeft = waves[i].enemies.Length;
         }
     }
-
     private void Update()
     {
         if(currentWaveIndex >= waves.Length)
@@ -41,7 +39,6 @@ public class WaveSystem : MonoBehaviour
             currentWaveIndex++;
         }
     }
-
     private IEnumerator SpawnWave()
     {
         if(currentWaveIndex < waves.Length)
@@ -55,7 +52,6 @@ public class WaveSystem : MonoBehaviour
         } 
     }
 }
-
 [System.Serializable]
 public class Wave   
 {

@@ -118,7 +118,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|3 Blunder
+      name: Armature|3 BlunderBuss
       takeName: Armature|3 Blunder
       internalID: -4123540356000073480
       firstFrame: 0
@@ -176,7 +176,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|5 Handpis
+      name: Armature|5 Gun
       takeName: Armature|5 Handpis
       internalID: 7830161973432160571
       firstFrame: 0
@@ -267,7 +267,7 @@ ModelImporter:
       takeName: Armature|8 Musket
       internalID: 2183050694546477387
       firstFrame: 0
-      lastFrame: 31
+      lastFrame: 19.02
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

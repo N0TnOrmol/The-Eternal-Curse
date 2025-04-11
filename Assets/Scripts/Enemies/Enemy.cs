@@ -6,12 +6,10 @@ public class Enemy : MonoBehaviour
 {
     private float countdown = 5f;
     private WaveSystem waveSystem;
-
     private void Start()
     {
         waveSystem = GetComponentInParent<WaveSystem>();
     }
-
     void Update()
     {
         if(countdown <= 0)

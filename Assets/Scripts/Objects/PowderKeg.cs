@@ -3,11 +3,10 @@ using System.Collections;
 
 public class PowderKeg : MonoBehaviour
 {
-    public float explosionRadius = 5f;      // Explosion range
-    public float explosionForce = 1000f;    // Knockback force
-    public bool exploded = false;          // Explosion flag
-    public ParticleSystem explosionEffect; // Reference to explosion particles
-
+    public float explosionRadius = 5f;
+    public float explosionForce = 1000f;
+    public bool exploded = false;
+    public ParticleSystem explosionEffect; 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Bullet") && !exploded)
@@ -15,20 +14,15 @@ public class PowderKeg : MonoBehaviour
             Explode();
         }
     }
-
     public void Explode()
     {
         if (exploded) return;
-
         exploded = true;
-
-        // Activate Particles 💨🔥
         if (explosionEffect != null)
         {
             explosionEffect.gameObject.SetActive(true);
             explosionEffect.Play();
         }
-
         Collider[] hitObjects = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider obj in hitObjects)
         {
@@ -37,9 +31,8 @@ public class PowderKeg : MonoBehaviour
                 PlayerHealth player = obj.GetComponent<PlayerHealth>();
                 if (player != null)
                 {
-                    player.TakeDamagePlayer(); // Deal damage
+                    player.TakeDamagePlayer(); 
                 }
-
                 Rigidbody rb = obj.GetComponent<Rigidbody>();
                 if (rb != null)
                 {
@@ -48,13 +41,9 @@ public class PowderKeg : MonoBehaviour
                 }
             }
         }
-
         Debug.Log("Boom 💥!");
-
-        // Start Coroutine to Destroy After 1 Second
         StartCoroutine(DestroyAfterDelay(1f));
     }
-
     private IEnumerator DestroyAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);

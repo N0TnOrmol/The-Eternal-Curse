@@ -9,13 +9,11 @@ public class PlayerHealth : MonoBehaviour
     public GameObject Player;
     public HealthBarController healthBarController;
     public GameObject deathScreen;
-
     private void Start()
     {
         Health = MaxHealth;
         healthBarController.SetMaxHealth(MaxHealth);
     }
-
     public void TakeDamagePlayer()
     {
         Health -= DamageTaken;
@@ -26,11 +24,9 @@ public class PlayerHealth : MonoBehaviour
             deathScreen.SetActive(true);
         }
     }
-
         public void HealPlayer(int healAmount)
     {
         Health = Mathf.Clamp(Health + healAmount, 0, MaxHealth);
         healthBarController.SetHealth(Health);
     }
-
 }

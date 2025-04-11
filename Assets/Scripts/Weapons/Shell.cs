@@ -17,7 +17,6 @@ public class Shell : MonoBehaviour
 
         StartCoroutine("Fade");
     }
-
     IEnumerator Fade()
     {
         while(true)
