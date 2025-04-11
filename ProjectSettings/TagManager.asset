@@ -12,6 +12,10 @@ TagManager:
   - Explosive
   - bullet
   - Bottle
+  - SpawnPoint2
+  - SpawnPoint
+  - SpawnPoint3
+  - SpawnPoint4
   layers:
   - Default
   - TransparentFX
