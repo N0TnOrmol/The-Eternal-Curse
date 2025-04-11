@@ -1,49 +1,38 @@
-using System.Collections;
-using UnityEditor.Rendering;
 using UnityEngine;
+
 public class DmgHpFast : MonoBehaviour
 {
-    public int DamageTaken = 2;
-    public int DamageDealt = 2;
-    public int Health;
-    public int MaxHealth = 2;
-    private bool attack = true;
-    public GameObject Enemies;
-    private void Start()
+    public float attackRange = 2f;
+    public float attackCooldown = 2f;
+    private float nextAttackTime = 0f;
+
+    public Transform player;
+    private Animator animator;
+
+    void Start()
     {
-        Health = MaxHealth;
+        animator = GetComponent<Animator>();
     }
-    IEnumerator ContinuousDMG()
+
+    void Update()
     {
-        attack = false;
-        yield return new WaitForSeconds(5);
-        attack = true;
-    }
-    public void TakeDamageEnemy()
-    {
-        if (Random.Range(1, 10) > 9)
+        float distance = Vector3.Distance(transform.position, player.position);
+
+        if (distance <= attackRange && Time.time >= nextAttackTime)
         {
-            Health -= DamageTaken * 2; 
-            if (Health <= 0)
-            {
-                Destroy(Enemies);
-            }
+            Attack();
         }
         else
         {
-            Health -= DamageTaken;
-            if (Health <= 0)
-            {
-                Destroy(Enemies);
-            }
+            animator.SetBool("IsAttacking", false); // return to idle/move
         }
     }
-    public void OnTriggerStay(Collider other)
+
+    void Attack()
     {
-        if (other.CompareTag("Player") && attack == true)
-        {
-            other.GetComponent<PlayerHealth>().TakeDamagePlayer();
-            StartCoroutine(ContinuousDMG());
-        }
+        animator.SetBool("IsAttacking", true);
+        nextAttackTime = Time.time + attackCooldown;
+
+        // Optional: deal damage, play SFX, etc.
     }
 }
