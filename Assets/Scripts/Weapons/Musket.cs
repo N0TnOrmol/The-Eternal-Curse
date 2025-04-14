@@ -9,7 +9,7 @@ public class Musket : MonoBehaviour
     public Transform shellEjectionPoint;
     public Rigidbody shell;
     public LineRenderer tracer;
-    private Animator animator;
+    public Animator animator;
     private float shotDistance = 20f;
     private float secondsBetweenShots;
     private float nextPossibleShootTime;

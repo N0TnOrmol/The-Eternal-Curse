@@ -42,22 +42,25 @@ public class PauseGame : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         if (playerAnimator != null)
+        {
             playerAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
+            playerAnimator.enabled = false;
+        }
     }
     void ResumeGameNow()
     {
         PauseUI.SetActive(false);
+        if (playerAnimator != null)
+        {
+            playerAnimator.updateMode = AnimatorUpdateMode.Normal;
+            playerAnimator.enabled = true;
+        }
         Time.timeScale = 1;
         isPaused = false;
         gun.SetActive(true);
         gunScript.enabled = true;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.None;
-        if (playerAnimator != null)
-        {
-            playerAnimator.updateMode = AnimatorUpdateMode.Normal;
-            playerAnimator.enabled = true; // just in case
-        }
         LineRenderer lr = gun.GetComponent<LineRenderer>();
         if (lr != null) lr.enabled = true;
     }

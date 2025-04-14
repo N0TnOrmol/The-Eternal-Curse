@@ -575,6 +575,18 @@ MonoBehaviour:
           m_StringArgument: Level-1
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1409631885}
+        m_TargetAssemblyTypeName: SceneDeterminer, Assembly-CSharp
+        m_MethodName: EnableGun
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &490514588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -987,6 +999,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec2f64fca33764b258e5bf21d2bf68dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gun: {fileID: 532914666583963210, guid: 9b99f4f11349745e3865ef4d59087a10, type: 3}
+  gunScript: {fileID: 939402350253587506, guid: 9b99f4f11349745e3865ef4d59087a10, type: 3}
+  playerMovement: {fileID: 2067941620969965681, guid: 1f95f01afc5dd492c9451a56f77de1cd, type: 3}
 --- !u!4 &1409631886
 Transform:
   m_ObjectHideFlags: 0
