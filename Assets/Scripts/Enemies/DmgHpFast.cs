@@ -5,29 +5,48 @@ public class DmgHpFast : MonoBehaviour
 {
     [Tooltip("Damage taken by the enemy")]
     public int DamageTaken = 2;
+
     [Tooltip("Damage dealt by the enemy")]
     public int DamageDealt = 2;
+
     public int Health;
     public int MaxHealth = 2;
+
+    [Tooltip("Enemy Animator")]
+    public Animator animator;
+
     [Tooltip("Enemy entity")]
     public GameObject Enemies;
+
     [Tooltip("Allows connection to functionality located in WaveSystem")]
     public WaveSystem waveSpawner;
+
     [Tooltip("Identifier relating to spawn origins")]
     public string SpawnOrigin;
-    [Tooltip("Booleon showing if enemy entity is allowed to attack")]
+
     private bool attack = true;
 
     private void Start()
     {
         Health = MaxHealth;
     }
+
     IEnumerator ContinuousDMG()
     {
         attack = false;
-        yield return new WaitForSeconds(5);
+
+        // Trigger attack animation
+        if (animator != null)
+        {
+            animator.SetBool("IsAttacking", true);
+            yield return new WaitForSeconds(0.2f); // time to show animation
+            animator.SetBool("IsAttacking", false);
+        }
+
+        yield return new WaitForSeconds(5); // delay between attacks
         attack = true;
     }
+
     public void TakeDamageEnemy()
     {
         if (Random.Range(1, 10) > 9)
@@ -49,9 +68,10 @@ public class DmgHpFast : MonoBehaviour
             }
         }
     }
+
     public void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && attack == true)
+        if (other.CompareTag("Player") && attack)
         {
             other.GetComponent<PlayerHealth>().TakeDamagePlayer();
             StartCoroutine(ContinuousDMG());
