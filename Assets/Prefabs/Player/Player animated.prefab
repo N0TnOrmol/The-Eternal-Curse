@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1667191349361564817}
     m_Modifications:
+    - target: {fileID: 407571747899005913, guid: 6af6a90367471450dbd5c7f01b1f6dc6, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1976272137160424231}
     - target: {fileID: 2717799489177193537, guid: 6af6a90367471450dbd5c7f01b1f6dc6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -197,6 +201,7 @@ MonoBehaviour:
   MaxHealth: 20
   Player: {fileID: 3653885941935627703}
   healthBarController: {fileID: 0}
+  deathScreen: {fileID: 0}
 --- !u!195 &2601157405309662185
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -368,6 +373,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1667191349361564817}
     m_Modifications:
+    - target: {fileID: 2871070471633702710, guid: 078ba4094895c4f47890aae863a8d6cd, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1976272137160424231}
     - target: {fileID: 7485631876383814501, guid: 078ba4094895c4f47890aae863a8d6cd, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.0128161
