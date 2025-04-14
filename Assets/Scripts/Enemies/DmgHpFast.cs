@@ -1,38 +1,60 @@
+using System.Collections;
 using UnityEngine;
 
 public class DmgHpFast : MonoBehaviour
 {
-    public float attackRange = 2f;
-    public float attackCooldown = 2f;
-    private float nextAttackTime = 0f;
+    [Tooltip("Damage taken by the enemy")]
+    public int DamageTaken = 2;
+    [Tooltip("Damage dealt by the enemy")]
+    public int DamageDealt = 2;
+    public int Health;
+    public int MaxHealth = 2;
+    [Tooltip("Enemy entity")]
+    public GameObject Enemies;
+    [Tooltip("Allows connection to functionality located in WaveSystem")]
+    public WaveSystem waveSpawner;
+    [Tooltip("Identifier relating to spawn origins")]
+    public string SpawnOrigin;
+    [Tooltip("Booleon showing if enemy entity is allowed to attack")]
+    private bool attack = true;
 
-    public Transform player;
-    private Animator animator;
-
-    void Start()
+    private void Start()
     {
-        animator = GetComponent<Animator>();
+        Health = MaxHealth;
     }
-
-    void Update()
+    IEnumerator ContinuousDMG()
     {
-        float distance = Vector3.Distance(transform.position, player.position);
-
-        if (distance <= attackRange && Time.time >= nextAttackTime)
+        attack = false;
+        yield return new WaitForSeconds(5);
+        attack = true;
+    }
+    public void TakeDamageEnemy()
+    {
+        if (Random.Range(1, 10) > 9)
         {
-            Attack();
+            Health -= DamageTaken * 2;
+            if (Health <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
         else
         {
-            animator.SetBool("IsAttacking", false); // return to idle/move
+            Health -= DamageTaken;
+            if (Health <= 0)
+            {
+                Destroy(gameObject);
+                waveSpawner = GameObject.FindGameObjectWithTag(SpawnOrigin).GetComponent<WaveSystem>();
+                waveSpawner.waves[waveSpawner.currentWaveIndex].enemiesLeft--;
+            }
         }
     }
-
-    void Attack()
+    public void OnTriggerStay(Collider other)
     {
-        animator.SetBool("IsAttacking", true);
-        nextAttackTime = Time.time + attackCooldown;
-
-        // Optional: deal damage, play SFX, etc.
+        if (other.CompareTag("Player") && attack == true)
+        {
+            other.GetComponent<PlayerHealth>().TakeDamagePlayer();
+            StartCoroutine(ContinuousDMG());
+        }
     }
 }

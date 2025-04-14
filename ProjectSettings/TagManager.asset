@@ -16,6 +16,7 @@ TagManager:
   - SpawnPoint
   - SpawnPoint3
   - SpawnPoint4
+  - Effects
   layers:
   - Default
   - TransparentFX

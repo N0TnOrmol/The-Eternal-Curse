@@ -104,7 +104,17 @@ public class WaveSystem : MonoBehaviour
 
                 Enemy enemy = Instantiate(waves[currentWaveIndex].enemies[i], SpawnPoint.transform);
 
-                enemy.GetComponent<DmgHp>().SpawnOrigin = gameObject.tag;
+                //enemy.TryGetComponent<DmgHp>(out DmgHp dmgHp).SpawnOrigin = gameObject.tag;
+                if (enemy.TryGetComponent<DmgHp>(out DmgHp dmgHp))
+                {
+                    dmgHp.SpawnOrigin = gameObject.tag;
+                }
+                if (enemy.TryGetComponent<DmgHpFast>(out DmgHpFast dmgHpFast))
+                {
+                    dmgHpFast.SpawnOrigin = gameObject.tag;
+                } 
+
+                
 
                 enemy.transform.SetParent(SpawnPoint.transform);
 
