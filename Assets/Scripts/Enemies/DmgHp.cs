@@ -8,7 +8,7 @@ public class DmgHp : MonoBehaviour
     [Tooltip("Damage dealt by the enemy")]
     public int DamageDealt = 2;
     public int Health;
-    public int MaxHealth = 2;
+    public int MaxHealth = 4;
     [Tooltip("Enemy entity")]
     public GameObject Enemies;
     [Tooltip("Allows connection to functionality located in WaveSystem")]
