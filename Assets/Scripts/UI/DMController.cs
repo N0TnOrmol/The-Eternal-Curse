@@ -70,9 +70,9 @@ public class DMController : MonoBehaviour
 
     public IEnumerator Cooldown()
     {
-        yield return new WaitForSeconds (10f);
+        yield return new WaitForSeconds (7f);
         DLIndex --;
-        yield return new WaitForSeconds (10f);
+        yield return new WaitForSeconds (7f);
         DLIndex --;
     }
 
