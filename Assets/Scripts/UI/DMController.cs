@@ -1,17 +1,23 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.PostProcessing;
 
 public class DMController : MonoBehaviour
 {
     public int DLIndex = 0;
+    public Volume DizzyEffect;
     public GameObject DL1;
     public GameObject DL2;
     public GameObject DL3;
     public PlayerMovement playerMovement;
+
     void Start()
     {
+        DizzyEffect = GameObject.FindGameObjectWithTag("Effects").GetComponent<Volume>();
+        DizzyEffect.weight = 0;
         UpdateDrunkUI();
-        ApplyDizzyEffect(); 
+        ApplyDizzyEffect();
     }
     public void IncreaseDrunkLevel()
     {
@@ -22,9 +28,21 @@ public class DMController : MonoBehaviour
     void UpdateDrunkUI()
     {
         DL1.SetActive(DLIndex >= 1);
+        if(DLIndex >= 1)
+        {
+            DizzyEffect.weight = 0.5f;
+        }
         DL2.SetActive(DLIndex >= 2);
+        if (DLIndex >= 2)
+        {
+            DizzyEffect.weight = 0.75f;
+        }
         DL3.SetActive(DLIndex >= 3);
-        if(DLIndex >= 4)
+        if (DLIndex >= 3)
+        {
+            DizzyEffect.weight = 1f;
+        }
+        if (DLIndex >= 4)
         {
            StartCoroutine(Cooldown()); 
         }
