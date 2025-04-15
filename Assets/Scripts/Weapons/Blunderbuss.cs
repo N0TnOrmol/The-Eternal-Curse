@@ -47,6 +47,10 @@ public class Blunderbuss : MonoBehaviour
             tracerDistance = hit.distance;
             if (hit.collider.TryGetComponent(out DmgHp enemy))
                 enemy.TakeDamageEnemy();
+
+            if (hit.collider.TryGetComponent(out DmgHpFast enemyFast))
+                enemyFast.TakeDamageEnemy();
+        
             if (hit.collider.CompareTag("Explosive"))
                 hit.collider.GetComponent<PowderKeg>().Explode();
         }

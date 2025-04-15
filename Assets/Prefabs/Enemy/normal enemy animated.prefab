@@ -114,7 +114,7 @@ MonoBehaviour:
   DamageTaken: 2
   DamageDealt: 2
   Health: 0
-  MaxHealth: 2
+  MaxHealth: 4
   Enemies: {fileID: 1382225587155447978}
   waveSpawner: {fileID: 0}
   SpawnOrigin: 

@@ -21,6 +21,7 @@ public class PlayerHealth : MonoBehaviour
         if (Health <= 0)
         {
             Player.SetActive(false);
+            Time.timeScale = 0;
             deathScreen.SetActive(true);
         }
     }

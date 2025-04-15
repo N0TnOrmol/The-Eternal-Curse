@@ -113,7 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DamageTaken: 2
   DamageDealt: 2
-  Health: 0
+  Health: 2
   MaxHealth: 2
   animator: {fileID: 4454911869233546541}
   Enemies: {fileID: 1970769276125874608}
