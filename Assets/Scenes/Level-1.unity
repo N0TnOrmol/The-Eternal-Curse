@@ -17,7 +17,7 @@ RenderSettings:
   m_Fog: 1
   m_FogColor: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0
+  m_FogDensity: 0.06
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
@@ -9373,13 +9373,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 821584870}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40753365, y: 0, z: 0, w: 0.91319025}
-  m_LocalPosition: {x: -3, y: 40, z: -60}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -3, y: 49.9, z: -37.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 48.1, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &838535661
 GameObject:
   m_ObjectHideFlags: 0
@@ -26697,6 +26697,22 @@ PrefabInstance:
     - target: {fileID: 3007501931920613265, guid: 103558ae7dbc344de9376d67395dffd3, type: 3}
       propertyPath: m_Range
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3007501931920613265, guid: 103558ae7dbc344de9376d67395dffd3, type: 3}
+      propertyPath: m_Shadows.m_Bias
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3007501931920613265, guid: 103558ae7dbc344de9376d67395dffd3, type: 3}
+      propertyPath: m_Shadows.m_Strength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3007501931920613265, guid: 103558ae7dbc344de9376d67395dffd3, type: 3}
+      propertyPath: m_Shadows.m_NearPlane
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3007501931920613265, guid: 103558ae7dbc344de9376d67395dffd3, type: 3}
+      propertyPath: m_Shadows.m_NormalBias
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4119666196488601684, guid: 103558ae7dbc344de9376d67395dffd3, type: 3}
       propertyPath: m_Name

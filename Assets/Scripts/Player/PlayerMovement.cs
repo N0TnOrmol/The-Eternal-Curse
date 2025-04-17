@@ -23,8 +23,6 @@ public class PlayerMovement : MonoBehaviour
         animator.updateMode = AnimatorUpdateMode.UnscaledTime;
         originalWalkSpeed = walkSpeed;
         originalRunSpeed = runSpeed;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.None;
     }
     void Update()
     {
@@ -38,13 +36,23 @@ public class PlayerMovement : MonoBehaviour
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
+        if (Physics.Raycast(ray, out hit, 1000f, LayerMask.GetMask("Ground")))
         {
-            Vector3 targetPoint = hit.point;
-            targetRotation = Quaternion.LookRotation(targetPoint - new Vector3(transform.position.x, 0, transform.position.z));
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            Vector3 hitPoint = hit.point;
+
+            // Match player's Y level with the hit point
+            Vector3 lookTarget = new Vector3(hitPoint.x, transform.position.y, hitPoint.z);
+
+            Vector3 direction = lookTarget - transform.position;
+
+            if (direction.sqrMagnitude > 0.01f)
+            {
+                Quaternion lookRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime);
+            }
         }
     }
+
     void ControlWASD()
     {
         Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
