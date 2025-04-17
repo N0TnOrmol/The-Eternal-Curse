@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1526964690268444965, guid: 51fb441a721bd4ff4ada799154dc53d3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b4282c47d3bef4752a4cb23df223a3f2, type: 2}
     - target: {fileID: 919132149155446097, guid: 51fb441a721bd4ff4ada799154dc53d3, type: 3}
       propertyPath: m_Name
       value: fast zombie
