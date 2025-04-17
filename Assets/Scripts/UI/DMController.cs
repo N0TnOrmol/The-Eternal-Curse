@@ -42,7 +42,7 @@ public class DMController : MonoBehaviour
         {
             DizzyEffect.weight = 1f;
         }
-        if (DLIndex >= 4)
+        else if (DLIndex >= 4)
         {
            StartCoroutine(Cooldown()); 
         }
@@ -70,9 +70,9 @@ public class DMController : MonoBehaviour
 
     public IEnumerator Cooldown()
     {
-        yield return new WaitForSeconds (7f);
+        yield return new WaitForSeconds (5f);
         DLIndex --;
-        yield return new WaitForSeconds (7f);
+        yield return new WaitForSeconds (5f);
         DLIndex --;
     }
 
