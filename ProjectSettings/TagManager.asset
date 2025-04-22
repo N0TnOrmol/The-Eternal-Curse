@@ -10,13 +10,13 @@ TagManager:
   - MeleeWeapon
   - Gun
   - Explosive
-  - bullet
   - Bottle
   - SpawnPoint2
   - SpawnPoint
   - SpawnPoint3
   - SpawnPoint4
   - Effects
+  - Bomb
   layers:
   - Default
   - TransparentFX
