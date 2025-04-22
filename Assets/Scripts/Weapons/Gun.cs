@@ -8,8 +8,6 @@ public class Gun : MonoBehaviour
     public GunType gunType;
     public float rpm;
     public Transform spawn;
-    public Transform shellEjectionPoint;
-    public Rigidbody shell;
     public LineRenderer tracer;
     private Animator animator;
     private float shotDistance = 20f;
@@ -59,8 +57,6 @@ public class Gun : MonoBehaviour
         audioSource.Play();
         StartCoroutine(WaitForSoundToEnd());
         if (tracer) StartCoroutine(RenderTracer(endPosition));
-        Rigidbody newShell = Instantiate(shell, shellEjectionPoint.position, Quaternion.identity);
-        newShell.AddForce(shellEjectionPoint.up * Random.Range(105f, 200f));
     }
     private Vector3 GetMouseAimDirection()
     {
