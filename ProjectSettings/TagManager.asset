@@ -7,7 +7,6 @@ TagManager:
   - Ground
   - Enemy
   - WaveSpawner
-  - MeleeWeapon
   - Gun
   - Explosive
   - Bottle
@@ -17,6 +16,7 @@ TagManager:
   - SpawnPoint4
   - Effects
   - Bomb
+  - ExplotionBombEffect
   layers:
   - Default
   - TransparentFX

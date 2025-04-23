@@ -3,28 +3,79 @@ using UnityEngine;
 public class BombBehaviour : MonoBehaviour
 {
     public GameObject explosionEffect;
-    public float explosionDelay = 3f;
+    public float explosionDuration = 2f;
+    public float lifetime = 2f;
+    public float explosionRadius = 3f;
+
+    public AudioClip explosionSound; 
+    private AudioSource audioSource;
+
+    private bool hasExploded = false;
 
     void Start()
     {
-        // Make sure it's not active when the bomb spawns
-        if (explosionEffect)
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
         {
-            explosionEffect.SetActive(false);
+            audioSource = gameObject.AddComponent<AudioSource>();
         }
 
-        Invoke(nameof(Explode), explosionDelay);
+        Invoke(nameof(Explode), lifetime);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (!hasExploded && collision.gameObject.CompareTag("Enemy"))
+        {
+            Explode();
+        }
     }
 
     void Explode()
     {
-        if (explosionEffect)
+        if (hasExploded) return;
+        hasExploded = true;
+
+        if (explosionSound != null)
         {
-            explosionEffect.transform.SetParent(null); // Detach from bomb so it can persist
-            explosionEffect.SetActive(true);
-            Destroy(explosionEffect, 2f); // Optional: clean it up after 2 seconds
+            audioSource.PlayOneShot(explosionSound);
         }
 
-        Destroy(gameObject); // Destroy the bomb itself
+        if (explosionEffect != null)
+        {
+            explosionEffect.transform.SetParent(null);
+            explosionEffect.transform.position = transform.position;
+            explosionEffect.SetActive(true);
+            Destroy(explosionEffect, explosionDuration);
+        }
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+        foreach (Collider nearby in colliders)
+        {
+            if (nearby.CompareTag("Enemy"))
+            {
+                DmgHpFast fastEnemyHP = nearby.GetComponent<DmgHpFast>();
+                if (fastEnemyHP != null)
+                {
+                    fastEnemyHP.TakeDamageEnemy();
+                }
+
+                DmgHp enemyHP = nearby.GetComponent<DmgHp>();
+                if (enemyHP != null)
+                {
+                    enemyHP.TakeDamageEnemy();
+                }
+            }
+            else if (nearby.CompareTag("Player"))
+            {
+                PlayerHealth playerHealth = nearby.GetComponent<PlayerHealth>();
+                if (playerHealth != null)
+                {
+                    playerHealth.TakeDamagePlayer();
+                }
+            }
+        }
+
+        Destroy(gameObject, explosionSound != null ? explosionSound.length : 0.1f);
     }
 }
