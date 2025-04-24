@@ -6,13 +6,21 @@ public class WeaponManager : MonoBehaviour
     public GameObject musket;
     public GameObject blunderbuss;
     public GameObject bomb;
+
+    public WeaponUIManager uiManager;
+
     private int currentWeaponIndex = 0;
     private GameObject[] weapons;
+    public int CurrentWeaponIndex => currentWeaponIndex;
+
+
     void Start()
     {
         weapons = new GameObject[] { gun, musket, blunderbuss, bomb };
-        UpdateWeaponState(); 
+        UpdateWeaponState();
+        uiManager.ShowWeaponUI(currentWeaponIndex); 
     }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
@@ -24,29 +32,36 @@ public class WeaponManager : MonoBehaviour
             ShootCurrentWeapon();
         }
     }
+
     void SwitchWeapon()
     {
         foreach (GameObject weapon in weapons)
         {
             if (weapon)
-            {
                 weapon.SetActive(false);
-            }
         }
+
         currentWeaponIndex = (currentWeaponIndex + 1) % weapons.Length;
+
         if (weapons[currentWeaponIndex])
         {
             weapons[currentWeaponIndex].SetActive(true);
+
             Gun gun = weapons[currentWeaponIndex].GetComponent<Gun>();
             Musket musket = weapons[currentWeaponIndex].GetComponent<Musket>();
             Blunderbuss blunderbuss = weapons[currentWeaponIndex].GetComponent<Blunderbuss>();
             ThrowingBomb bomb = weapons[currentWeaponIndex].GetComponent<ThrowingBomb>();
+
             if (gun) gun.ResetShootingState();
             if (musket) musket.ResetShootingState();
             if (blunderbuss) blunderbuss.ResetShootingState();
             if (bomb) bomb.ResetThrow();
         }
+
+        // Update the UI
+        uiManager.ShowWeaponUI(currentWeaponIndex);
     }
+
     void UpdateWeaponState()
     {
         for (int i = 0; i < weapons.Length; i++)
@@ -57,7 +72,8 @@ public class WeaponManager : MonoBehaviour
             }
         }
     }
-    void ShootCurrentWeapon()
+
+    public void ShootCurrentWeapon()
     {
         GameObject activeWeapon = weapons[currentWeaponIndex];
         if (activeWeapon)

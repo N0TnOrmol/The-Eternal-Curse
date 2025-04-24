@@ -5,10 +5,16 @@ public class PauseGame : MonoBehaviour
     public KeyCode Pause;
     public GameObject PauseUI;
     public static bool isPaused = false;
+    public int currentWeaponIndex = 0; // Make sure this syncs with your actual weapon system
+
     public GameObject gun;
     public Gun gunScript;
     public PlayerMovement playerMovement;
+    public WeaponUIManager weaponUIManager;
+    public WeaponManager weaponManager;
+
     private Animator playerAnimator;
+
     void Start()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player"); // Make sure your player has the "Player" tag
@@ -17,6 +23,7 @@ public class PauseGame : MonoBehaviour
             playerAnimator = player.GetComponentInChildren<Animator>();
         }
     }
+
     void Update()
     {
         if (Input.GetKeyDown(Pause))
@@ -27,12 +34,14 @@ public class PauseGame : MonoBehaviour
                 ResumeGameNow();
         }
     }
+
     public void ButtonReturn()
     {
         ResumeGameNow();
         Debug.Log("ON");
     }
-    void PauseGameNow()
+
+    public void PauseGameNow()
     {
         PauseUI.SetActive(true);
         Time.timeScale = 0;
@@ -41,13 +50,19 @@ public class PauseGame : MonoBehaviour
         gunScript.enabled = false;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+
+        if (weaponUIManager != null)
+            weaponUIManager.HideAll();
+
         if (playerAnimator != null)
         {
             playerAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
             playerAnimator.enabled = false;
         }
     }
-    void ResumeGameNow()
+
+
+    public void ResumeGameNow()
     {
         PauseUI.SetActive(false);
         if (playerAnimator != null)
@@ -61,7 +76,12 @@ public class PauseGame : MonoBehaviour
         gunScript.enabled = true;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.None;
+
         LineRenderer lr = gun.GetComponent<LineRenderer>();
         if (lr != null) lr.enabled = true;
+
+        if (weaponUIManager != null)
+            weaponUIManager.ShowWeaponUI(currentWeaponIndex); // Show weapon UI again
     }
+
 }
