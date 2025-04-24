@@ -48,8 +48,6 @@ public class PauseGame : MonoBehaviour
         isPaused = true;
         gun.SetActive(false);
         gunScript.enabled = false;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
 
         if (weaponUIManager != null)
             weaponUIManager.HideAll();
@@ -74,8 +72,6 @@ public class PauseGame : MonoBehaviour
         isPaused = false;
         gun.SetActive(true);
         gunScript.enabled = true;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.None;
 
         LineRenderer lr = gun.GetComponent<LineRenderer>();
         if (lr != null) lr.enabled = true;
