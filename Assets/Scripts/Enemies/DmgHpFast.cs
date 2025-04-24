@@ -23,12 +23,15 @@ public class DmgHpFast : MonoBehaviour
 
     [Tooltip("Identifier relating to spawn origins")]
     public string SpawnOrigin;
+    [Tooltip("Contrtols enemy hp bar")]
+    public EnemyHPBarController enemyHPBarController;
 
     private bool attack = true;
 
     private void Start()
     {
         Health = MaxHealth;
+        enemyHPBarController.SetMaxHealth(MaxHealth);
     }
 
     IEnumerator ContinuousDMG()
@@ -52,6 +55,7 @@ public class DmgHpFast : MonoBehaviour
         if (Random.Range(1, 10) > 9)
         {
             Health -= DamageTaken * 2;
+            enemyHPBarController.SetHealth(Health);
             if (Health <= 0)
             {
                 Destroy(gameObject);
@@ -60,6 +64,7 @@ public class DmgHpFast : MonoBehaviour
         else
         {
             Health -= DamageTaken;
+            enemyHPBarController.SetHealth(Health);
             if (Health <= 0)
             {
                 Destroy(gameObject);

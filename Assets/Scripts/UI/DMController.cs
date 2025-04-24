@@ -21,30 +21,42 @@ public class DMController : MonoBehaviour
     }
     public void IncreaseDrunkLevel()
     {
-        DLIndex = Mathf.Clamp(DLIndex + 1, 0, 4);
+        DLIndex = Mathf.Clamp(DLIndex + 1, 0, 3);
         UpdateDrunkUI();
         ApplyDizzyEffect();
     }
     void UpdateDrunkUI()
     {
-        DL1.SetActive(DLIndex >= 1);
+        if(DLIndex == 0)
+        {
+            DizzyEffect.weight = 0f;
+            DL1.SetActive(false);
+            DL2.SetActive(false);
+            DL3.SetActive(false);
+        }
         if(DLIndex >= 1)
         {
             DizzyEffect.weight = 0.5f;
+            DL1.SetActive(true);
+            DL2.SetActive(false);
+            DL3.SetActive(false);
+            StartCoroutine(Cooldown2());
         }
-        DL2.SetActive(DLIndex >= 2);
         if (DLIndex >= 2)
         {
             DizzyEffect.weight = 0.75f;
+            DL2.SetActive(true);
+            DL1.SetActive(false);
+            DL3.SetActive(false);
+            StartCoroutine(Cooldown3());
         }
-        DL3.SetActive(DLIndex >= 3);
         if (DLIndex >= 3)
         {
             DizzyEffect.weight = 1f;
-        }
-        else if (DLIndex >= 4)
-        {
-           StartCoroutine(Cooldown()); 
+            DL3.SetActive(true);
+            DL1.SetActive(false);
+            DL2.SetActive(false);
+            StartCoroutine(Cooldown());
         }
     }
     void ApplyDizzyEffect()
@@ -72,8 +84,18 @@ public class DMController : MonoBehaviour
     {
         yield return new WaitForSeconds (5f);
         DLIndex --;
-        yield return new WaitForSeconds (5f);
-        DLIndex --;
+        UpdateDrunkUI();
     }
-
+    public IEnumerator Cooldown2()
+    {
+        yield return new WaitForSeconds(10f);
+        DLIndex --;
+        UpdateDrunkUI();
+    }
+    public IEnumerator Cooldown3()
+    {
+        yield return new WaitForSeconds(15f);
+        DLIndex --;
+        UpdateDrunkUI();
+    }
 }

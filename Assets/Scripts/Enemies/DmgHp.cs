@@ -8,13 +8,15 @@ public class DmgHp : MonoBehaviour
     [Tooltip("Damage dealt by the enemy")]
     public int DamageDealt = 2;
     public int Health;
-    public int MaxHealth = 4;
+    public int MaxHealth = 2;
     [Tooltip("Enemy entity")]
     public GameObject Enemies;
     [Tooltip("Allows connection to functionality located in WaveSystem")]
     public WaveSystem waveSpawner;
     [Tooltip("Identifier relating to spawn origins")]
     public string SpawnOrigin;
+    [Tooltip("HP bar controller")]
+    public EnemyHPBarController enemyHPBarController;
     [Tooltip("Booleon showing if enemy entity is allowed to attack")]
     private bool attack = true;
 
@@ -26,6 +28,7 @@ public class DmgHp : MonoBehaviour
         Health = MaxHealth;
         // Get the Animator component
         animator = GetComponent<Animator>();
+        enemyHPBarController.SetMaxHealth(MaxHealth);
     }
 
     IEnumerator ContinuousDMG()
@@ -40,6 +43,7 @@ public class DmgHp : MonoBehaviour
         if (Random.Range(1, 10) > 9)
         {
             Health -= DamageTaken * 2;
+            enemyHPBarController.SetHealth(Health);
             if (Health <= 0)
             {
                 // Trigger the dead animation before destroying the object
@@ -50,6 +54,7 @@ public class DmgHp : MonoBehaviour
         else
         {
             Health -= DamageTaken;
+            enemyHPBarController.SetHealth(Health);
             if (Health <= 0)
             {
                 // Trigger the dead animation before destroying the object
@@ -57,6 +62,7 @@ public class DmgHp : MonoBehaviour
                 Destroy(gameObject, 1f);  // Delay destruction to let the death animation play
                 waveSpawner = GameObject.FindGameObjectWithTag(SpawnOrigin).GetComponent<WaveSystem>();
                 waveSpawner.waves[waveSpawner.currentWaveIndex].enemiesLeft--;
+                
             }
         }
     }
