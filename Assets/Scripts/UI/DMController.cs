@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.PostProcessing;
@@ -40,22 +41,22 @@ public class DMController : MonoBehaviour
             DL1.SetActive(true);
             DL2.SetActive(false);
             DL3.SetActive(false);
-            StartCoroutine(Cooldown2());
+            StartCoroutine(Cooldown());
         }
         if (DLIndex >= 2)
         {
             DizzyEffect.weight = 0.75f;
             DL2.SetActive(true);
-            DL1.SetActive(false);
+            DL1.SetActive(true);
             DL3.SetActive(false);
-            StartCoroutine(Cooldown3());
+            StartCoroutine(Cooldown());
         }
         if (DLIndex >= 3)
         {
             DizzyEffect.weight = 1f;
             DL3.SetActive(true);
-            DL1.SetActive(false);
-            DL2.SetActive(false);
+            DL1.SetActive(true);
+            DL2.SetActive(true);
             StartCoroutine(Cooldown());
         }
     }
@@ -83,18 +84,6 @@ public class DMController : MonoBehaviour
     public IEnumerator Cooldown()
     {
         yield return new WaitForSeconds (5f);
-        DLIndex --;
-        UpdateDrunkUI();
-    }
-    public IEnumerator Cooldown2()
-    {
-        yield return new WaitForSeconds(10f);
-        DLIndex --;
-        UpdateDrunkUI();
-    }
-    public IEnumerator Cooldown3()
-    {
-        yield return new WaitForSeconds(15f);
         DLIndex --;
         UpdateDrunkUI();
     }
