@@ -104,12 +104,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionEffect: {fileID: 8676369501689485223}
-  explosionDelay: 3
-  damageRadius: 5
-  damageAmount: 5
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
+  explosionDuration: 2
+  lifetime: 2
+  explosionRadius: 3
   explosionSound: {fileID: 8300000, guid: 8882d5a47d1864bb0ade1d49c38b3039, type: 3}
 --- !u!54 &-3282183431243559726
 Rigidbody:
@@ -151,7 +148,7 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
